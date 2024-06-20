@@ -27,6 +27,8 @@ flutter:
     - assets/images/page-circle-one.png
     - assets/images/3d-model.png
     - assets/images/language-chang-to-sinhala.png
+    - assets/images/profile-picture-icon.png
+    - assets/images/notification-icon-without-notification.png
     - assets/icon/icon.png
 
   fonts:

@@ -1,9 +1,31 @@
 import 'package:flutter/material.dart';
+import 'dashboard_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   void getStartedBtnOnClicked() {}
 
-  void loginBtnOnClicked() {}
+  void loginBtnOnClicked(BuildContext context) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            DashboardScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var begin = 0.0;
+          var end = 1.0;
+          var curve = Curves.ease;
+
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+          return FadeTransition(
+            opacity: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
+    );
+  }
 
   void navigateToSinhalaPage() {}
 
@@ -105,7 +127,7 @@ class HomeScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 110.0),
               child: ElevatedButton(
-                onPressed: loginBtnOnClicked,
+                onPressed: () => loginBtnOnClicked(context),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                       Colors.white.withOpacity(0.75)),
