@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Positioned(
-            bottom: 725.0,
+            bottom: 760.0,
             left: 280,
             right: 0,
             child: Center(
@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(165, 40)),
+                  minimumSize: MaterialStateProperty.all<Size>(Size(180, 40)),
                 ),
                 child: const Text(
                   'Get Started',
@@ -114,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(165, 40)),
+                  minimumSize: MaterialStateProperty.all<Size>(Size(180, 40)),
                 ),
                 child: Text(
                   'Login',
@@ -130,7 +130,7 @@ class HomeScreen extends StatelessWidget {
           ),
           Center(
             child: Padding(
-                padding: const EdgeInsets.only(top: 380.0),
+                padding: const EdgeInsets.only(top: 450.0),
                 child: Image.asset(
                   'assets/images/3d-model.png',
                   width: 400,
