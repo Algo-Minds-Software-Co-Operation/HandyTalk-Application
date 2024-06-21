@@ -27,6 +27,7 @@ flutter:
     - assets/images/page-circle-one.png
     - assets/images/3d-model.png
     - assets/images/language-chang-to-sinhala.png
+    - assets/images/language-chang-to-english.png
     - assets/images/profile-picture-icon.png
     - assets/images/notification-icon-without-notification.png
     - assets/icon/icon.png
@@ -36,6 +37,11 @@ flutter:
       fonts:
         - asset: assets/fonts/Roboto/Roboto-Regular.ttf
         - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+        - asset: assets/fonts/Abhaya_Libre/AbhayaLibre-ExtraBold.ttf
+        - asset: assets/fonts/Abhaya_Libre/AbhayaLibre-Medium.ttf
+        - asset: assets/fonts/Abhaya_Libre/AbhayaLibre-Regular.ttf
+        - asset: assets/fonts/Abhaya_Libre/AbhayaLibre-SemiBold.ttf
+        - asset: assets/fonts/Abhaya_Libre/AbhayaLibre-Bold.ttf
 
 flutter_icons:
   android: true
