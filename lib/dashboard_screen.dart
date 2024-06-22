@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 void navigateToProfileSettings(BuildContext context) {}
 
@@ -194,17 +195,45 @@ class SettingsPage extends StatelessWidget {
   }
 }
 
-class SearchBar extends StatelessWidget {
+class SearchBar extends StatefulWidget {
   final double width;
   final double height;
 
   SearchBar({this.width = 300.0, this.height = 50.0});
 
   @override
+  _SearchBarState createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  final ImagePicker _picker = ImagePicker();
+  bool _animate = false;
+
+  void _openCamera() async {
+    setState(() {
+      _animate = true;
+    });
+
+    await Future.delayed(Duration(seconds: 2));
+
+    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _animate = false;
+    });
+
+    // Handle the photo if needed
+    if (photo != null) {
+      print('Photo captured: ${photo.path}');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
+    return AnimatedContainer(
+      duration: Duration(seconds: 2),
+      width: widget.width,
+      height: widget.height,
       padding: EdgeInsets.symmetric(horizontal: 15.0),
       decoration: BoxDecoration(
         color: Color(0x1ACAF0F8), // #CAF0F8 with 10% opacity
@@ -237,9 +266,12 @@ class SearchBar extends StatelessWidget {
               ),
             ),
           ),
-          Icon(
-            Icons.camera_alt_rounded,
-            color: Colors.black.withOpacity(0.7), // 70% opacity
+          GestureDetector(
+            onTap: _openCamera,
+            child: Icon(
+              Icons.camera_alt_rounded,
+              color: Colors.black.withOpacity(0.7), // 70% opacity
+            ),
           ),
           SizedBox(width: 10.0), // Space between camera and mic icon
           Container(
