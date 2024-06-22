@@ -1,46 +1,83 @@
 import 'package:flutter/material.dart';
 
-void navigateToProfileSettings() {}
+void navigateToProfileSettings(BuildContext context) {
+  Navigator.of(context).popUntil((route) => route.isFirst);
+}
 
 void navigateToNotification() {}
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
+  @override
+  _DashboardScreenState createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  int _selectedIndex = 0;
+
+  static List<Widget> _widgetOptions = <Widget>[
+    DashboardPage(),
+    MessagesPage(),
+    ClassroomPage(),
+    GamesPage(),
+    SettingsPage(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    String appBarTitle;
+    String profileImagePath;
+    String notificationImagePath;
+
+    if (_selectedIndex == 1) {
+      appBarTitle = 'Messages';
+      profileImagePath = 'assets/images/default-notification.png';
+      notificationImagePath = 'assets/images/default-notification.png';
+    } else if (_selectedIndex == 2) {
+      appBarTitle = 'Classroom';
+      profileImagePath = 'assets/images/default-notification.png';
+      notificationImagePath = 'assets/images/default-notification.png';
+    } else if (_selectedIndex == 3) {
+      appBarTitle = 'Games';
+      profileImagePath = 'assets/images/default-notification.png';
+      notificationImagePath = 'assets/images/default-notification.png';
+    } else if (_selectedIndex == 4) {
+      appBarTitle = 'Settings';
+      profileImagePath = 'assets/images/default-notification.png';
+      notificationImagePath = 'assets/images/default-notification.png';
+    } else {
+      appBarTitle = 'Hello, Kavindu';
+      profileImagePath = 'assets/images/profile-picture-icon.png';
+      notificationImagePath =
+          'assets/images/notification-icon-without-notification.png';
+    }
+
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Image.asset(
-            'assets/images/background.png',
-            fit: BoxFit.cover,
-          ),
-          Positioned(
-            bottom: 710.0,
-            left: 0,
-            right: 290,
-            child: Center(
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () {
-                    navigateToProfileSettings();
-                  },
-                  child: Image.asset(
-                    'assets/images/profile-picture-icon.png',
-                    width: 40,
-                    height: 40,
-                  ),
-                ),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            GestureDetector(
+              onTap: () {
+                if (_selectedIndex > 0) {
+                  navigateToProfileSettings(context);
+                }
+              },
+              child: Image.asset(
+                profileImagePath,
+                width: 40,
+                height: 40,
               ),
             ),
-          ),
-          Positioned(
-            bottom: 718.0,
-            left: 82,
-            right: 0,
-            child: Text(
-              'Hello, Kavindu',
+            Text(
+              appBarTitle,
               style: TextStyle(
                 fontFamily: 'Roboto',
                 color: Colors.black.withOpacity(0.75),
@@ -48,36 +85,44 @@ class DashboardScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-          ),
-          Positioned(
-            bottom: 715.0,
-            left: 295,
-            right: 0,
-            child: Center(
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () {
-                    navigateToNotification();
-                  },
-                  child: Image.asset(
-                    'assets/images/notification-icon-without-notification.png',
-                    width: 30,
-                    height: 30,
-                  ),
-                ),
+            GestureDetector(
+              onTap: () {
+                navigateToNotification();
+              },
+              child: Image.asset(
+                notificationImagePath,
+                width: 30,
+                height: 30,
               ),
             ),
+          ],
+        ),
+      ),
+      extendBodyBehindAppBar: true,
+      body: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Image.asset(
+            'assets/images/background.png',
+            fit: BoxFit.cover,
+          ),
+          Center(
+            child: _widgetOptions.elementAt(_selectedIndex),
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.transparent, // Change the background color
-          selectedItemColor:
-              Color(0xFF0077B6), // Change the color of the selected item
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+        ),
+        child: BottomNavigationBar(
+          backgroundColor: Colors.transparent,
+          selectedItemColor: Color(0xFF0077B6),
           unselectedItemColor: Colors.grey,
           showSelectedLabels: false,
           showUnselectedLabels: false,
+          currentIndex: _selectedIndex,
+          onTap: _onItemTapped,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.dashboard_rounded),
@@ -99,7 +144,44 @@ class DashboardScreen extends StatelessWidget {
               icon: Icon(Icons.settings_rounded),
               label: 'Settings',
             ),
-          ]),
+          ],
+        ),
+      ),
     );
+  }
+}
+
+class DashboardPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Dashboard Page'));
+  }
+}
+
+class MessagesPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Messages Page'));
+  }
+}
+
+class ClassroomPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Classroom Page'));
+  }
+}
+
+class GamesPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Games Page'));
+  }
+}
+
+class SettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: Text('Settings Page'));
   }
 }

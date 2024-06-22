@@ -30,6 +30,9 @@ flutter:
     - assets/images/language-chang-to-english.png
     - assets/images/profile-picture-icon.png
     - assets/images/notification-icon-without-notification.png
+    - assets/images/back-image.png
+    - assets/images/add-new-message.png
+    - assets/images/default-notification.png
     - assets/icon/icon.png
 
   fonts:
