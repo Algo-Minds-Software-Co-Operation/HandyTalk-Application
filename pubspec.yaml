@@ -1,8 +1,8 @@
-name: handy_talk_application
-description: "A new Flutter project."
+name: HandyTalk
+description: "HandyTalk is very helpful for deaf and mute peoples to understand anothers."dashboard
 publish_to: "none"
 
-version: 1.0.0+1
+version: 1.0.2
 
 environment:
   sdk: ">=3.4.3 <4.0.0"
