@@ -1,3 +1,4 @@
+import 'package:HandyTalk/signin_userName.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'home_screen.dart';
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // home: DashboardScreen(),
-      home: SplashScreen(),
+      home: SignUsernameEnglish()
     );
   }
 }
