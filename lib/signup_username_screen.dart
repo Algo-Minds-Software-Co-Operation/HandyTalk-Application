@@ -64,8 +64,8 @@ class SignupUsernameScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                    child: TextField(
+                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                      child: TextField(
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person_outline),
                           hintText: 'Enter your username',
@@ -75,9 +75,7 @@ class SignupUsernameScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(4.0),
                           ),
                         ),
-                      )
-
-                  ),
+                      )),
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {

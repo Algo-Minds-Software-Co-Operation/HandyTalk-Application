@@ -35,6 +35,7 @@ flutter:
     - assets/images/add-new-message.png
     - assets/images/default-notification.png
     - assets/icon/icon.png
+    - assets/images/page-circle-three.png
 
   fonts:
     - family: Roboto
