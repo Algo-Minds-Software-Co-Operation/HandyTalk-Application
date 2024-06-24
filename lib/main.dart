@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'home_screen.dart';
 import 'dashboard_screen.dart';
-import 'signin_screen.dart';
 
 void main() {
   runApp(MyApp());
