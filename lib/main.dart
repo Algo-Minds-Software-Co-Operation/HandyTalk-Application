@@ -3,7 +3,8 @@ import 'dart:async';
 import 'home_screen.dart';
 import 'dashboard_screen.dart';
 import 'signin_screen.dart';
-import 'setting.dart';
+import 'singup_name_page.dart';
+import 'singup_details_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,8 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-      // home: Setting(),
+      // home: SplashScreen(),
+      home: SignupDetailsPage(),
     );
   }
 }
