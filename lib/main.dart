@@ -1,3 +1,4 @@
+import 'package:HandyTalk/reset_password_screen.dart';
 import 'package:HandyTalk/signup_password_screen.dart';
 import 'package:HandyTalk/signup_username_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // home: DashboardScreen(),
-      home: SignupPasswordScreen(),
+      home: ResetPasswordScreen(),
     );
   }
 }
