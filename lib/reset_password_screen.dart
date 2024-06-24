@@ -69,8 +69,8 @@ class ResetPasswordScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.person_outline),
-                          hintText: 'Enter your username',
+                          prefixIcon: Icon(Icons.email),
+                          hintText: 'Use email address',
                           filled: true,
                           fillColor: Colors.transparent,
                           border: OutlineInputBorder(
@@ -92,7 +92,7 @@ class ResetPasswordScreen extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Next',
+                      'Continue',
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Roboto',
