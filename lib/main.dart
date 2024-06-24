@@ -5,6 +5,7 @@ import 'dashboard_screen.dart';
 import 'signin_screen.dart';
 import 'singup_name_page.dart';
 import 'singup_details_page.dart';
+import 'singup_otpsend_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,8 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: SplashScreen(),
-      home: SignupDetailsPage(),
+      home: SplashScreen(),
+      // home: SingupOtpsendPage(),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SignupNamePage extends StatelessWidget {
-  const SignupNamePage({super.key});
+class SingupOtpsendPage extends StatelessWidget {
+  const SingupOtpsendPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class SignupNamePage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 500.0),
               child: Image.asset(
-                'assets/images/page-circle-one.png',
+                'assets/images/page-circle-two.png',
                 width: 50,
                 height: 50,
               ),
@@ -66,65 +66,31 @@ class SignupNamePage extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 380.0),
+              padding: const EdgeInsets.only(bottom: 280.0),
               child: Container(
                 width: 400,
                 height: 50, // Increased height to accommodate more top padding
                 decoration: BoxDecoration(
                   border: Border.all(
-                      color: const Color.fromARGB(255, 163, 163, 163),
-                      width: 2),
+                    color: const Color.fromARGB(255, 163, 163, 163),
+                    width: 2,
+                  ),
                   borderRadius:
                       BorderRadius.circular(10), // Border radius added
                   color: Colors.transparent,
                 ),
-
                 child: TextField(
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    hintText: 'First name',
-                    prefixIcon: Icon(Icons.line_axis),
+                    hintText: 'Enter your email address',
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.w100,
                     ),
-                  ),
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w100,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 250.0),
-              child: Container(
-                width: 400,
-                height: 50, // Increased height to accommodate more top padding
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: const Color.fromARGB(255, 163, 163, 163),
-                      width: 2),
-                  borderRadius:
-                      BorderRadius.circular(10), // Border radius added
-                  color: Colors.transparent,
-                ),
-
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    hintText: 'Last name',
-                    prefixIcon: Icon(Icons.line_axis),
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w100,
-                    ),
+                    prefixIcon:
+                        Icon(Icons.email_rounded), // Icon before the hint text
                   ),
                   style: TextStyle(
                     color: Colors.grey,
@@ -140,22 +106,23 @@ class SignupNamePage extends StatelessWidget {
                 bottom: 60.0, // Adjust top padding as needed
               ),
               child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(400, 60), // Set the width and height
-                    backgroundColor:
-                        Color(0xFF0077B6), // Background color set to blue
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    textStyle: TextStyle(
-                        color: Colors.black), // Text color set to black
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(400, 60), // Set the width and height
+                  backgroundColor:
+                      Color(0xFF0077B6), // Background color set to blue
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                  child: Text(
-                    'Next',
-                    style: TextStyle(
-                        color: Colors.white), // Text color set to white
-                  )),
+                  textStyle:
+                      TextStyle(color: Colors.white), // Text color set to white
+                ),
+                child: Text(
+                  'Send OTP',
+                  style:
+                      TextStyle(color: Colors.white), // Text color set to white
+                ),
+              ),
             ),
           ),
         ],

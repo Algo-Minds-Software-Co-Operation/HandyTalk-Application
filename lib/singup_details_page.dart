@@ -115,6 +115,7 @@ class _SignupDetailsPageState extends State<SignupDetailsPage> {
                     hintText: selectedDate != null
                         ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
                         : 'Birthday',
+                    prefixIcon: Icon(Icons.date_range),
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.w100,
@@ -156,6 +157,7 @@ class _SignupDetailsPageState extends State<SignupDetailsPage> {
                   },
                   decoration: InputDecoration(
                     hintText: 'Gender',
+                    prefixIcon: Icon(Icons.male),
                     hintStyle: TextStyle(
                       color: Colors.grey,
                       fontWeight: FontWeight.w100,
@@ -185,7 +187,8 @@ class _SignupDetailsPageState extends State<SignupDetailsPage> {
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   fixedSize: Size(400, 60), // Set the width and height
-                  backgroundColor: Colors.blue, // Background color set to blue
+                  backgroundColor:
+                      Color(0xFF0077B6), // Background color set to blue
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -193,7 +196,11 @@ class _SignupDetailsPageState extends State<SignupDetailsPage> {
                     color: Colors.black,
                   ), // Text color set to black
                 ),
-                child: Text('Next'),
+                child: Text(
+                  'Next',
+                  style:
+                      TextStyle(color: Colors.white), // Text color set to white
+                )
               ),
             ),
           ),
