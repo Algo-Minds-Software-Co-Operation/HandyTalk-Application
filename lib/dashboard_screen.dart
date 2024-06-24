@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'setting.dart';
 
 void navigateToProfileSettings(BuildContext context) {}
 
@@ -22,9 +23,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 4) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Setting()),
+      );
+    }
+    // else if(index == 3) {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => Setting()),
+    //   );
+    // }else if(index == 3) {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => Setting()),
+    //   );
+    // }
+
+    // else if(index == 3) {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => Setting()),
+    //   );
+    // }
+
+    else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
   }
 
   @override
