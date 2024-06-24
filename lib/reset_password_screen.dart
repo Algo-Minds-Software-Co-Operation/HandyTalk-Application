@@ -41,15 +41,7 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
             ),
           ),
-          Center(
-            child: Padding(
-                padding: const EdgeInsets.only(bottom: 355.0),
-                child: Image.asset(
-                  'assets/images/page-circle-one.png',
-                  width: 50,
-                  height: 50,
-                )),
-          ),
+         
           Center(
             child: Padding(
                 padding: const EdgeInsets.only(top: 450.0),
@@ -101,6 +93,26 @@ class ResetPasswordScreen extends StatelessWidget {
                       ),
                     ),
                   ),
+
+                   TextButton(
+                    onPressed: () {
+                      // Handle the back to log in button press
+                    },
+                    style: TextButton.styleFrom(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 110, vertical: 15),
+                    ),
+                    child: Text(
+                      'Back to Log in',
+                      style: TextStyle(
+                        color: Colors.blue,
+                        fontFamily: 'Roboto',
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  )
+
                 ],
               ),
             ),
