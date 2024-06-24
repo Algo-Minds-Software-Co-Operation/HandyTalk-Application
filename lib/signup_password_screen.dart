@@ -67,8 +67,24 @@ class SignupPasswordScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 40.0),
                       child: TextField(
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.person_outline),
+                          prefixIcon: Icon(Icons.lock),
+                          suffixIcon: Icon(Icons.visibility),
                           hintText: 'New Password',
+                          filled: true,
+                          fillColor: Colors.transparent,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(4.0),
+                          ),
+                        ),
+                      )),
+
+                      Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock),
+                          suffixIcon: Icon(Icons.visibility),
+                          hintText: 'Confirm Password',
                           filled: true,
                           fillColor: Colors.transparent,
                           border: OutlineInputBorder(
