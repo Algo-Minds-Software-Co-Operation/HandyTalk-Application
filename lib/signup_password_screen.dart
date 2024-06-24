@@ -62,14 +62,16 @@ class SignupPasswordScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 50.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                
                 children: <Widget>[
                   Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock),
                           suffixIcon: Icon(Icons.visibility),
                           hintText: 'New Password',
+                          
                           filled: true,
                           fillColor: Colors.transparent,
                           border: OutlineInputBorder(
@@ -77,9 +79,8 @@ class SignupPasswordScreen extends StatelessWidget {
                           ),
                         ),
                       )),
-
-                      Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                  Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: TextField(
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock),
@@ -92,6 +93,52 @@ class SignupPasswordScreen extends StatelessWidget {
                           ),
                         ),
                       )),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.done,
+                          color: Colors.black.withOpacity(1),
+                        ),
+                        SizedBox(
+                            width:
+                                5), // Adjust the space between the icon and text
+                        Text(
+                          '8 character (20 max)',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Colors.black.withOpacity(1),
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.done,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                        SizedBox(
+                            width:
+                                5), // Adjust the space between the icon and text
+                        Text(
+                          '1 letter and 1 number',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            color: Colors.black.withOpacity(0.5),
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
@@ -100,7 +147,7 @@ class SignupPasswordScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 11, 133, 240),
                       padding:
-                          EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                          EdgeInsets.symmetric(horizontal: 110, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4.0),
                       ),
