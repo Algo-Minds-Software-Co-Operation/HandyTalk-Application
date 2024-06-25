@@ -56,7 +56,7 @@ class SingupOtpsendPage extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 485.0),
+              padding: const EdgeInsets.only(top: 585.0),
               child: Image.asset(
                 'assets/images/3d-model.png',
                 width: 400,
@@ -67,36 +67,45 @@ class SingupOtpsendPage extends StatelessWidget {
           Center(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 280.0),
-              child: Container(
-                width: 400,
-                height: 50, // Increased height to accommodate more top padding
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 163, 163, 163),
-                    width: 2,
-                  ),
-                  borderRadius:
-                      BorderRadius.circular(10), // Border radius added
-                  color: Colors.transparent,
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    hintText: 'Enter your email address',
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w100,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth * 0.9;
+                  if (width > 800) {
+                    width = 800; // Increased maximum width limit
+                  }
+                  return Container(
+                    width: width,
+                    height:
+                        50, // Increased height to accommodate more top padding
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 163, 163, 163),
+                        width: 2,
+                      ),
+                      borderRadius:
+                          BorderRadius.circular(10), // Border radius added
+                      color: Colors.transparent,
                     ),
-                    prefixIcon:
-                        Icon(Icons.email_rounded), // Icon before the hint text
-                  ),
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w100,
-                  ),
-                ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        hintText: 'Enter your email address',
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w100,
+                        ),
+                        prefixIcon: Icon(
+                            Icons.email_rounded), // Icon before the hint text
+                      ),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w100,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -105,23 +114,31 @@ class SingupOtpsendPage extends StatelessWidget {
               padding: const EdgeInsets.only(
                 bottom: 60.0, // Adjust top padding as needed
               ),
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(400, 60), // Set the width and height
-                  backgroundColor:
-                      Color(0xFF0077B6), // Background color set to blue
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  textStyle:
-                      TextStyle(color: Colors.white), // Text color set to white
-                ),
-                child: Text(
-                  'Send OTP',
-                  style:
-                      TextStyle(color: Colors.white), // Text color set to white
-                ),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth * 0.9;
+                  if (width > 800) {
+                    width = 800; // Increased maximum width limit
+                  }
+                  return ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(width, 50), // Responsive width
+                      backgroundColor:
+                          Color(0xFF0077B6), // Background color set to blue
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      textStyle: TextStyle(
+                          color: Colors.white), // Text color set to white
+                    ),
+                    child: Text(
+                      'Send OTP',
+                      style: TextStyle(
+                          color: Colors.white), // Text color set to white
+                    ),
+                  );
+                },
               ),
             ),
           ),

@@ -70,7 +70,7 @@ class _SignupDetailsPageState extends State<SignupDetailsPage> {
           Center(
             child: Padding(
               padding: const EdgeInsets.only(
-                top: 485.0,
+                top: 585.0,
               ),
               child: Image.asset(
                 'assets/images/3d-model.png',
@@ -84,51 +84,59 @@ class _SignupDetailsPageState extends State<SignupDetailsPage> {
               padding: const EdgeInsets.only(
                 bottom: 380.0,
               ),
-              child: Container(
-                width: 400,
-                height: 50,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 163, 163, 163),
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.transparent,
-                ),
-                child: TextField(
-                  readOnly: true,
-                  onTap: () async {
-                    final DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: selectedDate ?? DateTime.now(),
-                      firstDate: DateTime(2020),
-                      lastDate: DateTime(2100),
-                    );
-
-                    if (pickedDate != null) {
-                      setState(() {
-                        selectedDate = pickedDate;
-                      });
-                    }
-                  },
-                  decoration: InputDecoration(
-                    hintText: selectedDate != null
-                        ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
-                        : 'Birthday',
-                    prefixIcon: Icon(Icons.date_range),
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w100,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth * 0.9;
+                  if (width > 800) {
+                    width = 800; // Increased maximum width limit
+                  }
+                  return Container(
+                    width: width,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 163, 163, 163),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.transparent,
                     ),
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  ),
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w100,
-                  ),
-                ),
+                    child: TextField(
+                      readOnly: true,
+                      onTap: () async {
+                        final DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: selectedDate ?? DateTime.now(),
+                          firstDate: DateTime(2020),
+                          lastDate: DateTime(2100),
+                        );
+
+                        if (pickedDate != null) {
+                          setState(() {
+                            selectedDate = pickedDate;
+                          });
+                        }
+                      },
+                      decoration: InputDecoration(
+                        hintText: selectedDate != null
+                            ? '${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}'
+                            : 'Birthday',
+                        prefixIcon: Icon(Icons.date_range),
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w100,
+                        ),
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      ),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w100,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -137,44 +145,52 @@ class _SignupDetailsPageState extends State<SignupDetailsPage> {
               padding: const EdgeInsets.only(
                 bottom: 250.0,
               ),
-              child: Container(
-                width: 400,
-                height: 50,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: const Color.fromARGB(255, 163, 163, 163),
-                    width: 2,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.transparent,
-                ),
-                child: DropdownButtonFormField<String>(
-                  value: selectedGender,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      selectedGender = newValue;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    hintText: 'Gender',
-                    prefixIcon: Icon(Icons.male),
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w100,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth * 0.9;
+                  if (width > 800) {
+                    width = 800; // Increased maximum width limit
+                  }
+                  return Container(
+                    width: width,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 163, 163, 163),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.transparent,
                     ),
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  ),
-                  items: <String>['Male', 'Female', 'Other']
-                      .map<DropdownMenuItem<String>>(
-                        (String value) => DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
+                    child: DropdownButtonFormField<String>(
+                      value: selectedGender,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedGender = newValue;
+                        });
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Gender',
+                        prefixIcon: Icon(Icons.male),
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w100,
                         ),
-                      )
-                      .toList(),
-                ),
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                      ),
+                      items: <String>['Male', 'Female', 'Other']
+                          .map<DropdownMenuItem<String>>(
+                            (String value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -183,24 +199,28 @@ class _SignupDetailsPageState extends State<SignupDetailsPage> {
               padding: const EdgeInsets.only(
                 bottom: 70.0,
               ),
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  fixedSize: Size(400, 60), // Set the width and height
-                  backgroundColor:
-                      Color(0xFF0077B6), // Background color set to blue
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  textStyle: TextStyle(
-                    color: Colors.black,
-                  ), // Text color set to black
-                ),
-                child: Text(
-                  'Next',
-                  style:
-                      TextStyle(color: Colors.white), // Text color set to white
-                )
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth * 0.9;
+                  if (width > 800) {
+                    width = 800; // Increased maximum width limit
+                  }
+                  return ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(width, 50), // Responsive width
+                      backgroundColor: Color(0xFF0077B6),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      textStyle: TextStyle(color: Colors.black),
+                    ),
+                    child: Text(
+                      'Next',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  );
+                },
               ),
             ),
           ),

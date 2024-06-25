@@ -15,8 +15,7 @@ class SignupNamePage extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(
-                  bottom: 680.0), // Adjusted padding to move the text higher
+              padding: const EdgeInsets.only(bottom: 680.0),
               child: Text(
                 'Sign in',
                 textAlign: TextAlign.center,
@@ -56,7 +55,7 @@ class SignupNamePage extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 485.0),
+              padding: const EdgeInsets.only(top: 585.0),
               child: Image.asset(
                 'assets/images/3d-model.png',
                 width: 400,
@@ -67,95 +66,113 @@ class SignupNamePage extends StatelessWidget {
           Center(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 380.0),
-              child: Container(
-                width: 400,
-                height: 50, // Increased height to accommodate more top padding
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: const Color.fromARGB(255, 163, 163, 163),
-                      width: 2),
-                  borderRadius:
-                      BorderRadius.circular(10), // Border radius added
-                  color: Colors.transparent,
-                ),
-
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    hintText: 'First name',
-                    prefixIcon: Icon(Icons.line_axis),
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w100,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth * 0.9;
+                  if (width > 800) {
+                    width = 800; // Increased maximum width limit
+                  }
+                  return Container(
+                    width: width,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 163, 163, 163),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.transparent,
                     ),
-                  ),
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w100,
-                  ),
-                ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        hintText: 'First name',
+                        prefixIcon: Icon(Icons.line_axis),
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w100,
+                        ),
+                      ),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w100,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
           Center(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 250.0),
-              child: Container(
-                width: 400,
-                height: 50, // Increased height to accommodate more top padding
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: const Color.fromARGB(255, 163, 163, 163),
-                      width: 2),
-                  borderRadius:
-                      BorderRadius.circular(10), // Border radius added
-                  color: Colors.transparent,
-                ),
-
-                child: TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    hintText: 'Last name',
-                    prefixIcon: Icon(Icons.line_axis),
-                    hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.w100,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth * 0.9;
+                  if (width > 800) {
+                    width = 800; // Increased maximum width limit
+                  }
+                  return Container(
+                    width: width,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 163, 163, 163),
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.transparent,
                     ),
-                  ),
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w100,
-                  ),
-                ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        hintText: 'Last name',
+                        prefixIcon: Icon(Icons.line_axis),
+                        hintStyle: TextStyle(
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w100,
+                        ),
+                      ),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.w100,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(
-                bottom: 60.0, // Adjust top padding as needed
-              ),
-              child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    fixedSize: Size(400, 60), // Set the width and height
-                    backgroundColor:
-                        Color(0xFF0077B6), // Background color set to blue
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              padding: const EdgeInsets.only(bottom: 60.0),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double width = constraints.maxWidth * 0.9;
+                  if (width > 800) {
+                    width = 800; // Increased maximum width limit
+                  }
+                  return ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: Size(width, 50), // Responsive width
+                      backgroundColor: Color(0xFF0077B6),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      textStyle: TextStyle(color: Colors.black),
                     ),
-                    textStyle: TextStyle(
-                        color: Colors.black), // Text color set to black
-                  ),
-                  child: Text(
-                    'Next',
-                    style: TextStyle(
-                        color: Colors.white), // Text color set to white
-                  )),
+                    child: Text(
+                      'Next',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],
