@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class SignUsernameEnglish extends StatelessWidget {
-  final TextEditingController _usernameController = TextEditingController();
+class SignUserpasswordEnglish extends StatefulWidget {
+  @override
+  _SignUserpasswordEnglishState createState() => _SignUserpasswordEnglishState();
+}
+
+class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isChecked = false;
+  bool _isPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +78,8 @@ class SignUsernameEnglish extends StatelessWidget {
                   width: double.infinity, // Makes the text box full width within the padding
                   height: 50, // Set a fixed height for the text field
                   child: TextField(
-                    controller: _usernameController,
+                    controller: _passwordController,
+                    obscureText: !_isPasswordVisible, // Toggle password visibility
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10), // Text field radius
@@ -82,9 +90,58 @@ class SignUsernameEnglish extends StatelessWidget {
                           color: Colors.blue, // Border color when focused
                         ),
                       ),
-                      labelText: 'Username',
+                      labelText: 'Password',
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _isPasswordVisible = !_isPasswordVisible;
+                          });
+                        },
+                      ),
                     ),
                   ),
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: _isChecked,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _isChecked = value ?? false;
+                            });
+                          },
+                        ),
+                        Text(
+                          'Remember me',
+                          style: TextStyle(
+                            fontFamily: 'Roboto',
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        // Add your forgot password logic here
+                        print('Forgot Password tapped');
+                      },
+                      child: Text(
+                        'Forgot Password?',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontSize: 12,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 20),
                 SizedBox(
@@ -93,7 +150,7 @@ class SignUsernameEnglish extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       // Add your onPressed code here!
-                      print('Username: ${_usernameController.text}');
+                      print('Password: ${_passwordController.text}');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF0077B6), // Button color
@@ -105,8 +162,7 @@ class SignUsernameEnglish extends StatelessWidget {
                       'Next',
                       style: TextStyle(
                         color: Colors.white, // Text color
-                        //fontWeight: FontWeight.bold, // Text bold
-                        fontFamily: 'roboto',
+                        fontFamily: 'Roboto',
                       ),
                     ),
                   ),
