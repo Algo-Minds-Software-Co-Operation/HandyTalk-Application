@@ -41,102 +41,108 @@ class SignupPasswordScreen extends StatelessWidget {
           ),
           Center(
             child: Padding(
-                padding: const EdgeInsets.only(bottom: 355.0),
-                child: Image.asset(
-                  'assets/images/page-circle-one.png',
-                  width: 50,
-                  height: 50,
-                )),
+              padding: const EdgeInsets.only(bottom: 350.0),
+              child: Image.asset(
+                'assets/images/page-circle-one.png',
+                width: 50,
+                height: 50,
+              ),
+            ),
           ),
           Center(
             child: Padding(
-                padding: const EdgeInsets.only(top: 450.0),
-                child: Image.asset(
-                  'assets/images/3d-model.png',
-                  width: 400,
-                  height: 400,
-                )),
+              padding: const EdgeInsets.only(top: 450.0),
+              child: Image.asset(
+                'assets/images/3d-model.png',
+                width: 400,
+                height: 400,
+              ),
+            ),
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 50.0),
+              padding: const EdgeInsets.only(top: 0.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                
                 children: <Widget>[
                   Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock),
-                          suffixIcon: Icon(Icons.visibility),
-                          hintText: 'New Password',
-                          
-                          filled: true,
-                          fillColor: Colors.transparent,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+                        suffixIcon: Icon(Icons.visibility),
+                        hintText: 'New Password',
+                        filled: true,
+                        fillColor: Colors.transparent,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4.0),
                         ),
-                      )),
-                  Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.lock),
-                          suffixIcon: Icon(Icons.visibility),
-                          hintText: 'Confirm Password',
-                          filled: true,
-                          fillColor: Colors.transparent,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
-                        ),
-                      )),
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.done,
-                          color: Colors.black.withOpacity(1),
-                        ),
-                        SizedBox(
-                            width:
-                                5), // Adjust the space between the icon and text
-                        Text(
-                          '8 character (20 max)',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            color: Colors.black.withOpacity(1),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                  Center(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.done,
-                          color: Colors.black.withOpacity(0.5),
+                  SizedBox(height: 20),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.lock),
+                        suffixIcon: Icon(Icons.visibility),
+                        hintText: 'Confirm Password',
+                        filled: true,
+                        fillColor: Colors.transparent,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(4.0),
                         ),
-                        SizedBox(
-                            width:
-                                5), // Adjust the space between the icon and text
-                        Text(
-                          '1 letter and 1 number',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            color: Colors.black.withOpacity(0.5),
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.done,
+                            color: Colors.black.withOpacity(1),
                           ),
-                        ),
-                      ],
+                          SizedBox(width: 5),
+                          Text(
+                            '8 character (20 max)',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              color: Colors.black.withOpacity(1),
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.done,
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            '1 letter and 1 number',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              color: Colors.black.withOpacity(0.5),
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(height: 20),
