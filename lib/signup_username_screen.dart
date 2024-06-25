@@ -59,7 +59,7 @@ class SignupUsernameScreen extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 50.0),
+              padding: const EdgeInsets.only(bottom: 100.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -84,7 +84,7 @@ class SignupUsernameScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 11, 133, 240),
                       padding:
-                          EdgeInsets.symmetric(horizontal: 110, vertical: 15),
+                          EdgeInsets.symmetric(horizontal: 125, vertical: 15),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4.0),
                       ),
