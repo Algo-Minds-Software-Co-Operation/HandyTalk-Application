@@ -66,41 +66,36 @@ class SingupOtpsendPage extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 280.0),
+              padding: const EdgeInsets.only(bottom: 210.0),
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   double width = constraints.maxWidth * 0.9;
                   if (width > 800) {
                     width = 800; // Increased maximum width limit
                   }
-                  return Container(
+                  return SizedBox(
                     width: width,
-                    height:
-                        50, // Increased height to accommodate more top padding
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 163, 163, 163),
-                        width: 2,
-                      ),
-                      borderRadius:
-                          BorderRadius.circular(10), // Border radius added
-                      color: Colors.transparent,
-                    ),
+                    height: 120,
                     child: TextField(
                       decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        hintText: 'Enter your email address',
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w100,
+                        labelText: 'Enter your email address',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        prefixIcon: Icon(
-                            Icons.email_rounded), // Icon before the hint text
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue, width: 2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: const Color.fromARGB(255, 163, 163, 163),
+                              width: 2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        prefixIcon: Icon(Icons.email),
                       ),
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: const Color.fromARGB(255, 2, 2, 2),
                         fontWeight: FontWeight.w100,
                       ),
                     ),

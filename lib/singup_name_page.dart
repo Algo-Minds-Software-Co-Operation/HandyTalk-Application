@@ -1,7 +1,26 @@
 import 'package:flutter/material.dart';
 
-class SignupNamePage extends StatelessWidget {
-  const SignupNamePage({super.key});
+class SignupNamePage extends StatefulWidget {
+  const SignupNamePage({Key? key}) : super(key: key);
+
+  @override
+  _SignupNamePageState createState() => _SignupNamePageState();
+}
+
+class _SignupNamePageState extends State<SignupNamePage> {
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final FocusNode _firstNameFocus = FocusNode();
+  final FocusNode _lastNameFocus = FocusNode();
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _firstNameFocus.dispose();
+    _lastNameFocus.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,38 +84,38 @@ class SignupNamePage extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 380.0),
+              padding: const EdgeInsets.only(bottom: 360.0),
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   double width = constraints.maxWidth * 0.9;
                   if (width > 800) {
                     width = 800; // Increased maximum width limit
                   }
-                  return Container(
+                  return SizedBox(
                     width: width,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 163, 163, 163),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.transparent,
-                    ),
+                    height: 80,
                     child: TextField(
+                      controller: _firstNameController,
+                      focusNode: _firstNameFocus,
                       decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        hintText: 'First name',
-                        prefixIcon: Icon(Icons.line_axis),
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w100,
+                        labelText: 'First name',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue, width: 2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: const Color.fromARGB(255, 163, 163, 163),
+                              width: 2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        prefixIcon: Icon(Icons.person),
                       ),
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: const Color.fromARGB(255, 2, 2, 2),
                         fontWeight: FontWeight.w100,
                       ),
                     ),
@@ -107,38 +126,38 @@ class SignupNamePage extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 250.0),
+              padding: const EdgeInsets.only(bottom: 220.0),
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   double width = constraints.maxWidth * 0.9;
                   if (width > 800) {
                     width = 800; // Increased maximum width limit
                   }
-                  return Container(
+                  return SizedBox(
                     width: width,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: const Color.fromARGB(255, 163, 163, 163),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.transparent,
-                    ),
+                    height: 80,
                     child: TextField(
+                      controller: _lastNameController,
+                      focusNode: _lastNameFocus,
                       decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        hintText: 'Last name',
-                        prefixIcon: Icon(Icons.line_axis),
-                        hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w100,
+                        labelText: 'Last name',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue, width: 2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: const Color.fromARGB(255, 163, 163, 163),
+                              width: 2),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        prefixIcon: Icon(Icons.person),
                       ),
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: const Color.fromARGB(255, 2, 2, 2),
                         fontWeight: FontWeight.w100,
                       ),
                     ),
