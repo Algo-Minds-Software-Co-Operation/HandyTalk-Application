@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dashboard_screen.dart';
+import 'signin_userName.dart';
 
 class HomeScreen extends StatelessWidget {
   void getStartedBtnOnClicked() {}
@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
       context,
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            DashboardScreen(),
+            SignUsernameEnglish(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           var begin = 0.0;
           var end = 1.0;
@@ -194,7 +194,7 @@ class HomeSinhalaScreen extends StatelessWidget {
       context,
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            DashboardScreen(),
+            SignUsernameEnglish(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           var begin = 0.0;
           var end = 1.0;

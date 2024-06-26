@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'signin_userPassword.dart';
 
 class SignUsernameEnglish extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
@@ -62,51 +63,92 @@ class SignUsernameEnglish extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 240.0, // Adjust this value to move the text box up or down
-            left: 40.0, // Adjust this value to move the text box left or right
-            right: 40.0, // Adjust this value to move the text box left or right
+            top: 240.0,
+            left: 40.0,
+            right: 40.0,
             child: Column(
               children: [
                 SizedBox(
-                  width: double.infinity, // Makes the text box full width within the padding
-                  height: 50, // Set a fixed height for the text field
+                  width: double.infinity,
+                  height: 45,
                   child: TextField(
                     controller: _usernameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10), // Text field radius
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Colors.black.withOpacity(0.5),
+                        ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10), // Text field radius when focused
+                        borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Colors.blue, // Border color when focused
+                          color: Colors.blue.withOpacity(
+                              0.5), // Focused border color with opacity
                         ),
                       ),
                       labelText: 'Username',
+                      labelStyle: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
                     ),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black, // Unfocused text color
+                    ),
+                    cursorColor: Colors.blue, // Cursor color
+                    onTap: () {
+                      // Change text color when focused
+                      _usernameController.selection = TextSelection(
+                        baseOffset: 0,
+                        extentOffset: _usernameController.text.length,
+                      );
+                    },
                   ),
                 ),
                 SizedBox(height: 20),
                 SizedBox(
-                  width: double.infinity, // Makes the button full width within the padding
-                  height: 50, // Set the same fixed height for the button
+                  width: double.infinity,
+                  height: 45,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add your onPressed code here!
-                      print('Username: ${_usernameController.text}');
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  SignUserpasswordEnglish(),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            var begin = 0.0;
+                            var end = 1.0;
+                            var curve = Curves.ease;
+
+                            var tween = Tween(begin: begin, end: end)
+                                .chain(CurveTween(curve: curve));
+
+                            return FadeTransition(
+                              opacity: animation.drive(tween),
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF0077B6), // Button color
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // Button radius
+                        borderRadius:
+                            BorderRadius.circular(10), // Button radius
                       ),
                     ),
                     child: Text(
                       'Next',
                       style: TextStyle(
-                        color: Colors.white, // Text color
-                        //fontWeight: FontWeight.bold, // Text bold
-                        fontFamily: 'roboto',
+                        color: Colors.white,
+                        fontFamily: 'Roboto-Bold',
+                        fontSize: 13,
                       ),
                     ),
                   ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'dashboard_screen.dart';
 
 class SignUserpasswordEnglish extends StatefulWidget {
   @override
-  _SignUserpasswordEnglishState createState() => _SignUserpasswordEnglishState();
+  _SignUserpasswordEnglishState createState() =>
+      _SignUserpasswordEnglishState();
 }
 
 class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
@@ -69,31 +71,41 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
             ),
           ),
           Positioned(
-            top: 240.0, // Adjust this value to move the text box up or down
-            left: 40.0, // Adjust this value to move the text box left or right
-            right: 40.0, // Adjust this value to move the text box left or right
+            top: 240.0,
+            left: 40.0,
+            right: 40.0,
             child: Column(
               children: [
                 SizedBox(
-                  width: double.infinity, // Makes the text box full width within the padding
-                  height: 50, // Set a fixed height for the text field
+                  width: double.infinity,
+                  height: 45,
                   child: TextField(
                     controller: _passwordController,
-                    obscureText: !_isPasswordVisible, // Toggle password visibility
+                    obscureText: !_isPasswordVisible,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10), // Text field radius
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Colors.black.withOpacity(0.5),
+                        ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10), // Text field radius when focused
+                        borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Colors.blue, // Border color when focused
+                          color: Colors.blue.withOpacity(0.5),
                         ),
                       ),
                       labelText: 'Password',
+                      labelStyle: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                          _isPasswordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                          color: _isPasswordVisible ? Colors.blue : Colors.grey,
                         ),
                         onPressed: () {
                           setState(() {
@@ -102,6 +114,17 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                         },
                       ),
                     ),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                    ),
+                    cursorColor: Colors.blue,
+                    onTap: () {
+                      _passwordController.selection = TextSelection(
+                        baseOffset: 0,
+                        extentOffset: _passwordController.text.length,
+                      );
+                    },
                   ),
                 ),
                 SizedBox(height: 10),
@@ -128,10 +151,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                       ],
                     ),
                     TextButton(
-                      onPressed: () {
-                        // Add your forgot password logic here
-                        print('Forgot Password tapped');
-                      },
+                      onPressed: () {},
                       child: Text(
                         'Forgot Password?',
                         style: TextStyle(
@@ -145,24 +165,45 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                 ),
                 SizedBox(height: 20),
                 SizedBox(
-                  width: double.infinity, // Makes the button full width within the padding
-                  height: 50, // Set the same fixed height for the button
+                  width: double.infinity,
+                  height: 45,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Add your onPressed code here!
-                      print('Password: ${_passwordController.text}');
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  DashboardScreen(),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            var begin = 0.0;
+                            var end = 1.0;
+                            var curve = Curves.ease;
+
+                            var tween = Tween(begin: begin, end: end)
+                                .chain(CurveTween(curve: curve));
+
+                            return FadeTransition(
+                              opacity: animation.drive(tween),
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF0077B6), // Button color
+                      backgroundColor: Color(0xFF0077B6),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // Button radius
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     child: Text(
                       'Next',
                       style: TextStyle(
-                        color: Colors.white, // Text color
-                        fontFamily: 'Roboto',
+                        color: Colors.white,
+                        fontFamily: 'Roboto-Bold',
+                        fontSize: 13,
                       ),
                     ),
                   ),
