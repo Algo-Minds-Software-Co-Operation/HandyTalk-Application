@@ -2,7 +2,7 @@ import 'package:HandyTalk/signin_userName.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'home_screen.dart';
-import 'signup_birthGen.dart';
+import 'signup_name_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +11,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: SignupBirthDetailsPage());
+    return MaterialApp(home: SplashScreen());
   }
 }
 

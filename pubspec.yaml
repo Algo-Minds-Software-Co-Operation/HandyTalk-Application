@@ -39,7 +39,12 @@ flutter:
     - assets/images/page-circle-signin-password.png
     - assets/icon/icon.png
     - assets/images/page-circle-two.png
-    
+    - assets/images/page-circle-signup-one.png
+    - assets/images/page-circle-signup-two.png
+    - assets/images/page-circle-signup-three.png
+    - assets/images/page-circle-signup-four.png
+    - assets/images/page-circle-signup-five.png
+    - assets/images/page-circle-signup-six.png
 
   fonts:
     - family: Roboto

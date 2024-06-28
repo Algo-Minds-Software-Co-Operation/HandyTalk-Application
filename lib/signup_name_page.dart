@@ -1,26 +1,9 @@
 import 'package:flutter/material.dart';
+import 'signup_birthGen.dart';
 
-class SignupNamePage extends StatefulWidget {
-  const SignupNamePage({Key? key}) : super(key: key);
-
-  @override
-  _SignupNamePageState createState() => _SignupNamePageState();
-}
-
-class _SignupNamePageState extends State<SignupNamePage> {
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final FocusNode _firstNameFocus = FocusNode();
-  final FocusNode _lastNameFocus = FocusNode();
-
-  @override
-  void dispose() {
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _firstNameFocus.dispose();
-    _lastNameFocus.dispose();
-    super.dispose();
-  }
+class SignupNamePage extends StatelessWidget {
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +17,13 @@ class _SignupNamePageState extends State<SignupNamePage> {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 680.0),
+              padding: const EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'Sign in',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'Roboto',
                   color: Colors.black,
-                  fontSize: 27,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -49,14 +31,13 @@ class _SignupNamePageState extends State<SignupNamePage> {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 599.0),
+              padding: const EdgeInsets.only(bottom: 415.0),
               child: Text(
                 'Signup for partner of HandyTalk',
-                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   color: Colors.black.withOpacity(0.5),
-                  fontSize: 16,
+                  fontSize: 12,
                   fontWeight: FontWeight.normal,
                 ),
               ),
@@ -64,17 +45,17 @@ class _SignupNamePageState extends State<SignupNamePage> {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 500.0),
+              padding: const EdgeInsets.only(bottom: 355.0),
               child: Image.asset(
-                'assets/images/page-circle-one.png',
-                width: 50,
-                height: 50,
+                'assets/images/page-circle-signup-one.png',
+                width: 85,
+                height: 85,
               ),
             ),
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 585.0),
+              padding: const EdgeInsets.only(top: 450.0),
               child: Image.asset(
                 'assets/images/3d-model.png',
                 width: 400,
@@ -82,116 +63,129 @@ class _SignupNamePageState extends State<SignupNamePage> {
               ),
             ),
           ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 360.0),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  double width = constraints.maxWidth * 0.9;
-                  if (width > 800) {
-                    width = 800; // Increased maximum width limit
-                  }
-                  return SizedBox(
-                    width: width,
-                    height: 80,
-                    child: TextField(
-                      controller: _firstNameController,
-                      focusNode: _firstNameFocus,
-                      decoration: InputDecoration(
-                        labelText: 'First name',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+          Positioned(
+            top: 270.0,
+            left: 40.0,
+            right: 40.0,
+            child: Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: TextField(
+                    controller: firstNameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Colors.black.withOpacity(0.5),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 2),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: const Color.fromARGB(255, 163, 163, 163),
-                              width: 2),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        prefixIcon: Icon(Icons.person),
                       ),
-                      style: TextStyle(
-                        color: const Color.fromARGB(255, 2, 2, 2),
-                        fontWeight: FontWeight.w100,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Colors.blue.withOpacity(0.5),
+                        ),
+                      ),
+                      labelText: 'First Name',
+                      labelStyle: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: Colors.black.withOpacity(0.5),
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 220.0),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  double width = constraints.maxWidth * 0.9;
-                  if (width > 800) {
-                    width = 800; // Increased maximum width limit
-                  }
-                  return SizedBox(
-                    width: width,
-                    height: 80,
-                    child: TextField(
-                      controller: _lastNameController,
-                      focusNode: _lastNameFocus,
-                      decoration: InputDecoration(
-                        labelText: 'Last name',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                    ),
+                    cursorColor: Colors.blue,
+                  ),
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: TextField(
+                    controller: lastNameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Colors.black.withOpacity(0.5),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 2),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: const Color.fromARGB(255, 163, 163, 163),
-                              width: 2),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        prefixIcon: Icon(Icons.person),
                       ),
-                      style: TextStyle(
-                        color: const Color.fromARGB(255, 2, 2, 2),
-                        fontWeight: FontWeight.w100,
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Colors.blue.withOpacity(0.5),
+                        ),
+                      ),
+                      labelText: 'Last Name',
+                      labelStyle: TextStyle(
+                        fontSize: 12,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: Colors.black.withOpacity(0.5),
                       ),
                     ),
-                  );
-                },
-              ),
-            ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 60.0),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  double width = constraints.maxWidth * 0.9;
-                  if (width > 800) {
-                    width = 800; // Increased maximum width limit
-                  }
-                  return ElevatedButton(
-                    onPressed: () {},
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black,
+                    ),
+                    cursorColor: Colors.blue,
+                  ),
+                ),
+                SizedBox(height: 20),
+                SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  SignupBirthDetailsPage(),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            var begin = 0.0;
+                            var end = 1.0;
+                            var curve = Curves.ease;
+
+                            var tween = Tween(begin: begin, end: end)
+                                .chain(CurveTween(curve: curve));
+
+                            return FadeTransition(
+                              opacity: animation.drive(tween),
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
-                      fixedSize: Size(width, 50), // Responsive width
                       backgroundColor: Color(0xFF0077B6),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      textStyle: TextStyle(color: Colors.black),
                     ),
                     child: Text(
                       'Next',
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Roboto-Bold',
+                        fontSize: 13,
+                      ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],

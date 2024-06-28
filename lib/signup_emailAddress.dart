@@ -46,9 +46,9 @@ class SignupEmailAddressPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 355.0),
               child: Image.asset(
-                'assets/images/page-circle-signin-username.png',
-                width: 50,
-                height: 50,
+                'assets/images/page-circle-signup-three.png',
+                width: 85,
+                height: 85,
               ),
             ),
           ),
