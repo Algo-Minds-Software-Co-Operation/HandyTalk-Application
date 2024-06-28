@@ -7,9 +7,9 @@ class Home extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Positioned(
-          top: 120, // Adjust this value to change the vertical position
-          left: 16, // Adjust this value to change the horizontal position
-          right: 16, // Adjust this value to change the horizontal position
+          top: 120,
+          left: 16,
+          right: 16,
           child: SearchBar(),
         ),
       ],
