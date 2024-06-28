@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'signup_emailAddress.dart';
+import 'signin_userpassword_screen.dart';
 
-class SignupBirthDetailsPage extends StatelessWidget {
-  final TextEditingController dateController = TextEditingController();
-  String? selectedGender;
+class SignUsernameEnglish extends StatelessWidget {
+  final TextEditingController _usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class SignupBirthDetailsPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 415.0),
               child: Text(
-                'Signup for partner of HandyTalk',
+                'Enter your details to proceed further',
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   color: Colors.black.withOpacity(0.5),
@@ -47,9 +46,9 @@ class SignupBirthDetailsPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 355.0),
               child: Image.asset(
-                'assets/images/page-circle-signup-two.png',
-                width: 85,
-                height: 85,
+                'assets/images/page-circle-signin-username.png',
+                width: 50,
+                height: 50,
               ),
             ),
           ),
@@ -73,8 +72,7 @@ class SignupBirthDetailsPage extends StatelessWidget {
                   width: double.infinity,
                   height: 45,
                   child: TextField(
-                    controller: dateController,
-                    readOnly: true,
+                    controller: _usernameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -89,74 +87,23 @@ class SignupBirthDetailsPage extends StatelessWidget {
                               0.5), // Focused border color with opacity
                         ),
                       ),
-                      labelText: 'Select Date',
+                      labelText: 'Username',
                       labelStyle: TextStyle(
                         fontSize: 12,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                      prefixIcon: Icon(
-                        Icons.calendar_today,
                         color: Colors.black.withOpacity(0.5),
                       ),
                     ),
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.black,
+                      color: Colors.black, // Unfocused text color
                     ),
-                    cursorColor: Colors.blue,
-                    onTap: () async {
-                      DateTime? pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2101),
+                    cursorColor: Colors.blue, // Cursor color
+                    onTap: () {
+                      // Change text color when focused
+                      _usernameController.selection = TextSelection(
+                        baseOffset: 0,
+                        extentOffset: _usernameController.text.length,
                       );
-
-                      if (pickedDate != null) {
-                        dateController.text =
-                            "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
-                      }
-                    },
-                  ),
-                ),
-                SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.blue.withOpacity(
-                              0.5), // Focused border color with opacity
-                        ),
-                      ),
-                      labelText: 'Select Gender',
-                      labelStyle: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                      prefixIcon: Icon(
-                        Icons.person,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                    ),
-                    value: selectedGender,
-                    items: ['Male', 'Female', 'Other']
-                        .map((gender) => DropdownMenuItem(
-                              value: gender,
-                              child: Text(gender),
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      selectedGender = value;
                     },
                   ),
                 ),
@@ -171,7 +118,7 @@ class SignupBirthDetailsPage extends StatelessWidget {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                                  SignupEmailAddressPage(),
+                                  SignUserpasswordEnglish(),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
                             var begin = 0.0;
@@ -190,9 +137,10 @@ class SignupBirthDetailsPage extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF0077B6),
+                      backgroundColor: Color(0xFF0077B6), // Button color
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius:
+                            BorderRadius.circular(10), // Button radius
                       ),
                     ),
                     child: Text(

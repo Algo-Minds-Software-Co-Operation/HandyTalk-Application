@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'signup_birthGen.dart';
+import 'signup_birthgen_screen.dart';
 
 class SignupNamePage extends StatelessWidget {
   final TextEditingController firstNameController = TextEditingController();
