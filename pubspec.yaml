@@ -36,6 +36,8 @@ flutter:
     - assets/images/default-notification.png
     - assets/images/tempory_img.png
     - assets/icon/icon.png
+    - assets/images/page-circle-two.png
+    
 
   fonts:
     - family: Roboto
