@@ -34,6 +34,7 @@ flutter:
     - assets/images/back-image.png
     - assets/images/add-new-message.png
     - assets/images/default-notification.png
+    - assets/images/tempory_img.png
     - assets/icon/icon.png
     - assets/images/page-circle-two.png
     
