@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'settings.dart';
 
+
 void navigateToProfileSettings(BuildContext context) {}
 
 void navigateToNotification() {}
@@ -22,7 +23,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Settings(),
   ];
 
-  void _onItemTapped(int index) {
+   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });

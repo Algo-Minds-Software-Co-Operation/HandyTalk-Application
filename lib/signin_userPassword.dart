@@ -54,7 +54,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 355.0),
               child: Image.asset(
-                'assets/images/page-circle-one.png',
+                'assets/images/page-circle-signin-password.png',
                 width: 50,
                 height: 50,
               ),
@@ -71,7 +71,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
             ),
           ),
           Positioned(
-            top: 240.0,
+            top: 270.0,
             left: 40.0,
             right: 40.0,
             child: Column(
