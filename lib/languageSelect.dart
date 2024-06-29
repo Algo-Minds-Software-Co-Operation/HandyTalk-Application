@@ -42,7 +42,7 @@ class LanguageSelect extends StatelessWidget {
           ),
           // Add your radio buttons here
           RadioListTile<SingingCharacter>(
-            contentPadding: EdgeInsets.only(top: 320.0 , left: 100.0),
+            contentPadding: EdgeInsets.only(top: 320.0, left: 100.0),
 
             title: const Text('English'),
             value: SingingCharacter.english, // Assign a unique value
@@ -54,7 +54,7 @@ class LanguageSelect extends StatelessWidget {
             },
           ),
           RadioListTile<SingingCharacter>(
-             contentPadding: EdgeInsets.only(top: 400.0, left: 100.0),
+            contentPadding: EdgeInsets.only(top: 400.0, left: 100.0),
             title: const Text('Sinhala'),
             value: SingingCharacter.sinhala, // Assign a unique value
             groupValue: _character,

@@ -1,6 +1,87 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'languageSelect.dart';
 
-class OTPVerify01 extends StatelessWidget {
+class OTPVerify01 extends StatefulWidget {
+  @override
+  _OTPVerify01State createState() => _OTPVerify01State();
+}
+
+class _OTPVerify01State extends State<OTPVerify01> {
+  List<TextEditingController> _otpControllers =
+      List.generate(4, (index) => TextEditingController());
+  List<FocusNode> _focusNodes = List.generate(4, (index) => FocusNode());
+  Color _buttonColor = Color.fromARGB(255, 148, 148, 148).withOpacity(0.75);
+  Timer? _timer;
+  int _start = 120; // 2 minutes in seconds
+  String _timerText = "2:00";
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+    for (var i = 0; i < 4; i++) {
+      _otpControllers[i].addListener(_onOtpChanged);
+      _otpControllers[i].text = '0'; // Initial values for OTP fields
+    }
+  }
+
+  void startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (_start == 0) {
+        setState(() {
+          _timerText = "Resend";
+        });
+        timer.cancel();
+      } else {
+        setState(() {
+          _start--;
+          int minutes = _start ~/ 60;
+          int seconds = _start % 60;
+          _timerText = "$minutes:${seconds.toString().padLeft(2, '0')}";
+        });
+      }
+    });
+  }
+
+  void _onOtpChanged() {
+    String otp = _otpControllers.map((controller) => controller.text).join();
+    if (otp.length == 4 && otp != "0000") {
+      setState(() {
+        _buttonColor = Colors.blue;
+      });
+    } else {
+      setState(() {
+        _buttonColor = Color.fromARGB(255, 148, 148, 148).withOpacity(0.75);
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    for (var controller in _otpControllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
+  void _nextField(int index) {
+    if (index < 3) {
+      FocusScope.of(context).requestFocus(_focusNodes[index + 1]);
+    } else {
+      FocusScope.of(context).unfocus();
+    }
+  }
+
+  void _previousField(int index) {
+    if (index > 0) {
+      FocusScope.of(context).requestFocus(_focusNodes[index - 1]);
+    } else {
+      FocusScope.of(context).unfocus();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,89 +131,159 @@ class OTPVerify01 extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 350.0),
-              child: Text(
-                '0 0 0 0',
-                style: TextStyle(
-                  fontFamily: 'Roboto',
-                  color: Colors.black,
-                  fontSize: 54,
-                  fontWeight: FontWeight.bold,
-                ),
-                 
-              ),
-            ),
-          ),
-         Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 215.0, right: 240.0),
-              child: RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Resend new otp in ',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        color: Colors.black.withOpacity(0.5),
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
+              padding: const EdgeInsets.only(bottom: 325.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(4, (index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: SizedBox(
+                      width: 60,
+                      child: TextField(
+                        controller: _otpControllers[index],
+                        focusNode: _focusNodes[index],
+                        keyboardType: TextInputType.number,
+                        textAlign: TextAlign.center,
+                        maxLength: 1,
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          color: Colors.black,
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        decoration: InputDecoration(
+                          counterText: '',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(color: Colors.transparent),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(color: Colors.transparent),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                            borderSide: BorderSide(color: Colors.transparent),
+                          ),
+                        ),
+                        onTap: () {
+                          if (_otpControllers[index].text == '0') {
+                            _otpControllers[index].clear();
+                          }
+                        },
+                        onChanged: (value) {
+                          setState(() {});
+                          if (value.length == 1) {
+                            _nextField(index);
+                          } else if (value.isEmpty) {
+                            _previousField(index);
+                          }
+                        },
                       ),
                     ),
-                    TextSpan(
-                      text: '2:00',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        color: Colors.red,
-                        fontSize: 12,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                  ],
-                ),
-                textAlign: TextAlign.left,
+                  );
+                }),
               ),
             ),
           ),
-
-         Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 110.0),
-              child: TextButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    Color.fromARGB(255, 148, 148, 148).withOpacity(0.75),
-                  ),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(380, 60)),
-                ),
-                onPressed: () {
-                  // Define the onPressed action here
-                },
-                child: Text(
-                  'Next',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    color: Color(0xFFFFFFFF),
-                    fontSize: 25.0,
-                    fontStyle: FontStyle.normal,
-                  ),
-                ),
-              ),
-            ),
-          ),
-
           Center(
             child: Padding(
-                padding: const EdgeInsets.only(top: 550.0),
-                child: Image.asset(
-                  'assets/images/3d-model.png',
-                  width: 400,
-                  height: 400,
-                )),
+              padding: const EdgeInsets.only(bottom: 192.0, right: 160.0),
+              child: GestureDetector(
+                onTap: () {
+                  if (_timerText == "Resend OTP") {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => AnotherPage()),
+                    // );
+                  }
+                },
+                child: RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Resend new otp in ',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          color: Colors.black.withOpacity(0.5),
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      TextSpan(
+                        text: _timerText,
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          color:
+                              _timerText == "Resend" ? Colors.blue : Colors.red,
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ],
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 110.0),
+              child: SizedBox(
+                width: 300,
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            LanguageSelect(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          var begin = 0.0;
+                          var end = 1.0;
+                          var curve = Curves.ease;
+
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
+
+                          return FadeTransition(
+                            opacity: animation.drive(tween),
+                            child: child,
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF0077B6), // Button color
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10), // Button radius
+                    ),
+                  ),
+                  child: Text(
+                    'Next',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Roboto-Bold',
+                      fontSize: 13,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 550.0),
+              child: Image.asset(
+                'assets/images/3d-model.png',
+                width: 400,
+                height: 400,
+              ),
+            ),
           ),
         ],
       ),
