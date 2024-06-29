@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'signin_userpassword_screen.dart';
-import 'signup_userpassword_screen.dart';
 
 class SignupUsernameScreen extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();

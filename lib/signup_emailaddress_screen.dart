@@ -1,6 +1,5 @@
 import 'package:HandyTalk/otp_verify_screen.dart';
 import 'package:flutter/material.dart';
-import 'signin_userpassword_screen.dart';
 
 class SignupEmailAddressPage extends StatelessWidget {
   final TextEditingController emailAddressController = TextEditingController();
