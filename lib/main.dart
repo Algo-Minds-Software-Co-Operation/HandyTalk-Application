@@ -1,12 +1,7 @@
-import 'package:HandyTalk/languageSelect.dart';
-import 'package:HandyTalk/otp_verify01.dart';
-import 'package:HandyTalk/otp_verify02.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'home_screen.dart';
-import 'dashboard_screen.dart';
-import 'signin_screen.dart';
-import 'languageSelect.dart';
+import 'reset_password_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,13 +10,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // home: DashboardScreen(),
-       home: LanguageSelect(),
-     //  home: OTPVerify02(),
-      // home: OTPVerify01(),
-      
-    );
+    return MaterialApp(home: SplashScreen());
   }
 }
 
@@ -85,4 +74,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-

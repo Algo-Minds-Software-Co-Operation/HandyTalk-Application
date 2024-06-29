@@ -1,15 +1,37 @@
 import 'package:flutter/material.dart';
-import 'dashboard_screen.dart';
+import 'signin_username_screen.dart';
+import 'signup_name_page.dart';
 
 class HomeScreen extends StatelessWidget {
-  void getStartedBtnOnClicked() {}
+  void getStartedBtnOnClicked(BuildContext context) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            SignupNamePage(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var begin = 0.0;
+          var end = 1.0;
+          var curve = Curves.ease;
+
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+          return FadeTransition(
+            opacity: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
+    );
+  }
 
   void loginBtnOnClicked(BuildContext context) {
     Navigator.push(
       context,
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            DashboardScreen(),
+            SignUsernameEnglish(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           var begin = 0.0;
           var end = 1.0;
@@ -121,7 +143,7 @@ class HomeScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 200.0),
               child: ElevatedButton(
-                onPressed: getStartedBtnOnClicked,
+                onPressed: () => getStartedBtnOnClicked(context),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                       Color(0xFF0077B6).withOpacity(0.75)),
@@ -194,7 +216,7 @@ class HomeSinhalaScreen extends StatelessWidget {
       context,
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            DashboardScreen(),
+            SignUsernameEnglish(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           var begin = 0.0;
           var end = 1.0;
