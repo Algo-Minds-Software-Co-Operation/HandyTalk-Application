@@ -1,3 +1,4 @@
+import 'package:HandyTalk/otp_verify_screen.dart';
 import 'package:flutter/material.dart';
 import 'signin_userpassword_screen.dart';
 
@@ -121,7 +122,7 @@ class SignupEmailAddressPage extends StatelessWidget {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                                  SignUserpasswordEnglish(),
+                                  OTPVerifyScreen(),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
                             var begin = 0.0;

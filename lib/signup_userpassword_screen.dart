@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'signin_userpassword_screen.dart';
-import 'signup_userpassword_screen.dart';
+import 'home_screen.dart';
 
 class SignupUserpasswordScreen extends StatefulWidget {
   @override
@@ -214,28 +213,28 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
                   height: 45,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   PageRouteBuilder(
-                      //     pageBuilder:
-                      //         (context, animation, secondaryAnimation) =>
-                      //             SignupUserpasswordScreen(),
-                      //     transitionsBuilder:
-                      //         (context, animation, secondaryAnimation, child) {
-                      //       var begin = 0.0;
-                      //       var end = 1.0;
-                      //       var curve = Curves.ease;
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  HomeScreen(),
+                          transitionsBuilder:
+                              (context, animation, secondaryAnimation, child) {
+                            var begin = 0.0;
+                            var end = 1.0;
+                            var curve = Curves.ease;
 
-                      //       var tween = Tween(begin: begin, end: end)
-                      //           .chain(CurveTween(curve: curve));
+                            var tween = Tween(begin: begin, end: end)
+                                .chain(CurveTween(curve: curve));
 
-                      //       return FadeTransition(
-                      //         opacity: animation.drive(tween),
-                      //         child: child,
-                      //       );
-                      //     },
-                      //   ),
-                      // );
+                            return FadeTransition(
+                              opacity: animation.drive(tween),
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF0077B6),

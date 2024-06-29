@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'language_select_screen.dart';
 
-class OTPVerify01 extends StatefulWidget {
+class OTPVerifyScreen extends StatefulWidget {
   @override
   _OTPVerify01State createState() => _OTPVerify01State();
 }
 
-class _OTPVerify01State extends State<OTPVerify01> {
+class _OTPVerify01State extends State<OTPVerifyScreen> {
   List<TextEditingController> _otpControllers =
       List.generate(4, (index) => TextEditingController());
   List<FocusNode> _focusNodes = List.generate(4, (index) => FocusNode());
