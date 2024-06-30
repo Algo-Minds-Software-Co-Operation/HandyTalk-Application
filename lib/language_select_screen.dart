@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'signup_username_screen.dart';
 
 class LanguageSelect extends StatefulWidget {
   @override
@@ -54,20 +55,19 @@ class _LanguageSelectState extends State<LanguageSelect> {
                 SizedBox(
                   height: 0,
                   width: 0,
-                ), // Adjusted position here
+                ),
                 GestureDetector(
                   onTap: () {
                     setState(() {
                       _character = SingingCharacter.english;
                     });
-                    // Navigate to next page
                     navigateToNextPage();
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 50), // Adjusted width here
+                      padding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 50),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: _character == SingingCharacter.english
@@ -97,7 +97,6 @@ class _LanguageSelectState extends State<LanguageSelect> {
                               setState(() {
                                 _character = value;
                               });
-                              // Navigate to next page
                               navigateToNextPage();
                             },
                           ),
@@ -114,14 +113,13 @@ class _LanguageSelectState extends State<LanguageSelect> {
                     setState(() {
                       _character = SingingCharacter.sinhala;
                     });
-                    // Navigate to next page
                     navigateToNextPage();
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 20, horizontal: 50), // Adjusted width here
+                      padding:
+                          EdgeInsets.symmetric(vertical: 20, horizontal: 50),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: _character == SingingCharacter.sinhala
@@ -151,7 +149,6 @@ class _LanguageSelectState extends State<LanguageSelect> {
                               setState(() {
                                 _character = value;
                               });
-                              // Navigate to next page
                               navigateToNextPage();
                             },
                           ),
@@ -163,27 +160,32 @@ class _LanguageSelectState extends State<LanguageSelect> {
               ],
             ),
           ),
-          // Center(
-          //   child: Padding(
-          //     padding: const EdgeInsets.only(top: 450.0),
-          //     child: Image.asset(
-          //       'assets/images/3d-model.png',
-          //       width: 400,
-          //       height: 400,
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
   }
 
   void navigateToNextPage() {
-    // Add your navigation logic here, for example:
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(builder: (context) => NextPage()),
-    // );
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            SignupUsernameScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var begin = 0.0;
+          var end = 1.0;
+          var curve = Curves.ease;
+
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+          return FadeTransition(
+            opacity: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
+    );
   }
 }
 
