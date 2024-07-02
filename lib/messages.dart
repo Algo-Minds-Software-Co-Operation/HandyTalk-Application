@@ -33,58 +33,7 @@ class MessagesBody extends StatefulWidget {
 
 class _MessagesBodyState extends State<MessagesBody> {
   final TextEditingController _searchController = TextEditingController();
-  List<String> _allChats = [
-    'Chat 1',
-    'Chat 2',
-    'Chat 3',
-    'Chat 4',
-    'Chat 5',
-    'Chat 6',
-    'Chat 7',
-    'Chat 8',
-    'Chat 9',
-    'Chat 10',
-    'Chat 11',
-    'Chat 12',
-    'Chat 13',
-    'Chat 14',
-    'Chat 15',
-    'Chat 16',
-    'Chat 17',
-    'Chat 18',
-    'Chat 19',
-    'Chat 20',
-    'Chat 21',
-    'Chat 22',
-    'Chat 23',
-    'Chat 24',
-    'Chat 25',
-    'Chat 26',
-    'Chat 27',
-    'Chat 28',
-    'Chat 29',
-    'Chat 30',
-    'Chat 31',
-    'Chat 32',
-    'Chat 33',
-    'Chat 34',
-    'Chat 35',
-    'Chat 36',
-    'Chat 37',
-    'Chat 38',
-    'Chat 39',
-    'Chat 40',
-    'Chat 41',
-    'Chat 42',
-    'Chat 43',
-    'Chat 44',
-    'Chat 45',
-    'Chat 46',
-    'Chat 47',
-    'Chat 48',
-    'Chat 49',
-    'Chat 50',
-  ];
+  List<String> _allChats = List.generate(50, (index) => 'Chat ${index + 1}');
   List<String> _filteredChats = [];
 
   @override
@@ -110,37 +59,90 @@ class _MessagesBodyState extends State<MessagesBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Positioned search bar
-        Positioned(
-          top: 86.0, // Adjust this value to move the search bar up or down
-          left: 8.0,
-          right: 8.0,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: 'Search',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(8.0, 86.0, 8.0, 0),
+          child: TextField(
+            controller: _searchController,
+            decoration: InputDecoration(
+              labelText: 'Search',
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              prefixIcon: Icon(Icons.search),
+              filled: true,
+              fillColor: Colors
+                  .transparent, // Transparent background color for search bar
+            ),
+            style: TextStyle(
+              color: Colors.white,
+            ), // White text color for the search input
+          ),
+        ),
+        // Text above horizontal list of person images
+        Padding(
+          padding: const EdgeInsets.fromLTRB(
+              16.0, 32.0, 16.0, 0), // Adjusted top padding here
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Find Groups', // Text above the horizontal list
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(255, 0, 0, 0),
                 ),
-                prefixIcon: Icon(Icons.search),
-                filled: true,
-                fillColor: Colors.white
-                    .withOpacity(0.8), // Background color of search bar
+              ),
+              Icon(
+                Icons.add,
+                size: 24.0,
+                color: Colors.black, // Use Colors.black for simplicity
+              ),
+            ],
+          ),
+        ),
+        // Horizontal list of person images
+        Padding(
+          padding: const EdgeInsets.only(top: 18.0),
+          child: Container(
+            height: 115.0, // Fixed height for the horizontal list
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(10, (index) {
+                  return Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Column(
+                      children: [
+                        CircleAvatar(
+                          radius: 30.0,
+                          backgroundImage: AssetImage(
+                            'assets/images/person_${index + 1}.png', // Replace with your image path pattern
+                          ),
+                        ),
+                        SizedBox(height: 4.0),
+                        Text(
+                          'Person ${index + 1}', // Text below each avatar
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            color: const Color.fromARGB(255, 0, 0, 0),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
               ),
             ),
           ),
         ),
-        // Positioned ListView
-        Positioned(
-          top:
-              150.0, // Adjust this value to position the ListView correctly below the search bar
-          left: 0,
-          right: 0,
-          bottom: 0,
+
+        // Expanded ListView for chats
+        Expanded(
           child: ListView.builder(
             itemCount: _filteredChats.length,
             itemBuilder: (context, index) {
@@ -164,7 +166,8 @@ class _MessagesBodyState extends State<MessagesBody> {
                       'Today', // This is the text to display next to each chat item
                       style: TextStyle(
                         fontSize: 12.0, // Adjust the font size as needed
-                        color: Colors.grey, // Color of the small text
+                        color: const Color.fromARGB(
+                            255, 0, 0, 0), // Color of the small text
                       ),
                     ),
                   ],
