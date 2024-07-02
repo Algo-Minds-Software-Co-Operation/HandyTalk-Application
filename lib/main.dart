@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'home_screen.dart';
+import 'premium_screen.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,7 +1,8 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'settings.dart';
-
+import 'premium_screen.dart'; // Import the PremiumScreen
 
 void navigateToProfileSettings(BuildContext context) {}
 
@@ -23,7 +24,19 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Settings(),
   ];
 
-   void _onItemTapped(int index) {
+  @override
+  void initState() {
+    super.initState();
+    // Navigate to PremiumScreen after 2 seconds
+    Timer(Duration(seconds: 2), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PremiumScreen()),
+      );
+    });
+  }
+
+  void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
