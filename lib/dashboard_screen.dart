@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'settings.dart';
 import 'premium_screen.dart'; // Import the PremiumScreen
+import 'classroom.dart';
 
 void navigateToProfileSettings(BuildContext context) {}
 
@@ -17,9 +18,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    MessagesPage(),
     ClassroomPage(),
+    MessagesPage(),
+    Home(),
     GamesPage(),
     Settings(),
   ];
@@ -170,13 +171,6 @@ class MessagesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('Messages Page'));
-  }
-}
-
-class ClassroomPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Classroom Page'));
   }
 }
 
