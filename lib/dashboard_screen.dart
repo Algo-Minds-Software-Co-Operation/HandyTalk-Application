@@ -4,6 +4,7 @@ import 'home.dart';
 import 'settings.dart';
 import 'premium_screen.dart'; // Import the PremiumScreen
 import 'classroom.dart';
+import 'games.dart';
 
 void navigateToProfileSettings(BuildContext context) {}
 
@@ -171,12 +172,5 @@ class MessagesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(child: Text('Messages Page'));
-  }
-}
-
-class GamesPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Games Page'));
   }
 }
