@@ -1,3 +1,4 @@
+import 'package:HandyTalk/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'home_screen.dart';
@@ -10,7 +11,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: SplashScreen());
+    return MaterialApp(home: DashboardScreen());
   }
 }
 
