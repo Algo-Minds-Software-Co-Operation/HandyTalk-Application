@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'alphabet_screen.dart';
 
 class ClassroomPage extends StatelessWidget {
   @override
@@ -35,12 +36,18 @@ class ClassroomPage extends StatelessWidget {
             ClassroomCard(
               image: Image.asset(
                 'assets/images/alphabet.png',
-                width: 50.0, // Set your desired width here
-                height: 50.0, // Set your desired height here
+                width: 50.0,
+                height: 50.0,
               ),
               title: 'Alphabet',
               subtitle: 'Learn Sign Language Alphabet',
               color: Colors.red,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AlphabetScreen()),
+                );
+              },
             ),
             SizedBox(height: 20),
             ClassroomCard(
@@ -77,6 +84,7 @@ class ClassroomCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final Color color;
+  final VoidCallback? onTap; // Add onTap callback
 
   ClassroomCard({
     this.icon,
@@ -84,61 +92,63 @@ class ClassroomCard extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.color,
+    this.onTap, // Receive onTap callback
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.0),
-      width: MediaQuery.of(context).size.width - 40, // Decrease width by 40
-      height: 130.0, // Adjusted height
-      decoration: BoxDecoration(
-        color: Color(0xFFCAF0F8)
-            .withOpacity(0.35), // Set background color with opacity
-        borderRadius: BorderRadius.circular(10.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          if (image != null)
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: image,
-            )
-          else
-            Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Icon(icon, color: color),
+    return GestureDetector(
+      onTap: onTap, // Execute onTap callback when card is tapped
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 20.0),
+        width: MediaQuery.of(context).size.width - 40,
+        height: 130.0,
+        decoration: BoxDecoration(
+          color: Color(0xFFCAF0F8).withOpacity(0.35),
+          borderRadius: BorderRadius.circular(10.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 7,
+              offset: Offset(0, 3),
             ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(
-                  right: 10.0), // Align text slightly to the right
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style:
-                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    subtitle,
-                    style: TextStyle(fontSize: 12.0),
-                  ),
-                ],
+          ],
+        ),
+        child: Row(
+          children: [
+            if (image != null)
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: image!,
+              )
+            else
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Icon(icon, color: color),
+              ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.only(right: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      subtitle,
+                      style: TextStyle(fontSize: 12.0),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
