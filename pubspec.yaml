@@ -46,6 +46,14 @@ flutter:
     - assets/images/page-circle-signup-five.png
     - assets/images/page-circle-signup-six.png
     - assets/images/premium-pages.png
+    - assets/images/sign_language.png
+    - assets/images/alphabet.png
+    - assets/images/numbers.png
+    - assets/images/common_words.png
+    - assets/images/game1.png
+    - assets/images/game2.png
+    - assets/images/game3.png
+    - assets/images/game4.png
 
   fonts:
     - family: Roboto
