@@ -17,8 +17,7 @@ class ClassroomPage extends StatelessWidget {
           //   colors: [Color(0xFF9FE7FB), Color(0xFF85C7F2)],
           // ),
         ),
-        
-        padding: EdgeInsets.only(top: 100.0), // Adjust top padding here
+        padding: EdgeInsets.only(top: 75.0), // Adjust top padding here
         child: ListView(
           padding: EdgeInsets.zero, // Remove default ListView padding
           children: [
@@ -26,40 +25,40 @@ class ClassroomPage extends StatelessWidget {
               image: Image.asset(
                 'assets/images/sign_language.png',
                 width: 50.0, // Set your desired width here
-                height: 100.0, // Set your desired height here
+                height: 50.0, // Set your desired height here
               ),
               title: 'Sign Language',
               subtitle: 'Learn Sign Language',
               color: Colors.blue,
             ),
-            SizedBox(height: 75),
+            SizedBox(height: 20),
             ClassroomCard(
               image: Image.asset(
                 'assets/images/alphabet.png',
                 width: 50.0, // Set your desired width here
-                height: 100.0, // Set your desired height here
+                height: 50.0, // Set your desired height here
               ),
               title: 'Alphabet',
               subtitle: 'Learn Sign Language Alphabet',
               color: Colors.red,
             ),
-            SizedBox(height: 75),
+            SizedBox(height: 20),
             ClassroomCard(
               image: Image.asset(
                 'assets/images/common_words.png',
                 width: 50.0, // Set your desired width here
-                height: 100.0, // Set your desired height here
+                height: 50.0, // Set your desired height here
               ),
               title: 'Common Words',
               subtitle: 'Learn Sign Language Common Words',
               color: Colors.green,
             ),
-            SizedBox(height: 75),
+            SizedBox(height: 20),
             ClassroomCard(
               image: Image.asset(
                 'assets/images/numbers.png',
                 width: 50.0, // Set your desired width here
-                height: 100.0, // Set your desired height here
+                height: 50.0, // Set your desired height here
               ),
               title: 'Numbers',
               subtitle: 'Learn Sign Language Numbers',
@@ -88,27 +87,59 @@ class ClassroomCard extends StatelessWidget {
   });
 
   @override
-Widget build(BuildContext context) {
-    return Card(
-      child: ListTile(
-        leading: image != null
-            ? SizedBox(
-                width: 50,
-                height: 150,
-                child: image,
-
-              )
-            : Icon(icon, color: color),
-        title: Align(
-          alignment: Alignment.centerRight,
-          child: Text(title, textAlign: TextAlign.right),
-        ),
-        subtitle: Align(
-          alignment: Alignment.centerRight,
-          child: Text(subtitle, textAlign: TextAlign.right),
-        ),
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      width: MediaQuery.of(context).size.width - 40, // Decrease width by 40
+      height: 130.0, // Adjusted height
+      decoration: BoxDecoration(
+        color: Color(0xFFCAF0F8)
+            .withOpacity(0.35), // Set background color with opacity
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          if (image != null)
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: image,
+            )
+          else
+            Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Icon(icon, color: color),
+            ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(
+                  right: 10.0), // Align text slightly to the right
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style:
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    subtitle,
+                    style: TextStyle(fontSize: 12.0),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
-
 }

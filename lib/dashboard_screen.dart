@@ -18,9 +18,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    ClassroomPage(),
-    MessagesPage(),
     Home(),
+    MessagesPage(),
+    ClassroomPage(),
     GamesPage(),
     Settings(),
   ];
