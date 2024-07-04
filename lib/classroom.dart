@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'alphabet_screen.dart';
+import 'numbers_screen.dart'; // Import the NumbersScreen
 
 class ClassroomPage extends StatelessWidget {
   @override
@@ -11,12 +12,6 @@ class ClassroomPage extends StatelessWidget {
             image: AssetImage('assets/images/background.png'),
             fit: BoxFit.cover,
           ),
-          // Uncomment the gradient if needed
-          // gradient: LinearGradient(
-          //   begin: Alignment.topCenter,
-          //   end: Alignment.bottomCenter,
-          //   colors: [Color(0xFF9FE7FB), Color(0xFF85C7F2)],
-          // ),
         ),
         padding: EdgeInsets.only(top: 75.0), // Adjust top padding here
         child: ListView(
@@ -70,6 +65,12 @@ class ClassroomPage extends StatelessWidget {
               title: 'Numbers',
               subtitle: 'Learn Sign Language Numbers',
               color: Colors.orange,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => NumbersScreen()),
+                );
+              },
             ),
           ],
         ),
