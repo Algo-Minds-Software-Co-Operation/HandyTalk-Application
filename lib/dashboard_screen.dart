@@ -5,10 +5,19 @@ import 'settings.dart';
 import 'premium_screen.dart'; // Import the PremiumScreen
 import 'classroom.dart';
 import 'games.dart';
+import 'messages.dart';
+import 'new_messages_screen.dart'; // Import the NewMessagePage
 
-void navigateToProfileSettings(BuildContext context) {}
+void navigateToProfileSettings(BuildContext context) {
+  // Define your navigation logic here
+}
 
-void navigateToNotification() {}
+void navigateToNotification(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => NewMessagePage()),
+  );
+}
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -53,7 +62,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     if (_selectedIndex == 1) {
       appBarTitle = 'Messages';
       profileImagePath = 'assets/images/default-notification.png';
-      notificationImagePath = 'assets/images/default-notification.png';
+      notificationImagePath = 'assets/images/add-new-message.png';
     } else if (_selectedIndex == 2) {
       appBarTitle = 'Classroom';
       profileImagePath = 'assets/images/default-notification.png';
@@ -104,7 +113,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             GestureDetector(
               onTap: () {
-                navigateToNotification();
+                navigateToNotification(context); // Pass context here
               },
               child: Image.asset(
                 notificationImagePath,
@@ -165,12 +174,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
       ),
     );
-  }
-}
-
-class MessagesPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(child: Text('Messages Page'));
   }
 }
