@@ -5,8 +5,9 @@ class MessagesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true, // Extend the body behind the AppBar
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
@@ -15,7 +16,6 @@ class MessagesPage extends StatelessWidget {
           style: TextStyle(fontSize: 24, color: Colors.black),
         ),
       ),
-
       body: Stack(
         children: [
           // Background image

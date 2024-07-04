@@ -10,7 +10,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: DashboardScreen());
+    return MaterialApp(home: SplashScreen());
   }
 }
 
