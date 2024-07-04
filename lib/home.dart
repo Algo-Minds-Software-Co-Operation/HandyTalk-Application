@@ -12,6 +12,12 @@ class Home extends StatelessWidget {
           right: 16,
           child: SearchBar(),
         ),
+        Positioned(
+          top: 200, // Adjust the position as needed
+          left: 16,
+          right: 16,
+          child: ProgressRectangle(),
+        ),
       ],
     );
   }
@@ -110,6 +116,112 @@ class _SearchBarState extends State<SearchBar> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ProgressRectangle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      decoration: BoxDecoration(
+        color: Color(0xFFCAF0F8).withOpacity(0.50), // Set the opacity here
+        borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Your progress',
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Text(
+                      '5',
+                      style: TextStyle(
+                        fontSize: 32.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(width: 4.0),
+                    Text(
+                      'Days',
+                      style: TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 16.0),
+                Row(
+                  children: <Widget>[
+                    ProgressCategory(
+                      color: Colors.orange,
+                    ),
+                    SizedBox(width: 16.0),
+                    ProgressCategory(
+                      color: Colors.green,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          // Placeholder for the chart on the right side
+          Container(
+            width: 100, // Adjust the width as needed
+            height: 100, // Adjust the height as needed
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: Colors.blue.withOpacity(0.2),
+            ),
+            child: Center(
+              child: Text(
+                'Chart',
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.5),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProgressCategory extends StatelessWidget {
+  final Color color;
+
+  ProgressCategory({required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 50.0,
+      height: 50.0,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8.0),
       ),
     );
   }

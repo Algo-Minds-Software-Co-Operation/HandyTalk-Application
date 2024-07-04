@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'new_messages_screen.dart';
+import 'chat_screen.dart';
 
 class MessagesPage extends StatelessWidget {
   @override
@@ -168,6 +168,16 @@ class MessagesPage extends StatelessWidget {
                                   color: Colors.black, size: 16.0),
                             ],
                           ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ChatScreen(
+                                      userName: 'User Name',
+                                      profileImagePath:
+                                          'assets/images/profile-picture-icon.png')),
+                            );
+                          },
                         ),
                         // Add more chats here
                       ],
