@@ -93,7 +93,7 @@ class MessagesPage extends StatelessWidget {
                             CircleAvatar(
                               radius: 30,
                               backgroundImage: AssetImage(
-                                  'assets/images/group_dp.png'), // Replace with group dp path
+                                  'assets/images/profile-picture-icon.png'), // Replace with group dp path
                             ),
                             SizedBox(height: 8.0),
                             Text(
@@ -137,7 +137,7 @@ class MessagesPage extends StatelessWidget {
                         ListTile(
                           leading: CircleAvatar(
                             backgroundImage: AssetImage(
-                                'assets/images/profile_pic.png'), // Replace with profile pic path
+                                'assets/images/profile-picture-icon.png'), // Replace with profile pic path
                           ),
                           title: Text(
                             'User Name',

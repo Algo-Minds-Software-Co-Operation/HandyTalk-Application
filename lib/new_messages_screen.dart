@@ -128,7 +128,7 @@ class NewMessagePage extends StatelessWidget {
                 return ListTile(
                   leading: CircleAvatar(
                     backgroundImage: AssetImage(
-                        'assets/images/contact.png'), // Replace with contact image
+                        'assets/images/profile-picture-icon.png'), // Replace with contact image
                   ),
                   title:
                       Text('Contact Name $index'), // Replace with contact name
