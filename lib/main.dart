@@ -1,4 +1,5 @@
 import 'package:HandyTalk/dashboard_screen.dart';
+import 'package:HandyTalk/edit_model.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'home_screen.dart';

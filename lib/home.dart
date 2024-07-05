@@ -1,24 +1,91 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'edit_model.dart';
 
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Positioned(
-          top: 120,
-          left: 16,
-          right: 16,
-          child: SearchBar(),
-        ),
-        Positioned(
-          top: 200, // Adjust the position as needed
-          left: 16,
-          right: 16,
-          child: ProgressRectangle(),
-        ),
-      ],
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          Image.asset(
+            'assets/images/background.png',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+          Positioned(
+            top: 120,
+            left: 16,
+            right: 16,
+            child: SearchBar(),
+          ),
+          Positioned(
+            top: 200, // Adjust the position as needed
+            left: 16,
+            right: 16,
+            child: ProgressRectangle(),
+          ),
+          Positioned(
+            bottom: 16, // Adjust the bottom margin as needed
+            right: 16,
+            child: Container(
+              margin: EdgeInsets.only(bottom: 8.0),
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: Colors.blue.withOpacity(0.5),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              child: Center(
+                child: Text(
+                  '1.0',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 84, // Adjust the bottom margin as needed
+            right: 16,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => EditModel()),
+                );
+              },
+              child: Container(
+                width: 60,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Color(0xFF90E0EF).withOpacity(0.5),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.edit,
+                    color: Color(0xFFFFFFFF),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 0, // Adjust the bottom margin as needed
+            right: 16,
+            child: Image.asset(
+              'assets/images/3d-model.png', // Make sure the image is in the assets folder
+              width: 350.0, // Adjust width as needed
+              height: 350.0, // Adjust height as needed
+              fit: BoxFit.contain,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -125,10 +192,11 @@ class ProgressRectangle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(12.0), // Adjust padding as needed
       decoration: BoxDecoration(
         color: Color(0xFFCAF0F8).withOpacity(0.50), // Set the opacity here
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius:
+            BorderRadius.circular(8.0), // Adjust border radius as needed
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -138,6 +206,7 @@ class ProgressRectangle extends StatelessWidget {
         ],
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Expanded(
             child: Column(
@@ -146,7 +215,7 @@ class ProgressRectangle extends StatelessWidget {
                 Text(
                   'Your progress',
                   style: TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 14.0, // Adjust font size as needed
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -157,7 +226,7 @@ class ProgressRectangle extends StatelessWidget {
                     Text(
                       '5',
                       style: TextStyle(
-                        fontSize: 32.0,
+                        fontSize: 24.0, // Adjust font size as needed
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -165,30 +234,26 @@ class ProgressRectangle extends StatelessWidget {
                     Text(
                       'Days',
                       style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 14.0, // Adjust font size as needed
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 16.0),
-                Row(
-                  children: <Widget>[
-                    ProgressCategory(
-                      color: Colors.orange,
-                    ),
-                    SizedBox(width: 16.0),
-                    ProgressCategory(
-                      color: Colors.green,
-                    ),
-                  ],
+                SizedBox(height: 8.0),
+                ProgressCategory(
+                  color: Colors.orange,
+                  text: 'Games',
+                  width: 20.0, // Adjust width as needed
+                  height: 10.0, // Adjust height as needed
+                  textSize: 8.0, // Adjust font size as needed
                 ),
               ],
             ),
           ),
           // Placeholder for the chart on the right side
           Container(
-            width: 100, // Adjust the width as needed
-            height: 100, // Adjust the height as needed
+            width: 60, // Adjust the width as needed
+            height: 60, // Adjust the height as needed
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: Colors.blue.withOpacity(0.2),
@@ -211,18 +276,41 @@ class ProgressRectangle extends StatelessWidget {
 
 class ProgressCategory extends StatelessWidget {
   final Color color;
+  final String text;
+  final double width;
+  final double height;
+  final double textSize;
 
-  ProgressCategory({required this.color});
+  ProgressCategory({
+    required this.color,
+    required this.text,
+    this.width = 50.0,
+    this.height = 30.0,
+    this.textSize = 14.0,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 50.0,
-      height: 50.0,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
+    return Row(
+      children: [
+        Container(
+          width: width,
+          height: height,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius:
+                BorderRadius.circular(6.0), // Adjust border radius as needed
+          ),
+        ),
+        SizedBox(width: 8.0),
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: textSize,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -7,6 +7,7 @@ import 'classroom.dart';
 import 'games.dart';
 import 'messages.dart';
 import 'new_messages_screen.dart'; // Import the NewMessagePage
+import 'coins_buy_screen.dart'; // Import the CoinsScreen
 
 void navigateToProfileSettings(BuildContext context) {
   // Define your navigation logic here
@@ -16,6 +17,13 @@ void navigateToNotification(BuildContext context) {
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => NewMessagePage()),
+  );
+}
+
+void navigateToCoinsScreen(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => CoinsScreen()),
   );
 }
 
@@ -51,6 +59,37 @@ class _DashboardScreenState extends State<DashboardScreen> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Widget _buildCoinsIcon() {
+    return GestureDetector(
+      onTap: () {
+        navigateToCoinsScreen(context);
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+        decoration: BoxDecoration(
+          color: Colors.amber,
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.add, color: Colors.white, size: 12),
+            SizedBox(width: 2),
+            Text(
+              '100',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+              ),
+            ),
+            Icon(Icons.monetization_on, color: Colors.yellow, size: 16),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
@@ -90,27 +129,33 @@ class _DashboardScreenState extends State<DashboardScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GestureDetector(
-              onTap: () {
-                if (_selectedIndex > 0) {
-                  navigateToProfileSettings(context);
-                }
-              },
-              child: Image.asset(
-                profileImagePath,
-                width: 40,
-                height: 40,
-              ),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    if (_selectedIndex > 0) {
+                      navigateToProfileSettings(context);
+                    }
+                  },
+                  child: Image.asset(
+                    profileImagePath,
+                    width: 40,
+                    height: 40,
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  appBarTitle,
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    color: Colors.black.withOpacity(0.75),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
-            Text(
-              appBarTitle,
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                color: Colors.black.withOpacity(0.75),
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            if (_selectedIndex == 0) _buildCoinsIcon(),
             GestureDetector(
               onTap: () {
                 navigateToNotification(context); // Pass context here
