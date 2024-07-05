@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   final String userName;
   final String profileImagePath;
 
   ChatScreen({required this.userName, required this.profileImagePath});
+
+  @override
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  bool _show3DModel = false;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +29,11 @@ class ChatScreen extends StatelessWidget {
         title: Row(
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage(profileImagePath),
+              backgroundImage: AssetImage(widget.profileImagePath),
             ),
             SizedBox(width: 8.0),
             Text(
-              userName,
+              widget.userName,
               style: TextStyle(color: Colors.black),
             ),
           ],
@@ -64,28 +71,60 @@ class ChatScreen extends StatelessWidget {
                     // Example chat message
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: Container(
-                        margin: EdgeInsets.all(8.0),
-                        padding: EdgeInsets.all(12.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'User Name',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _show3DModel = !_show3DModel;
+                          });
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(8.0),
+                          padding: EdgeInsets.all(12.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'User Name',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Hello!',
-                              style: TextStyle(color: Colors.black),
-                            ),
-                          ],
+                              Text(
+                                'Hello HandyTalk!',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              if (_show3DModel)
+                                Container(
+                                  margin: EdgeInsets.only(top: 8.0),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.9),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.8,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.5,
+                                  child: Center(
+                                    child: Image.asset(
+                                      'assets/images/3d-model.png', // Replace with your 3D model image path
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                ),
+                              Text(
+                                'Translate to sign language',
+                                style: TextStyle(
+                                  fontSize: 8,
+                                  color: Colors.black.withOpacity(0.35),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

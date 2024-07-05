@@ -1,3 +1,4 @@
+import 'package:HandyTalk/common_screen.dart';
 import 'package:flutter/material.dart';
 import 'alphabet_screen.dart';
 import 'numbers_screen.dart'; // Import the NumbersScreen
@@ -54,6 +55,12 @@ class ClassroomPage extends StatelessWidget {
               title: 'Common Words',
               subtitle: 'Learn Sign Language Common Words',
               color: Colors.green,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CommonScreen()),
+                );
+              },
             ),
             SizedBox(height: 20),
             ClassroomCard(
