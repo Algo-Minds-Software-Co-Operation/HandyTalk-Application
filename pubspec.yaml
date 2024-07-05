@@ -57,6 +57,12 @@ flutter:
     - assets/images/game4.png
     - assets/images/face_image_1.png
     - assets/images/face_image_2.png
+    - assets/images/shirt_01.png
+    - assets/images/shirt_02.png
+    - assets/images/shirt_03.png
+    - assets/images/shirt_04.png
+    - assets/images/shirt_05.png
+    - assets/images/shirt_06.png
     - assets/models/model_video_01.mtl
     - assets/models/model_video_01.obj
 

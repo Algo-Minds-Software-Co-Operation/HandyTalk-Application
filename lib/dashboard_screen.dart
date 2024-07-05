@@ -8,24 +8,7 @@ import 'games.dart';
 import 'messages.dart';
 import 'new_messages_screen.dart'; // Import the NewMessagePage
 import 'coins_buy_screen.dart'; // Import the CoinsScreen
-
-void navigateToProfileSettings(BuildContext context) {
-  // Define your navigation logic here
-}
-
-void navigateToNotification(BuildContext context) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => NewMessagePage()),
-  );
-}
-
-void navigateToCoinsScreen(BuildContext context) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => CoinsScreen()),
-  );
-}
+import 'edit_model.dart'; // Import the EditModel screen
 
 class DashboardScreen extends StatefulWidget {
   @override
@@ -59,6 +42,30 @@ class _DashboardScreenState extends State<DashboardScreen> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  void navigateToProfileSettings(BuildContext context) {
+    if (_selectedIndex == 0) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => EditModel()), // Navigate to EditModel screen
+      );
+    }
+  }
+
+  void navigateToNotification(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => NewMessagePage()),
+    );
+  }
+
+  void navigateToCoinsScreen(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CoinsScreen()),
+    );
   }
 
   Widget _buildCoinsIcon() {
@@ -129,31 +136,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    if (_selectedIndex > 0) {
-                      navigateToProfileSettings(context);
-                    }
-                  },
-                  child: Image.asset(
-                    profileImagePath,
-                    width: 40,
-                    height: 40,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Text(
-                  appBarTitle,
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    color: Colors.black.withOpacity(0.75),
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
+            GestureDetector(
+              onTap: () {
+                navigateToProfileSettings(
+                    context); // Navigate to EditModel when tapping profile picture on Home page
+              },
+              child: Image.asset(
+                profileImagePath,
+                width: 40,
+                height: 40,
+              ),
+            ),
+            SizedBox(width: 10),
+            Text(
+              appBarTitle,
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                color: Colors.black.withOpacity(0.75),
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             if (_selectedIndex == 0) _buildCoinsIcon(),
             GestureDetector(

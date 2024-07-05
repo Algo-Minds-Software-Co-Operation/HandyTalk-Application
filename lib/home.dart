@@ -51,24 +51,28 @@ class Home extends StatelessWidget {
           Positioned(
             bottom: 84, // Adjust the bottom margin as needed
             right: 16,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => EditModel()),
-                );
-              },
-              child: Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Color(0xFF90E0EF).withOpacity(0.5),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Center(
-                  child: Icon(
-                    Icons.edit,
-                    color: Color(0xFFFFFFFF),
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EditModel()),
+                  );
+                },
+                borderRadius: BorderRadius.circular(10.0),
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 125, 236, 255).withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.edit,
+                      color: Color(0xFFFFFFFF),
+                    ),
                   ),
                 ),
               ),

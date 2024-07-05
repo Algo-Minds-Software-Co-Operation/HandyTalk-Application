@@ -1,7 +1,7 @@
+import 'package:HandyTalk/edit_model.dart';
 import 'package:flutter/material.dart';
-import 'shield_screen.dart';
 
-class EditModel extends StatelessWidget {
+class ShieldEditingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,6 +55,16 @@ class EditModel extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      IconButton(
+                        icon: Icon(Icons.face),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditModel()),
+                          );
+                        },
+                      ),
                       GestureDetector(
                         onTap: () {
                           // Navigate to face editing page
@@ -70,20 +80,10 @@ class EditModel extends StatelessWidget {
                           ),
                           padding: EdgeInsets.all(8.0),
                           child: Icon(
-                            Icons.face,
+                            Icons.shield_rounded,
                             color: Colors.blue,
                           ),
                         ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.shield_rounded),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShieldEditingPage()),
-                          );
-                        },
                       ),
                       IconButton(
                         icon: Icon(Icons.sports),
@@ -168,49 +168,80 @@ class FaceEditingPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              GestureDetector(
-                onTap: () {
-                  // Implement logic for selecting first rectangle
-                },
-                child: Container(
-                  width: 100.0,
-                  height: 100.0,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.blue,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: Image.asset(
-                    'assets/images/face_image_2.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  // Implement logic for selecting second rectangle
-                },
-                child: Container(
-                  width: 100.0,
-                  height: 100.0,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.transparent,
-                      width: 2.0,
-                    ),
-                  ),
-                  child: Image.asset(
-                    'assets/images/face_image_1.png',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+              _buildRectangle('assets/images/shirt_01.png', '6 coins'),
+              _buildRectangle('assets/images/shirt_02.png', '8 coins'),
+              _buildRectangle('assets/images/shirt_03.png', '5 coins'),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _buildRectangle('assets/images/shirt_04.png', '7 coins'),
+              _buildRectangle('assets/images/shirt_05.png', '4 coins'),
+              _buildRectangle('assets/images/shirt_06.png', '9 coins'),
             ],
           ),
         ),
         // Additional widgets for face editing as needed
       ],
+    );
+  }
+
+  Widget _buildRectangle(String imagePath, String prizeTag) {
+    return GestureDetector(
+      onTap: () {
+        // Implement logic for selecting rectangle
+      },
+      child: Stack(
+        children: [
+          Container(
+            width: 100.0,
+            height: 100.0,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(76, 0, 0, 0),
+                width: 2.0,
+              ),
+            ),
+            padding: EdgeInsets.all(8.0), // Adjust padding as needed
+            child: Center(
+              child: Image.asset(
+                imagePath,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 4.0,
+            right: 4.0,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 6.0),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.monetization_on, color: Colors.yellow, size: 12),
+                  SizedBox(width: 2.0),
+                  Text(
+                    prizeTag,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
