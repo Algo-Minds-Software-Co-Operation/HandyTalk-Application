@@ -28,7 +28,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.handy_talk_application"
-        minSdk = 23
+        minSdk = 28
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
