@@ -3,6 +3,8 @@ import 'package:image_picker/image_picker.dart';
 import 'edit_model.dart';
 
 class Home extends StatelessWidget {
+  const Home({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,13 +16,13 @@ class Home extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
           ),
-          Positioned(
+          const Positioned(
             top: 120,
             left: 16,
             right: 16,
             child: SearchBar(),
           ),
-          Positioned(
+          const Positioned(
             top: 200, // Adjust the position as needed
             left: 16,
             right: 16,
@@ -30,14 +32,14 @@ class Home extends StatelessWidget {
             bottom: 16, // Adjust the bottom margin as needed
             right: 16,
             child: Container(
-              margin: EdgeInsets.only(bottom: 8.0),
+              margin: const EdgeInsets.only(bottom: 8.0),
               width: 60,
               height: 60,
               decoration: BoxDecoration(
                 color: Colors.blue.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   '1.0',
                   style: TextStyle(
@@ -57,7 +59,7 @@ class Home extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EditModel()),
+                    MaterialPageRoute(builder: (context) => const EditModel()),
                   );
                 },
                 borderRadius: BorderRadius.circular(10.0),
@@ -65,10 +67,10 @@ class Home extends StatelessWidget {
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 125, 236, 255).withOpacity(0.5),
+                    color: const Color.fromARGB(255, 125, 236, 255).withOpacity(0.5),
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: Center(
+                  child: const Center(
                     child: Icon(
                       Icons.edit,
                       color: Color(0xFFFFFFFF),
@@ -98,7 +100,7 @@ class SearchBar extends StatefulWidget {
   final double width;
   final double height;
 
-  SearchBar({this.width = 300.0, this.height = 50.0});
+  const SearchBar({super.key, this.width = 300.0, this.height = 50.0});
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -113,7 +115,7 @@ class _SearchBarState extends State<SearchBar> {
       _animate = true;
     });
 
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
 
     final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
 
@@ -130,17 +132,17 @@ class _SearchBarState extends State<SearchBar> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(seconds: 2),
+      duration: const Duration(seconds: 2),
       width: widget.width,
       height: widget.height,
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
       decoration: BoxDecoration(
-        color: Color(0x1ACAF0F8), // #CAF0F8 with 10% opacity
+        color: const Color(0x1ACAF0F8), // #CAF0F8 with 10% opacity
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2), // #000000 with 20% opacity
-            offset: Offset(1, 1),
+            offset: const Offset(1, 1),
             blurRadius: 50,
             spreadRadius: 2,
           ),
@@ -156,7 +158,7 @@ class _SearchBarState extends State<SearchBar> {
             Icons.search_rounded,
             color: Colors.black.withOpacity(0.5), // 50% opacity
           ),
-          Expanded(
+          const Expanded(
             child: TextField(
               decoration: InputDecoration(
                 hintText: 'Search',
@@ -172,15 +174,15 @@ class _SearchBarState extends State<SearchBar> {
               color: Colors.black.withOpacity(0.7), // 70% opacity
             ),
           ),
-          SizedBox(width: 10.0), // Space between camera and mic icon
+          const SizedBox(width: 10.0), // Space between camera and mic icon
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Color(0xFF0077B6), // Circle color #0077B6
               shape: BoxShape.circle,
             ),
-            padding: EdgeInsets.all(
+            padding: const EdgeInsets.all(
                 8.0), // Adjust padding to control the size of the circle
-            child: Icon(
+            child: const Icon(
               Icons.mic,
               color: Colors.white, // Mic icon color
               size: 16.0, // Mic icon size
@@ -193,12 +195,14 @@ class _SearchBarState extends State<SearchBar> {
 }
 
 class ProgressRectangle extends StatelessWidget {
+  const ProgressRectangle({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(12.0), // Adjust padding as needed
+      padding: const EdgeInsets.all(12.0), // Adjust padding as needed
       decoration: BoxDecoration(
-        color: Color(0xFFCAF0F8).withOpacity(0.50), // Set the opacity here
+        color: const Color(0xFFCAF0F8).withOpacity(0.50), // Set the opacity here
         borderRadius:
             BorderRadius.circular(8.0), // Adjust border radius as needed
         boxShadow: [
@@ -212,7 +216,7 @@ class ProgressRectangle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Expanded(
+          const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -285,7 +289,7 @@ class ProgressCategory extends StatelessWidget {
   final double height;
   final double textSize;
 
-  ProgressCategory({
+  const ProgressCategory({super.key, 
     required this.color,
     required this.text,
     this.width = 50.0,
@@ -306,7 +310,7 @@ class ProgressCategory extends StatelessWidget {
                 BorderRadius.circular(6.0), // Adjust border radius as needed
           ),
         ),
-        SizedBox(width: 8.0),
+        const SizedBox(width: 8.0),
         Text(
           text,
           style: TextStyle(

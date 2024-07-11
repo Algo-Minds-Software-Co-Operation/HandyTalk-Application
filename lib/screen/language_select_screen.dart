@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'signup_username_screen.dart';
 
 class LanguageSelect extends StatefulWidget {
+  const LanguageSelect({super.key});
+
   @override
   _LanguageSelectState createState() => _LanguageSelectState();
 }
@@ -19,9 +21,9 @@ class _LanguageSelectState extends State<LanguageSelect> {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 520.0),
+              padding: EdgeInsets.only(bottom: 520.0),
               child: Text(
                 'Select App Language',
                 style: TextStyle(
@@ -52,7 +54,7 @@ class _LanguageSelectState extends State<LanguageSelect> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
+                const SizedBox(
                   height: 0,
                   width: 0,
                 ),
@@ -67,22 +69,22 @@ class _LanguageSelectState extends State<LanguageSelect> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                          const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: _character == SingingCharacter.english
-                              ? Color(0xFF0077B6)
-                              : Color(0xFF0077B6).withOpacity(0.1),
+                              ? const Color(0xFF0077B6)
+                              : const Color(0xFF0077B6).withOpacity(0.1),
                         ),
                         borderRadius: BorderRadius.circular(8),
                         color: _character == SingingCharacter.english
-                            ? Color(0xFF0077B6).withOpacity(0.2)
-                            : Color(0xFF0077B6).withOpacity(0.1),
+                            ? const Color(0xFF0077B6).withOpacity(0.2)
+                            : const Color(0xFF0077B6).withOpacity(0.1),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
+                          const Text(
                             'English',
                             style: TextStyle(
                               color: Color(0xFF0077B6),
@@ -105,7 +107,7 @@ class _LanguageSelectState extends State<LanguageSelect> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 GestureDetector(
@@ -119,22 +121,22 @@ class _LanguageSelectState extends State<LanguageSelect> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Container(
                       padding:
-                          EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                          const EdgeInsets.symmetric(vertical: 20, horizontal: 50),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: _character == SingingCharacter.sinhala
-                              ? Color(0xFF0077B6)
-                              : Color(0xFF0077B6).withOpacity(0.1),
+                              ? const Color(0xFF0077B6)
+                              : const Color(0xFF0077B6).withOpacity(0.1),
                         ),
                         borderRadius: BorderRadius.circular(8),
                         color: _character == SingingCharacter.sinhala
-                            ? Color(0xFF0077B6).withOpacity(0.2)
-                            : Color(0xFF0077B6).withOpacity(0.1),
+                            ? const Color(0xFF0077B6).withOpacity(0.2)
+                            : const Color(0xFF0077B6).withOpacity(0.1),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(
+                          const Text(
                             'Sinhala - සිංහල',
                             style: TextStyle(
                               color: Color(0xFF0077B6),

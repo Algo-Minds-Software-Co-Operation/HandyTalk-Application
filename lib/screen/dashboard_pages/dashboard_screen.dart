@@ -11,6 +11,8 @@ import 'coins_buy_screen.dart'; // Import the CoinsScreen
 import 'edit_model.dart'; // Import the EditModel screen
 
 class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
   @override
   _DashboardScreenState createState() => _DashboardScreenState();
 }
@@ -18,22 +20,22 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
 
-  static List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    MessagesPage(),
-    ClassroomPage(),
-    GamesPage(),
-    Settings(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const Home(),
+    const MessagesPage(),
+    const ClassroomPage(),
+    const GamesPage(),
+    const Settings(),
   ];
 
   @override
   void initState() {
     super.initState();
     // Navigate to PremiumScreen after 2 seconds
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 2), () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => PremiumScreen()),
+        MaterialPageRoute(builder: (context) => const PremiumScreen()),
       );
     });
   }
@@ -49,7 +51,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => EditModel()), // Navigate to EditModel screen
+            builder: (context) => const EditModel()), // Navigate to EditModel screen
       );
     }
   }
@@ -57,14 +59,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void navigateToNotification(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NewMessagePage()),
+      MaterialPageRoute(builder: (context) => const NewMessagePage()),
     );
   }
 
   void navigateToCoinsScreen(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => CoinsScreen()),
+      MaterialPageRoute(builder: (context) => const CoinsScreen()),
     );
   }
 
@@ -74,12 +76,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         navigateToCoinsScreen(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
         decoration: BoxDecoration(
           color: Colors.amber,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Row(
+        child: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.add, color: Colors.white, size: 12),
@@ -147,7 +149,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 height: 40,
               ),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               appBarTitle,
               style: TextStyle(
@@ -185,12 +187,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ],
       ),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.transparent,
         ),
         child: BottomNavigationBar(
           backgroundColor: Colors.transparent,
-          selectedItemColor: Color(0xFF0077B6),
+          selectedItemColor: const Color(0xFF0077B6),
           unselectedItemColor: Colors.grey,
           showSelectedLabels: false,
           showUnselectedLabels: false,

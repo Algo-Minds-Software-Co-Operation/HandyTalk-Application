@@ -4,7 +4,7 @@ class ChatScreen extends StatefulWidget {
   final String userName;
   final String profileImagePath;
 
-  ChatScreen({required this.userName, required this.profileImagePath});
+  const ChatScreen({super.key, required this.userName, required this.profileImagePath});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
@@ -21,7 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -31,24 +31,24 @@ class _ChatScreenState extends State<ChatScreen> {
             CircleAvatar(
               backgroundImage: AssetImage(widget.profileImagePath),
             ),
-            SizedBox(width: 8.0),
+            const SizedBox(width: 8.0),
             Text(
               widget.userName,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
           ],
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.videocam, color: Colors.black),
+            icon: const Icon(Icons.videocam, color: Colors.black),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.call, color: Colors.black),
+            icon: const Icon(Icons.call, color: Colors.black),
             onPressed: () {},
           ),
           IconButton(
-            icon: Icon(Icons.more_vert, color: Colors.black),
+            icon: const Icon(Icons.more_vert, color: Colors.black),
             onPressed: () {},
           ),
         ],
@@ -78,8 +78,8 @@ class _ChatScreenState extends State<ChatScreen> {
                           });
                         },
                         child: Container(
-                          margin: EdgeInsets.all(8.0),
-                          padding: EdgeInsets.all(12.0),
+                          margin: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(12.0),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.8),
                             borderRadius: BorderRadius.circular(10.0),
@@ -87,20 +87,20 @@ class _ChatScreenState extends State<ChatScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'User Name',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
                               ),
-                              Text(
+                              const Text(
                                 'Hello HandyTalk!',
                                 style: TextStyle(color: Colors.black),
                               ),
                               if (_show3DModel)
                                 Container(
-                                  margin: EdgeInsets.only(top: 8.0),
+                                  margin: const EdgeInsets.only(top: 8.0),
                                   decoration: BoxDecoration(
                                     color: Colors.white.withOpacity(0.9),
                                     borderRadius: BorderRadius.circular(10.0),
@@ -138,18 +138,18 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.emoji_emotions, color: Colors.black),
+                      icon: const Icon(Icons.emoji_emotions, color: Colors.black),
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: Icon(Icons.attach_file, color: Colors.black),
+                      icon: const Icon(Icons.attach_file, color: Colors.black),
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: Icon(Icons.camera_alt, color: Colors.black),
+                      icon: const Icon(Icons.camera_alt, color: Colors.black),
                       onPressed: () {},
                     ),
-                    Expanded(
+                    const Expanded(
                       child: TextField(
                         decoration: InputDecoration(
                           hintText: 'Type a message',
@@ -160,7 +160,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       ),
                     ),
                     IconButton(
-                      icon: Icon(Icons.send, color: Colors.black),
+                      icon: const Icon(Icons.send, color: Colors.black),
                       onPressed: () {
                         // Implement send message functionality here
                       },

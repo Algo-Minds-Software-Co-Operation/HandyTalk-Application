@@ -3,6 +3,8 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
 class Settings extends StatefulWidget {
+  const Settings({super.key});
+
   @override
   _SettingsState createState() => _SettingsState();
 }
@@ -18,7 +20,7 @@ class _SettingsState extends State<Settings>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3),
+      duration: const Duration(seconds: 3),
     )..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           setState(() {
@@ -29,8 +31,8 @@ class _SettingsState extends State<Settings>
   }
 
   Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     if (image != null) {
       setState(() {
         _image = File(image.path);
@@ -57,12 +59,12 @@ class _SettingsState extends State<Settings>
             width: 320,
             height: 250,
             decoration: BoxDecoration(
-              color: Color(0xFFCAF0F8).withOpacity(0.25),
+              color: const Color(0xFFCAF0F8).withOpacity(0.25),
               borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
-                  color: Color(0xFF000000).withOpacity(0.35),
-                  offset: Offset(0, 0),
+                  color: const Color(0xFF000000).withOpacity(0.35),
+                  offset: const Offset(0, 0),
                   blurRadius: 150,
                   spreadRadius: 5,
                 ),
@@ -75,7 +77,7 @@ class _SettingsState extends State<Settings>
                     _isAnimating = true;
                   });
                   _animationController.forward(from: 0.0);
-                  Future.delayed(Duration(seconds: 3), _pickImage);
+                  Future.delayed(const Duration(seconds: 3), _pickImage);
                 },
                 child: Stack(
                   alignment: Alignment.center,
@@ -83,7 +85,7 @@ class _SettingsState extends State<Settings>
                     Positioned(
                       top: 30,
                       child: AnimatedContainer(
-                        duration: Duration(seconds: 3),
+                        duration: const Duration(seconds: 3),
                         curve: Curves.easeInOut,
                         width: _isAnimating ? 80 : 60,
                         height: _isAnimating ? 80 : 60,
@@ -100,7 +102,7 @@ class _SettingsState extends State<Settings>
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       top: 110,
                       child: Text(
                         'Kavindu Malshan',
@@ -131,7 +133,7 @@ class _SettingsState extends State<Settings>
                         children: [
                           Icon(Icons.email,
                               color: Colors.black.withOpacity(0.75), size: 16),
-                          SizedBox(width: 8), // Adjust spacing as needed
+                          const SizedBox(width: 8), // Adjust spacing as needed
                           Text(
                             'kavindu11250403@gmail.com',
                             style: TextStyle(
@@ -141,7 +143,7 @@ class _SettingsState extends State<Settings>
                               fontWeight: FontWeight.normal,
                             ),
                           ),
-                          SizedBox(width: 8), // Adjust spacing as needed
+                          const SizedBox(width: 8), // Adjust spacing as needed
                           SizedBox(
                             width: 75.0, // Set width of the button
                             height: 20.0, // Set height of the button
@@ -151,9 +153,9 @@ class _SettingsState extends State<Settings>
                               },
                               style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.all<Color>(Color(
+                                    WidgetStateProperty.all<Color>(const Color(
                                         0xFF4BFF2E)), // Set background color to #4BFF2E
-                                shape: MaterialStateProperty.all<
+                                shape: WidgetStateProperty.all<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
@@ -161,10 +163,10 @@ class _SettingsState extends State<Settings>
                                   ),
                                 ),
                                 foregroundColor:
-                                    MaterialStateProperty.all<Color>(Colors
+                                    WidgetStateProperty.all<Color>(Colors
                                         .white), // Set font color to white
                               ),
-                              child: Text(
+                              child: const Text(
                                 'verified',
                                 style: TextStyle(
                                     fontSize: 8,
@@ -190,12 +192,12 @@ class _SettingsState extends State<Settings>
             width: 320,
             height: 125,
             decoration: BoxDecoration(
-              color: Color(0xFFCAF0F8).withOpacity(0.25),
+              color: const Color(0xFFCAF0F8).withOpacity(0.25),
               borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
-                  color: Color(0xFF000000).withOpacity(0.35),
-                  offset: Offset(0, 0),
+                  color: const Color(0xFF000000).withOpacity(0.35),
+                  offset: const Offset(0, 0),
                   blurRadius: 150,
                   spreadRadius: 5,
                 ),
@@ -210,12 +212,12 @@ class _SettingsState extends State<Settings>
             width: 320,
             height: 125,
             decoration: BoxDecoration(
-              color: Color(0xFFCAF0F8).withOpacity(0.25),
+              color: const Color(0xFFCAF0F8).withOpacity(0.25),
               borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
-                  color: Color(0xFF000000).withOpacity(0.35),
-                  offset: Offset(0, 0),
+                  color: const Color(0xFF000000).withOpacity(0.35),
+                  offset: const Offset(0, 0),
                   blurRadius: 150,
                   spreadRadius: 5,
                 ),

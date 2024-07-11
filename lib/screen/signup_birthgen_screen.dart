@@ -5,6 +5,8 @@ class SignupBirthDetailsPage extends StatelessWidget {
   final TextEditingController dateController = TextEditingController();
   String? selectedGender;
 
+  SignupBirthDetailsPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,9 +17,9 @@ class SignupBirthDetailsPage extends StatelessWidget {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'Sign in',
                 style: TextStyle(
@@ -99,7 +101,7 @@ class SignupBirthDetailsPage extends StatelessWidget {
                         color: Colors.black.withOpacity(0.5),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black,
                     ),
@@ -119,7 +121,7 @@ class SignupBirthDetailsPage extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -160,7 +162,7 @@ class SignupBirthDetailsPage extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -190,12 +192,12 @@ class SignupBirthDetailsPage extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF0077B6),
+                      backgroundColor: const Color(0xFF0077B6),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Next',
                       style: TextStyle(
                         color: Colors.white,

@@ -4,6 +4,8 @@ import 'signup_userpassword_screen.dart';
 class SignupUsernameScreen extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
 
+  SignupUsernameScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,9 +16,9 @@ class SignupUsernameScreen extends StatelessWidget {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'Sign up',
                 style: TextStyle(
@@ -96,7 +98,7 @@ class SignupUsernameScreen extends StatelessWidget {
                         color: Colors.black.withOpacity(0.5), // Icon color
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black, // Unfocused text color
                     ),
@@ -109,7 +111,7 @@ class SignupUsernameScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -120,7 +122,7 @@ class SignupUsernameScreen extends StatelessWidget {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                                  SignupUserpasswordScreen(),
+                                  const SignupUserpasswordScreen(),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
                             var begin = 0.0;
@@ -139,12 +141,12 @@ class SignupUsernameScreen extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF0077B6),
+                      backgroundColor: const Color(0xFF0077B6),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Next',
                       style: TextStyle(
                         color: Colors.white,

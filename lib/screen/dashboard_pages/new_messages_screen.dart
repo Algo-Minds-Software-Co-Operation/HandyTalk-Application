@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class NewMessagePage extends StatelessWidget {
+  const NewMessagePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,24 +11,24 @@ class NewMessagePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           'Select contact',
           style: TextStyle(color: Colors.black),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.search, color: Colors.black),
+            icon: const Icon(Icons.search, color: Colors.black),
             onPressed: () {
               // Search action
             },
           ),
           IconButton(
-            icon: Icon(Icons.more_vert, color: Colors.black),
+            icon: const Icon(Icons.more_vert, color: Colors.black),
             onPressed: () {
               // More action
             },
@@ -56,16 +58,16 @@ class NewMessagePage extends StatelessWidget {
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.transparent,
-                      padding: EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16.0),
                     ),
                     child: Row(
                       children: [
                         CircleAvatar(
                           backgroundColor: Colors.grey[300],
-                          child: Icon(Icons.group_add, color: Colors.black),
+                          child: const Icon(Icons.group_add, color: Colors.black),
                         ),
-                        SizedBox(width: 16),
-                        Text('New group',
+                        const SizedBox(width: 16),
+                        const Text('New group',
                             style: TextStyle(color: Colors.black)),
                       ],
                     ),
@@ -82,24 +84,24 @@ class NewMessagePage extends StatelessWidget {
                           },
                           style: TextButton.styleFrom(
                             backgroundColor: Colors.transparent,
-                            padding: EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(16.0),
                           ),
                           child: Row(
                             children: [
                               CircleAvatar(
                                 backgroundColor: Colors.grey[300],
                                 child:
-                                    Icon(Icons.person_add, color: Colors.black),
+                                    const Icon(Icons.person_add, color: Colors.black),
                               ),
-                              SizedBox(width: 16),
-                              Text('New contact',
+                              const SizedBox(width: 16),
+                              const Text('New contact',
                                   style: TextStyle(color: Colors.black)),
                             ],
                           ),
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.qr_code, color: Colors.black),
+                        icon: const Icon(Icons.qr_code, color: Colors.black),
                         onPressed: () {
                           // QR code action
                         },
@@ -107,8 +109,8 @@ class NewMessagePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Contacts on WhatsApp',
                     style: TextStyle(color: Colors.grey),
@@ -126,19 +128,19 @@ class NewMessagePage extends StatelessWidget {
               itemCount: 10, // Replace with your contacts count
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: CircleAvatar(
+                  leading: const CircleAvatar(
                     backgroundImage: AssetImage(
                         'assets/images/profile-picture-icon.png'), // Replace with contact image
                   ),
                   title:
                       Text('Contact Name $index'), // Replace with contact name
                   subtitle:
-                      Text('Registered on app'), // Replace with contact status
+                      const Text('Registered on app'), // Replace with contact status
                   trailing: ElevatedButton(
                     onPressed: () {
                       // Invite action
                     },
-                    child: Text('Invite'),
+                    child: const Text('Invite'),
                   ),
                 );
               },

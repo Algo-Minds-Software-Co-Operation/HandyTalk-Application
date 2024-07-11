@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'shield_screen.dart';
 
 class EditModel extends StatelessWidget {
+  const EditModel({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('Edit Model'), // Renamed the app bar title
+        title: const Text('Edit Model'), // Renamed the app bar title
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context); // Implement back button functionality
           },
@@ -34,7 +36,7 @@ class EditModel extends StatelessWidget {
                   top: 95.0,
                   left: 16.0,
                   right: 16.0,
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: 350.0,
                     child: Image.asset(
@@ -68,39 +70,39 @@ class EditModel extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(5.0),
                           ),
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
+                          padding: const EdgeInsets.all(8.0),
+                          child: const Icon(
                             Icons.face,
                             color: Colors.blue,
                           ),
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.shield_rounded),
+                        icon: const Icon(Icons.shield_rounded),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ShieldEditingPage()),
+                                builder: (context) => const ShieldEditingPage()),
                           );
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.sports),
+                        icon: const Icon(Icons.sports),
                         onPressed: () {
                           // Navigate to trouser editing page
                           // Implement navigation logic here
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.auto_awesome_mosaic),
+                        icon: const Icon(Icons.auto_awesome_mosaic),
                         onPressed: () {
                           // Navigate to full kit editing page
                           // Implement navigation logic here
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.person),
+                        icon: const Icon(Icons.person),
                         onPressed: () {
                           // Navigate to avatar editing page
                           // Implement navigation logic here
@@ -109,10 +111,10 @@ class EditModel extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.0),
                       child: FaceEditingPage(),
                       // Replace with ShirtEditingPage, TrouserEditingPage, etc.
                     ),
@@ -132,12 +134,12 @@ class EditModel extends StatelessWidget {
         // Implement action for coins section if needed
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
         decoration: BoxDecoration(
           color: Colors.amber,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Row(
+        child: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.add, color: Colors.white, size: 12),
@@ -159,6 +161,8 @@ class EditModel extends StatelessWidget {
 }
 
 class FaceEditingPage extends StatelessWidget {
+  const FaceEditingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(

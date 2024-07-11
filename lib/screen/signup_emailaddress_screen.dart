@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class SignupEmailAddressPage extends StatelessWidget {
   final TextEditingController emailAddressController = TextEditingController();
 
+  SignupEmailAddressPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,9 +16,9 @@ class SignupEmailAddressPage extends StatelessWidget {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'Sign in',
                 style: TextStyle(
@@ -97,7 +99,7 @@ class SignupEmailAddressPage extends StatelessWidget {
                         color: Colors.black.withOpacity(0.5),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black,
                     ),
@@ -110,7 +112,7 @@ class SignupEmailAddressPage extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -121,7 +123,7 @@ class SignupEmailAddressPage extends StatelessWidget {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                                  OTPVerifyScreen(),
+                                  const OTPVerifyScreen(),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
                             var begin = 0.0;
@@ -140,12 +142,12 @@ class SignupEmailAddressPage extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF0077B6),
+                      backgroundColor: const Color(0xFF0077B6),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Send OTP',
                       style: TextStyle(
                         color: Colors.white,

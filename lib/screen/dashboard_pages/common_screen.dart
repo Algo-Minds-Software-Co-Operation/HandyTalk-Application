@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CommonScreen extends StatelessWidget {
+  const CommonScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class CommonScreen extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/background.png'),
                 fit: BoxFit.cover,
@@ -47,7 +49,7 @@ class CommonScreen extends StatelessWidget {
                         width: 1,
                       ),
                     ),
-                    child: TextField(
+                    child: const TextField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.search, color: Colors.black),
                         hintText: 'Search',
@@ -91,23 +93,23 @@ class CommonScreen extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
-        margin: EdgeInsets.only(bottom: 20.0),
-        padding: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.only(bottom: 20.0),
+        padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: Color(0xFFCAF0F8).withOpacity(0.25),
+          color: const Color(0xFFCAF0F8).withOpacity(0.25),
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
         ),
         child: Text(
           text,
-          style: TextStyle(fontSize: 18.0, color: Colors.black87),
+          style: const TextStyle(fontSize: 18.0, color: Colors.black87),
         ),
       ),
     );

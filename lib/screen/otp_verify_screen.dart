@@ -3,15 +3,17 @@ import 'dart:async';
 import 'language_select_screen.dart';
 
 class OTPVerifyScreen extends StatefulWidget {
+  const OTPVerifyScreen({super.key});
+
   @override
   _OTPVerify01State createState() => _OTPVerify01State();
 }
 
 class _OTPVerify01State extends State<OTPVerifyScreen> {
-  List<TextEditingController> _otpControllers =
+  final List<TextEditingController> _otpControllers =
       List.generate(4, (index) => TextEditingController());
-  List<FocusNode> _focusNodes = List.generate(4, (index) => FocusNode());
-  Color _buttonColor = Color.fromARGB(255, 148, 148, 148).withOpacity(0.75);
+  final List<FocusNode> _focusNodes = List.generate(4, (index) => FocusNode());
+  Color _buttonColor = const Color.fromARGB(255, 148, 148, 148).withOpacity(0.75);
   Timer? _timer;
   int _start = 120; // 2 minutes in seconds
   String _timerText = "2:00";
@@ -27,7 +29,7 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_start == 0) {
         setState(() {
           _timerText = "Resend";
@@ -52,7 +54,7 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
       });
     } else {
       setState(() {
-        _buttonColor = Color.fromARGB(255, 148, 148, 148).withOpacity(0.75);
+        _buttonColor = const Color.fromARGB(255, 148, 148, 148).withOpacity(0.75);
       });
     }
   }
@@ -92,9 +94,9 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 570.0),
+              padding: EdgeInsets.only(bottom: 570.0),
               child: Text(
                 'OTP Verification',
                 style: TextStyle(
@@ -145,7 +147,7 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
                         maxLength: 1,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Roboto',
                           color: Colors.black,
                           fontSize: 36,
@@ -155,15 +157,15 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
                           counterText: '',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            borderSide: BorderSide(color: Colors.transparent),
+                            borderSide: const BorderSide(color: Colors.transparent),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            borderSide: BorderSide(color: Colors.transparent),
+                            borderSide: const BorderSide(color: Colors.transparent),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
-                            borderSide: BorderSide(color: Colors.transparent),
+                            borderSide: const BorderSide(color: Colors.transparent),
                           ),
                         ),
                         onTap: () {
@@ -239,7 +241,7 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (context, animation, secondaryAnimation) =>
-                            LanguageSelect(),
+                            const LanguageSelect(),
                         transitionsBuilder:
                             (context, animation, secondaryAnimation, child) {
                           var begin = 0.0;
@@ -258,12 +260,12 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF0077B6), // Button color
+                    backgroundColor: const Color(0xFF0077B6), // Button color
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10), // Button radius
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Next',
                     style: TextStyle(
                       color: Colors.white,

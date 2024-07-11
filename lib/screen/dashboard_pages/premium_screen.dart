@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PremiumScreen extends StatelessWidget {
+  const PremiumScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -23,7 +25,7 @@ class PremiumScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
             color: Colors.black), // Change the color of the back button
       ),
       extendBodyBehindAppBar:
@@ -39,32 +41,32 @@ class PremiumScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 60),
+                const SizedBox(height: 60),
                 Center(
                   child: Image.asset(
                     'assets/images/premium-pages.png',
                     height: 200,
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 _buildLabelRow(Icons.build, "Customize 3D Model"),
                 _buildLabelRow(
                     Icons.translate, "Text translate to any language"),
                 _buildLabelRow(Icons.chat, "Chat groups team members 10+"),
                 _buildLabelRow(Icons.block, "No Ads"),
                 _buildLabelRow(Icons.more_horiz, "Up to 10 features"),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Center(
                   child: Column(
                     children: [
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(
                             child: Divider(color: Colors.grey),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Text("Select Plan"),
                           ),
                           Expanded(
@@ -72,17 +74,17 @@ class PremiumScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _buildPlanCard("Weekly", "29", Color(0x1508FF00),
-                              Color(0xFF08FF00)),
-                          _buildPlanCard("Monthly", "99", Color(0x15FF9F00),
-                              Color(0xFFFF9F00),
+                          _buildPlanCard("Weekly", "29", const Color(0x1508FF00),
+                              const Color(0xFF08FF00)),
+                          _buildPlanCard("Monthly", "99", const Color(0x15FF9F00),
+                              const Color(0xFFFF9F00),
                               isPopular: true),
-                          _buildPlanCard("Yearly", "199", Color(0x150091FF),
-                              Color(0xFF0091FF)),
+                          _buildPlanCard("Yearly", "199", const Color(0x150091FF),
+                              const Color(0xFF0091FF)),
                         ],
                       ),
                     ],
@@ -102,10 +104,10 @@ class PremiumScreen extends StatelessWidget {
       child: Row(
         children: [
           Icon(icon),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text(
             text,
-            style: TextStyle(fontFamily: 'Roboto'),
+            style: const TextStyle(fontFamily: 'Roboto'),
           ),
         ],
       ),
@@ -117,8 +119,8 @@ class PremiumScreen extends StatelessWidget {
       {bool isPopular = false}) {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.all(16),
-        margin: EdgeInsets.symmetric(horizontal: 5),
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: borderColor),
@@ -128,12 +130,12 @@ class PremiumScreen extends StatelessWidget {
           children: [
             if (isPopular)
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Color(0xFFFE9800),
+                  color: const Color(0xFFFE9800),
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: Text(
+                child: const Text(
                   "Popular",
                   style: TextStyle(
                     fontFamily: 'Roboto',
@@ -144,24 +146,24 @@ class PremiumScreen extends StatelessWidget {
               ),
             Text(
               duration,
-              style: TextStyle(fontSize: 18, fontFamily: 'Roboto'),
+              style: const TextStyle(fontSize: 18, fontFamily: 'Roboto'),
             ),
-            SizedBox(height: 10),
-            Icon(Icons.attach_money, size: 20),
+            const SizedBox(height: 10),
+            const Icon(Icons.attach_money, size: 20),
             Text(
               price,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'Roboto'),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.black,
               ),
               onPressed: () {},
-              child: Text(
+              child: const Text(
                 "Buy",
                 style: TextStyle(
                   color: Colors.white,

@@ -20,19 +20,23 @@ Future<void> main() async {
     }
   });
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: SplashScreen(),
     );
   }
 }
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -45,15 +49,15 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _startAnimation();
 
-    Timer(Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 5), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
     });
   }
 
   void _startAnimation() {
-    Future.delayed(Duration(milliseconds: 500), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       setState(() {
         _opacity = 1.0;
       });
@@ -73,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Center(
             child: AnimatedOpacity(
               opacity: _opacity,
-              duration: Duration(seconds: 2),
+              duration: const Duration(seconds: 2),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -82,7 +86,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     width: 100,
                     height: 100,
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
