@@ -1,17 +1,8 @@
+import 'package:HandyTalk/screen/otp_verify_screen.dart';
 import 'package:flutter/material.dart';
-import 'dashboard_screen.dart';
-import 'reset_password_screen.dart';
 
-class SignUserpasswordEnglish extends StatefulWidget {
-  @override
-  _SignUserpasswordEnglishState createState() =>
-      _SignUserpasswordEnglishState();
-}
-
-class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
-  final TextEditingController _passwordController = TextEditingController();
-  bool _isChecked = false;
-  bool _isPasswordVisible = false;
+class SignupEmailAddressPage extends StatelessWidget {
+  final TextEditingController emailAddressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +32,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 415.0),
               child: Text(
-                'Enter your details to proceed further',
+                'Signup for partner of HandyTalk',
                 style: TextStyle(
                   fontFamily: 'Roboto',
                   color: Colors.black.withOpacity(0.5),
@@ -55,9 +46,9 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 355.0),
               child: Image.asset(
-                'assets/images/page-circle-signin-password.png',
-                width: 50,
-                height: 50,
+                'assets/images/page-circle-signup-three.png',
+                width: 85,
+                height: 85,
               ),
             ),
           ),
@@ -81,8 +72,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                   width: double.infinity,
                   height: 45,
                   child: TextField(
-                    controller: _passwordController,
-                    obscureText: !_isPasswordVisible,
+                    controller: emailAddressController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -93,26 +83,18 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Colors.blue.withOpacity(0.5),
+                          color: Colors.blue.withOpacity(
+                              0.5), // Focused border color with opacity
                         ),
                       ),
-                      labelText: 'Password',
+                      labelText: 'Email address',
                       labelStyle: TextStyle(
                         fontSize: 12,
                         color: Colors.black.withOpacity(0.5),
                       ),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _isPasswordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: _isPasswordVisible ? Colors.blue : Colors.grey,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordVisible = !_isPasswordVisible;
-                          });
-                        },
+                      prefixIcon: Icon(
+                        Icons.email,
+                        color: Colors.black.withOpacity(0.5),
                       ),
                     ),
                     style: TextStyle(
@@ -121,71 +103,12 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                     ),
                     cursorColor: Colors.blue,
                     onTap: () {
-                      _passwordController.selection = TextSelection(
+                      emailAddressController.selection = TextSelection(
                         baseOffset: 0,
-                        extentOffset: _passwordController.text.length,
+                        extentOffset: emailAddressController.text.length,
                       );
                     },
                   ),
-                ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _isChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              _isChecked = value ?? false;
-                            });
-                          },
-                        ),
-                        Text(
-                          'Remember me',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                                    ResetPasswordScreen(),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              var begin = 0.0;
-                              var end = 1.0;
-                              var curve = Curves.ease;
-
-                              var tween = Tween(begin: begin, end: end)
-                                  .chain(CurveTween(curve: curve));
-
-                              return FadeTransition(
-                                opacity: animation.drive(tween),
-                                child: child,
-                              );
-                            },
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontSize: 12,
-                          color: Colors.blue,
-                        ),
-                      ),
-                    ),
-                  ],
                 ),
                 SizedBox(height: 20),
                 SizedBox(
@@ -198,7 +121,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                                  DashboardScreen(),
+                                  OTPVerifyScreen(),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
                             var begin = 0.0;
@@ -223,7 +146,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                       ),
                     ),
                     child: Text(
-                      'Next',
+                      'Send OTP',
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Roboto-Bold',

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "756865579969",
+    "project_id": "handytalk-8bb4e",
+    "storage_bucket": "handytalk-8bb4e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756865579969:android:88bd41d9128f56287c8d40",
+        "android_client_info": {
+          "package_name": "com.example.handy_talk_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwBBeOx32GKV2qCaeSZF8v9s855oaIH2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

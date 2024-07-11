@@ -1,4 +1,4 @@
-import 'package:HandyTalk/common_screen.dart';
+import 'package:HandyTalk/screen/dashboard_pages/common_screen.dart';
 import 'package:flutter/material.dart';
 import 'alphabet_screen.dart';
 import 'numbers_screen.dart'; // Import the NumbersScreen

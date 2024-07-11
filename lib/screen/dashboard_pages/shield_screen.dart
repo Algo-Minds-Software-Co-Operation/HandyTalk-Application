@@ -1,4 +1,4 @@
-import 'package:HandyTalk/edit_model.dart';
+import 'package:HandyTalk/screen/dashboard_pages/edit_model.dart';
 import 'package:flutter/material.dart';
 
 class ShieldEditingPage extends StatelessWidget {

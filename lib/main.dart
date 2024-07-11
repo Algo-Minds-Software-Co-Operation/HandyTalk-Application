@@ -1,17 +1,34 @@
-import 'package:HandyTalk/dashboard_screen.dart';
-import 'package:HandyTalk/edit_model.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'home_screen.dart';
+import 'screen/welcome_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase/firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
+
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: SplashScreen());
+    return MaterialApp(
+      home: SplashScreen(),
+    );
   }
 }
 
