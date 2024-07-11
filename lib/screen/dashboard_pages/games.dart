@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class GamesPage extends StatelessWidget {
+  const GamesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background.png'),
             fit: BoxFit.cover,
@@ -17,7 +19,7 @@ class GamesPage extends StatelessWidget {
           //   colors: [Color(0xFF9FE7FB), Color(0xFF85C7F2)],
           // ),
         ),
-        padding: EdgeInsets.only(top: 75.0), // Adjust top padding here
+        padding: const EdgeInsets.only(top: 75.0), // Adjust top padding here
         child: ListView(
           padding: EdgeInsets.zero, // Remove default ListView padding
           children: [
@@ -32,7 +34,7 @@ class GamesPage extends StatelessWidget {
               color: Colors.blue,
               isBoldTitle: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ClassroomCard(
               image: Image.asset(
                 'assets/images/game2.png',
@@ -44,7 +46,7 @@ class GamesPage extends StatelessWidget {
               color: Colors.red,
               isBoldTitle: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ClassroomCard(
               image: Image.asset(
                 'assets/images/game3.png',
@@ -56,7 +58,7 @@ class GamesPage extends StatelessWidget {
               color: Colors.green,
               isBoldTitle: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ClassroomCard(
               image: Image.asset(
                 'assets/images/game4.png',
@@ -83,7 +85,7 @@ class ClassroomCard extends StatelessWidget {
   final Color color;
   final bool isBoldTitle;
 
-  ClassroomCard({
+  const ClassroomCard({super.key, 
     this.icon,
     this.image,
     required this.title,
@@ -95,11 +97,11 @@ class ClassroomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 20.0),
+      margin: const EdgeInsets.symmetric(horizontal: 20.0),
       width: MediaQuery.of(context).size.width - 40, // Decrease width by 40
       height: 130.0, // Adjusted height
       decoration: BoxDecoration(
-        color: Color(0xFFCAF0F8)
+        color: const Color(0xFFCAF0F8)
             .withOpacity(0.35), // Set background color with opacity
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
@@ -107,7 +109,7 @@ class ClassroomCard extends StatelessWidget {
             color: Colors.grey.withOpacity(0.5),
             spreadRadius: 2,
             blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
+            offset: const Offset(0, 3), // changes position of shadow
           ),
         ],
       ),
@@ -115,12 +117,12 @@ class ClassroomCard extends StatelessWidget {
         children: [
           if (image != null)
             Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: image,
             )
           else
             Padding(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: Icon(icon, color: color),
             ),
           Expanded(
@@ -136,10 +138,10 @@ class ClassroomCard extends StatelessWidget {
                         isBoldTitle ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
-                SizedBox(height: 5.0),
+                const SizedBox(height: 5.0),
                 Text(
                   subtitle,
-                  style: TextStyle(fontSize: 12.0),
+                  style: const TextStyle(fontSize: 12.0),
                 ),
               ],
             ),

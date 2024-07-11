@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SignUsernameScreen extends StatelessWidget {
+  const SignUsernameScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,9 +13,9 @@ class SignUsernameScreen extends StatelessWidget {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'Sign in',
                 style: TextStyle(
@@ -64,6 +66,8 @@ class SignUsernameScreen extends StatelessWidget {
 }
 
 class SignUsernameSinhalaScreen extends StatelessWidget {
+  const SignUsernameSinhalaScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,9 +78,9 @@ class SignUsernameSinhalaScreen extends StatelessWidget {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'අදම අප හා එක්වන්න',
                 style: TextStyle(

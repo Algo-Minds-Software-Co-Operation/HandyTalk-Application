@@ -4,17 +4,19 @@ import 'alphabet_screen.dart';
 import 'numbers_screen.dart'; // Import the NumbersScreen
 
 class ClassroomPage extends StatelessWidget {
+  const ClassroomPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/background.png'),
             fit: BoxFit.cover,
           ),
         ),
-        padding: EdgeInsets.only(top: 75.0), // Adjust top padding here
+        padding: const EdgeInsets.only(top: 75.0), // Adjust top padding here
         child: ListView(
           padding: EdgeInsets.zero, // Remove default ListView padding
           children: [
@@ -28,7 +30,7 @@ class ClassroomPage extends StatelessWidget {
               subtitle: 'Learn Sign Language',
               color: Colors.blue,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ClassroomCard(
               image: Image.asset(
                 'assets/images/alphabet.png',
@@ -41,11 +43,11 @@ class ClassroomPage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AlphabetScreen()),
+                  MaterialPageRoute(builder: (context) => const AlphabetScreen()),
                 );
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ClassroomCard(
               image: Image.asset(
                 'assets/images/common_words.png',
@@ -58,11 +60,11 @@ class ClassroomPage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CommonScreen()),
+                  MaterialPageRoute(builder: (context) => const CommonScreen()),
                 );
               },
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ClassroomCard(
               image: Image.asset(
                 'assets/images/numbers.png',
@@ -75,7 +77,7 @@ class ClassroomPage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => NumbersScreen()),
+                  MaterialPageRoute(builder: (context) => const NumbersScreen()),
                 );
               },
             ),
@@ -94,7 +96,7 @@ class ClassroomCard extends StatelessWidget {
   final Color color;
   final VoidCallback? onTap; // Add onTap callback
 
-  ClassroomCard({
+  const ClassroomCard({super.key, 
     this.icon,
     this.image,
     required this.title,
@@ -108,18 +110,18 @@ class ClassroomCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap, // Execute onTap callback when card is tapped
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.0),
+        margin: const EdgeInsets.symmetric(horizontal: 20.0),
         width: MediaQuery.of(context).size.width - 40,
         height: 130.0,
         decoration: BoxDecoration(
-          color: Color(0xFFCAF0F8).withOpacity(0.35),
+          color: const Color(0xFFCAF0F8).withOpacity(0.35),
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
         ),
@@ -127,29 +129,29 @@ class ClassroomCard extends StatelessWidget {
           children: [
             if (image != null)
               Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: image!,
               )
             else
               Padding(
-                padding: EdgeInsets.all(20.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Icon(icon, color: color),
               ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(right: 10.0),
+                padding: const EdgeInsets.only(right: 10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       subtitle,
-                      style: TextStyle(fontSize: 12.0),
+                      style: const TextStyle(fontSize: 12.0),
                     ),
                   ],
                 ),

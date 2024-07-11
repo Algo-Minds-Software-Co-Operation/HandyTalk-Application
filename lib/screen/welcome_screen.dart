@@ -3,6 +3,8 @@ import 'signin_username_screen.dart';
 import 'signup_name_page.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   void getStartedBtnOnClicked(BuildContext context) {
     Navigator.push(
       context,
@@ -54,7 +56,7 @@ class HomeScreen extends StatelessWidget {
       context,
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            HomeSinhalaScreen(),
+            const HomeSinhalaScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           var begin = 0.0;
           var end = 1.0;
@@ -102,9 +104,9 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'Join Us Today',
                 style: TextStyle(
@@ -145,14 +147,14 @@ class HomeScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => getStartedBtnOnClicked(context),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      Color(0xFF0077B6).withOpacity(0.75)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  backgroundColor: WidgetStateProperty.all<Color>(
+                      const Color(0xFF0077B6).withOpacity(0.75)),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(180, 40)),
+                  minimumSize: WidgetStateProperty.all<Size>(const Size(180, 40)),
                 ),
                 child: const Text(
                   'Get Started',
@@ -172,16 +174,16 @@ class HomeScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => loginBtnOnClicked(context),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
+                  backgroundColor: WidgetStateProperty.all<Color>(
                       Colors.white.withOpacity(0.75)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(180, 40)),
+                  minimumSize: WidgetStateProperty.all<Size>(const Size(180, 40)),
                 ),
-                child: Text(
+                child: const Text(
                   'Login',
                   style: TextStyle(
                     fontFamily: 'Roboto-Bold',
@@ -209,6 +211,8 @@ class HomeScreen extends StatelessWidget {
 }
 
 class HomeSinhalaScreen extends StatelessWidget {
+  const HomeSinhalaScreen({super.key});
+
   void getStartedBtnOnClicked() {}
 
   void loginBtnOnClicked(BuildContext context) {
@@ -238,7 +242,7 @@ class HomeSinhalaScreen extends StatelessWidget {
     Navigator.push(
       context,
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => HomeScreen(),
+        pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           var begin = 0.0;
           var end = 1.0;
@@ -286,9 +290,9 @@ class HomeSinhalaScreen extends StatelessWidget {
               ),
             ),
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'අදම අප හා එක්වන්න',
                 style: TextStyle(
@@ -329,14 +333,14 @@ class HomeSinhalaScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: getStartedBtnOnClicked,
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                      Color(0xFF0077B6).withOpacity(0.75)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  backgroundColor: WidgetStateProperty.all<Color>(
+                      const Color(0xFF0077B6).withOpacity(0.75)),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(180, 40)),
+                  minimumSize: WidgetStateProperty.all<Size>(const Size(180, 40)),
                 ),
                 child: const Text(
                   'දැන්ම එකතු වන්න',
@@ -356,16 +360,16 @@ class HomeSinhalaScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => loginBtnOnClicked(context),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
+                  backgroundColor: WidgetStateProperty.all<Color>(
                       Colors.white.withOpacity(0.75)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
                   ),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(180, 40)),
+                  minimumSize: WidgetStateProperty.all<Size>(const Size(180, 40)),
                 ),
-                child: Text(
+                child: const Text(
                   'ඇතුල් වන්න',
                   style: TextStyle(
                     fontFamily: 'Roboto-Bold',

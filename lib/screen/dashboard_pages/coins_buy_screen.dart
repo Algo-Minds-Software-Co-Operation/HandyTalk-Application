@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CoinsScreen extends StatelessWidget {
+  const CoinsScreen({super.key});
+
   Widget _buildCoinPackage(int coins, double price) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      padding: EdgeInsets.all(16),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Color(0xFFCAF0F8).withOpacity(0.35),
+        color: const Color(0xFFCAF0F8).withOpacity(0.35),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
@@ -14,14 +16,14 @@ class CoinsScreen extends StatelessWidget {
         children: [
           Text(
             '$coins Coins',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             '\$${price.toStringAsFixed(2)}',
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -33,13 +35,13 @@ class CoinsScreen extends StatelessWidget {
 
   Widget _buildFreeCoinsNotification() {
     return Container(
-      margin: EdgeInsets.only(top: 100, left: 16, right: 16, bottom: 8),
-      padding: EdgeInsets.all(8),
+      margin: const EdgeInsets.only(top: 100, left: 16, right: 16, bottom: 8),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 175, 86, 76).withOpacity(0.7),
+        color: const Color.fromARGB(255, 175, 86, 76).withOpacity(0.7),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Center(
+      child: const Center(
         child: Text(
           'Free 100 Coins available for 7 days only',
           style: TextStyle(
@@ -59,12 +61,12 @@ class CoinsScreen extends StatelessWidget {
         Navigator.pop(context);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
         decoration: BoxDecoration(
           color: Colors.amber,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Row(
+        child: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.add, color: Colors.white, size: 12),
@@ -90,7 +92,7 @@ class CoinsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Buy Coins'),
+        title: const Text('Buy Coins'),
         actions: [
           _buildCoinsIcon(context),
         ],

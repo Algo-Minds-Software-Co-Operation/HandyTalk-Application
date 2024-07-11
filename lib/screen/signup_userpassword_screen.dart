@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'welcome_screen.dart';
 
 class SignupUserpasswordScreen extends StatefulWidget {
+  const SignupUserpasswordScreen({super.key});
+
   @override
   _SignupUserpasswordScreenState createState() =>
       _SignupUserpasswordScreenState();
@@ -25,9 +27,9 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'Sign up',
                 style: TextStyle(
@@ -108,7 +110,7 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
                         color: Colors.black.withOpacity(0.5),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black,
                     ),
@@ -124,7 +126,7 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
                     },
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -154,7 +156,7 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
                         color: Colors.black.withOpacity(0.5),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black,
                     ),
@@ -167,7 +169,7 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
                     },
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 // Placeholder for validation messages
                 // Implement your validation UI here
                 // Example:
@@ -177,7 +179,7 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
                       isLengthValid ? Icons.check_circle : Icons.error,
                       color: isLengthValid ? Colors.green : Colors.red,
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     Text(
                       isLengthValid
                           ? '8 characters (20 max)'
@@ -195,7 +197,7 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
                       hasLetterAndNumber ? Icons.check_circle : Icons.error,
                       color: hasLetterAndNumber ? Colors.green : Colors.red,
                     ),
-                    SizedBox(width: 5),
+                    const SizedBox(width: 5),
                     Text(
                       hasLetterAndNumber
                           ? 'Contains letter and number'
@@ -207,7 +209,7 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -218,7 +220,7 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                                  HomeScreen(),
+                                  const HomeScreen(),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
                             var begin = 0.0;
@@ -237,12 +239,12 @@ class _SignupUserpasswordScreenState extends State<SignupUserpasswordScreen> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF0077B6),
+                      backgroundColor: const Color(0xFF0077B6),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Finish',
                       style: TextStyle(
                         color: Colors.white,

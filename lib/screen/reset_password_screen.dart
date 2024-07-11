@@ -4,6 +4,8 @@ import 'signin_userpassword_screen.dart';
 class ResetPasswordScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
 
+  ResetPasswordScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,9 +16,9 @@ class ResetPasswordScreen extends StatelessWidget {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'Reset Your Password',
                 style: TextStyle(
@@ -32,7 +34,7 @@ class ResetPasswordScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 165.0),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
                   children: [
                     Text(
@@ -114,14 +116,14 @@ class ResetPasswordScreen extends StatelessWidget {
                         color: Colors.black.withOpacity(0.5),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black,
                     ),
                     cursorColor: Colors.blue,
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -132,7 +134,7 @@ class ResetPasswordScreen extends StatelessWidget {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                                  SignUserpasswordEnglish(),
+                                  const SignUserpasswordEnglish(),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
                             var begin = 0.0;
@@ -151,12 +153,12 @@ class ResetPasswordScreen extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF0077B6),
+                      backgroundColor: const Color(0xFF0077B6),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Next',
                       style: TextStyle(
                         color: Colors.white,
@@ -166,7 +168,7 @@ class ResetPasswordScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -174,18 +176,18 @@ class ResetPasswordScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: const Text(
                       'Back to Log in',
                       style: TextStyle(
                         color: Color(0xFF0077B6),
                         fontFamily: 'Roboto-Bold',
                         fontSize: 13,
-                      ),
-                    ),
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                   ),

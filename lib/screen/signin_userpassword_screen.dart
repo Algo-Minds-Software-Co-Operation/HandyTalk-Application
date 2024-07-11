@@ -3,6 +3,8 @@ import 'dashboard_pages/dashboard_screen.dart';
 import 'reset_password_screen.dart';
 
 class SignUserpasswordEnglish extends StatefulWidget {
+  const SignUserpasswordEnglish({super.key});
+
   @override
   _SignUserpasswordEnglishState createState() =>
       _SignUserpasswordEnglishState();
@@ -23,9 +25,9 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'Sign in',
                 style: TextStyle(
@@ -115,7 +117,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                         },
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black,
                     ),
@@ -128,7 +130,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                     },
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -142,7 +144,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                             });
                           },
                         ),
-                        Text(
+                        const Text(
                           'Remember me',
                           style: TextStyle(
                             fontFamily: 'Roboto',
@@ -176,7 +178,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                           ),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         'Forgot Password?',
                         style: TextStyle(
                           fontFamily: 'Roboto',
@@ -187,7 +189,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -198,7 +200,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                                  DashboardScreen(),
+                                  const DashboardScreen(),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
                             var begin = 0.0;
@@ -217,12 +219,12 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF0077B6),
+                      backgroundColor: const Color(0xFF0077B6),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Next',
                       style: TextStyle(
                         color: Colors.white,

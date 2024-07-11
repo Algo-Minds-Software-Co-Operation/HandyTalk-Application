@@ -4,6 +4,8 @@ import 'signin_userpassword_screen.dart';
 class SignUsernameEnglish extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
 
+  SignUsernameEnglish({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,9 +16,9 @@ class SignUsernameEnglish extends StatelessWidget {
             'assets/images/background.png',
             fit: BoxFit.cover,
           ),
-          Center(
+          const Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 470.0),
+              padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
                 'Sign in',
                 style: TextStyle(
@@ -93,7 +95,7 @@ class SignUsernameEnglish extends StatelessWidget {
                         color: Colors.black.withOpacity(0.5),
                       ),
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black, // Unfocused text color
                     ),
@@ -107,7 +109,7 @@ class SignUsernameEnglish extends StatelessWidget {
                     },
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -118,7 +120,7 @@ class SignUsernameEnglish extends StatelessWidget {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                                  SignUserpasswordEnglish(),
+                                  const SignUserpasswordEnglish(),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
                             var begin = 0.0;
@@ -137,13 +139,13 @@ class SignUsernameEnglish extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF0077B6), // Button color
+                      backgroundColor: const Color(0xFF0077B6), // Button color
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(10), // Button radius
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Next',
                       style: TextStyle(
                         color: Colors.white,

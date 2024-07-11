@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'chat_screen.dart';
 
 class MessagesPage extends StatelessWidget {
+  const MessagesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +13,7 @@ class MessagesPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: Text(
+        title: const Text(
           '',
           style: TextStyle(fontSize: 24, color: Colors.black),
         ),
@@ -43,7 +45,7 @@ class MessagesPage extends StatelessWidget {
                         width: 1,
                       ),
                     ),
-                    child: TextField(
+                    child: const TextField(
                       decoration: InputDecoration(
                         prefixIcon: Icon(Icons.search, color: Colors.black),
                         hintText: 'Search',
@@ -56,10 +58,10 @@ class MessagesPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 // Groups section
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -79,15 +81,15 @@ class MessagesPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 // Groups joined section
                 Expanded(
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: [
+                    children: const [
                       // Example group
                       Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(15.0),
                         child: Column(
                           children: [
                             CircleAvatar(
@@ -112,10 +114,10 @@ class MessagesPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 0.0),
+                const SizedBox(height: 0.0),
                 // Recent chats section
                 Transform.translate(
-                  offset: Offset(
+                  offset: const Offset(
                       0, -285), // Adjust the offset to move the section up
                   child: Padding(
                     padding:
@@ -123,7 +125,7 @@ class MessagesPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Recent Chats',
                           style: TextStyle(
                             fontFamily: 'Roboto',
@@ -132,14 +134,14 @@ class MessagesPage extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(height: 16.0),
+                        const SizedBox(height: 16.0),
                         // Example chat
                         ListTile(
-                          leading: CircleAvatar(
+                          leading: const CircleAvatar(
                             backgroundImage: AssetImage(
                                 'assets/images/profile-picture-icon.png'), // Replace with profile pic path
                           ),
-                          title: Text(
+                          title: const Text(
                             'User Name',
                             style: TextStyle(
                               fontFamily: 'Roboto',
@@ -148,13 +150,13 @@ class MessagesPage extends StatelessWidget {
                               color: Colors.black,
                             ),
                           ),
-                          subtitle: Text(
+                          subtitle: const Text(
                             'Last message content...',
                             style: TextStyle(
                               color: Colors.black,
                             ),
                           ),
-                          trailing: Column(
+                          trailing: const Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -172,7 +174,7 @@ class MessagesPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ChatScreen(
+                                  builder: (context) => const ChatScreen(
                                       userName: 'User Name',
                                       profileImagePath:
                                           'assets/images/profile-picture-icon.png')),

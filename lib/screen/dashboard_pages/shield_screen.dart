@@ -2,15 +2,17 @@ import 'package:HandyTalk/screen/dashboard_pages/edit_model.dart';
 import 'package:flutter/material.dart';
 
 class ShieldEditingPage extends StatelessWidget {
+  const ShieldEditingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        title: Text('Edit Model'), // Renamed the app bar title
+        title: const Text('Edit Model'), // Renamed the app bar title
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context); // Implement back button functionality
           },
@@ -34,7 +36,7 @@ class ShieldEditingPage extends StatelessWidget {
                   top: 95.0,
                   left: 16.0,
                   right: 16.0,
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: 350.0,
                     child: Image.asset(
@@ -56,12 +58,12 @@ class ShieldEditingPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       IconButton(
-                        icon: Icon(Icons.face),
+                        icon: const Icon(Icons.face),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => EditModel()),
+                                builder: (context) => const EditModel()),
                           );
                         },
                       ),
@@ -78,29 +80,29 @@ class ShieldEditingPage extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(5.0),
                           ),
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
+                          padding: const EdgeInsets.all(8.0),
+                          child: const Icon(
                             Icons.shield_rounded,
                             color: Colors.blue,
                           ),
                         ),
                       ),
                       IconButton(
-                        icon: Icon(Icons.sports),
+                        icon: const Icon(Icons.sports),
                         onPressed: () {
                           // Navigate to trouser editing page
                           // Implement navigation logic here
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.auto_awesome_mosaic),
+                        icon: const Icon(Icons.auto_awesome_mosaic),
                         onPressed: () {
                           // Navigate to full kit editing page
                           // Implement navigation logic here
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.person),
+                        icon: const Icon(Icons.person),
                         onPressed: () {
                           // Navigate to avatar editing page
                           // Implement navigation logic here
@@ -109,10 +111,10 @@ class ShieldEditingPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(
+                const Expanded(
                   child: SingleChildScrollView(
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.0),
                       child: FaceEditingPage(),
                       // Replace with ShirtEditingPage, TrouserEditingPage, etc.
                     ),
@@ -132,12 +134,12 @@ class ShieldEditingPage extends StatelessWidget {
         // Implement action for coins section if needed
       },
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 6),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
         decoration: BoxDecoration(
           color: Colors.amber,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Row(
+        child: const Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.add, color: Colors.white, size: 12),
@@ -159,6 +161,8 @@ class ShieldEditingPage extends StatelessWidget {
 }
 
 class FaceEditingPage extends StatelessWidget {
+  const FaceEditingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -202,11 +206,11 @@ class FaceEditingPage extends StatelessWidget {
             height: 100.0,
             decoration: BoxDecoration(
               border: Border.all(
-                color: Color.fromARGB(76, 0, 0, 0),
+                color: const Color.fromARGB(76, 0, 0, 0),
                 width: 2.0,
               ),
             ),
-            padding: EdgeInsets.all(8.0), // Adjust padding as needed
+            padding: const EdgeInsets.all(8.0), // Adjust padding as needed
             child: Center(
               child: Image.asset(
                 imagePath,
@@ -218,7 +222,7 @@ class FaceEditingPage extends StatelessWidget {
             bottom: 4.0,
             right: 4.0,
             child: Container(
-              padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 6.0),
+              padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 6.0),
               decoration: BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(12.0),
@@ -226,11 +230,11 @@ class FaceEditingPage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.monetization_on, color: Colors.yellow, size: 12),
-                  SizedBox(width: 2.0),
+                  const Icon(Icons.monetization_on, color: Colors.yellow, size: 12),
+                  const SizedBox(width: 2.0),
                   Text(
                     prizeTag,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 10.0,
                       fontWeight: FontWeight.bold,
