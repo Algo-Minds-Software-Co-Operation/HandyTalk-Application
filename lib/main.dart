@@ -1,3 +1,5 @@
+import 'package:HandyTalk/screen/dashboard_pages/chat_screen.dart';
+import 'package:HandyTalk/screen/dashboard_pages/messages.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'screen/welcome_screen.dart';
@@ -19,7 +21,6 @@ Future<void> main() async {
       print('User is signed in!');
     }
   });
-
   runApp(const MyApp());
 }
 
