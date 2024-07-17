@@ -1,17 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 
 class ChatScreen extends StatefulWidget {
   final String userName;
   final String profileImagePath;
 
-  const ChatScreen({super.key, required this.userName, required this.profileImagePath});
+  const ChatScreen(
+      {super.key, required this.userName, required this.profileImagePath});
 
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final TextEditingController _messageController = TextEditingController();
   bool _show3DModel = false;
+  List<String> _messages = [];
+  bool _showEmojiPicker = false;
+
+  void _sendMessage() {
+    if (_messageController.text.isNotEmpty) {
+      setState(() {
+        _messages.insert(0, _messageController.text);
+        _messageController.clear();
+      });
+    }
+  }
+
+  void _sendFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      setState(() {
+        _messages.insert(0, 'File: ${file.name}');
+      });
+    }
+  }
+
+  void _sendEmoji(String emoji) {
+    _messageController.text += emoji;
+  }
+
+  void _toggleEmojiPicker() {
+    setState(() {
+      _showEmojiPicker = !_showEmojiPicker;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,22 +91,25 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       body: Stack(
         children: [
-          // Background image
           Positioned.fill(
             child: Image.asset(
-              'assets/images/background.png', // Replace with your image path
+              'assets/images/background.png',
               fit: BoxFit.cover,
             ),
           ),
-          // Chat messages
           Column(
             children: [
               Expanded(
-                child: ListView(
-                  children: [
-                    // Example chat message
-                    Align(
-                      alignment: Alignment.centerLeft,
+                child: ListView.builder(
+                  reverse: true,
+                  itemCount: _messages.length,
+                  itemBuilder: (context, index) {
+                    bool isSentMessage = true;
+
+                    return Align(
+                      alignment: isSentMessage
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                       child: GestureDetector(
                         onTap: () {
                           setState(() {
@@ -81,7 +120,9 @@ class _ChatScreenState extends State<ChatScreen> {
                           margin: const EdgeInsets.all(8.0),
                           padding: const EdgeInsets.all(12.0),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.8),
+                            color: isSentMessage
+                                ? Colors.blue.withOpacity(0.2)
+                                : Colors.white.withOpacity(0.8),
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Column(
@@ -94,9 +135,9 @@ class _ChatScreenState extends State<ChatScreen> {
                                   color: Colors.black,
                                 ),
                               ),
-                              const Text(
-                                'Hello HandyTalk!',
-                                style: TextStyle(color: Colors.black),
+                              Text(
+                                _messages[index],
+                                style: const TextStyle(color: Colors.black),
                               ),
                               if (_show3DModel)
                                 Container(
@@ -111,7 +152,7 @@ class _ChatScreenState extends State<ChatScreen> {
                                       MediaQuery.of(context).size.height * 0.5,
                                   child: Center(
                                     child: Image.asset(
-                                      'assets/images/3d-model.png', // Replace with your 3D model image path
+                                      'assets/images/3d-model.png',
                                       fit: BoxFit.contain,
                                     ),
                                   ),
@@ -127,43 +168,50 @@ class _ChatScreenState extends State<ChatScreen> {
                           ),
                         ),
                       ),
-                    ),
-                    // Add more chat messages here
-                  ],
+                    );
+                  },
                 ),
               ),
-              // Messaging facilities
+              if (_showEmojiPicker)
+                SizedBox(
+                  height: 250,
+                  child: EmojiPicker(
+                    onEmojiSelected: (category, emoji) {
+                      _sendEmoji(emoji.emoji);
+                    },
+                  ),
+                ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.emoji_emotions, color: Colors.black),
-                      onPressed: () {},
+                      icon:
+                          const Icon(Icons.emoji_emotions, color: Colors.black),
+                      onPressed: _toggleEmojiPicker,
                     ),
                     IconButton(
                       icon: const Icon(Icons.attach_file, color: Colors.black),
-                      onPressed: () {},
+                      onPressed: _sendFile,
                     ),
                     IconButton(
                       icon: const Icon(Icons.camera_alt, color: Colors.black),
                       onPressed: () {},
                     ),
-                    const Expanded(
+                    Expanded(
                       child: TextField(
-                        decoration: InputDecoration(
+                        controller: _messageController,
+                        decoration: const InputDecoration(
                           hintText: 'Type a message',
                           hintStyle: TextStyle(color: Colors.black),
                           border: InputBorder.none,
                         ),
-                        style: TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.black),
                       ),
                     ),
                     IconButton(
                       icon: const Icon(Icons.send, color: Colors.black),
-                      onPressed: () {
-                        // Implement send message functionality here
-                      },
+                      onPressed: _sendMessage,
                     ),
                   ],
                 ),
