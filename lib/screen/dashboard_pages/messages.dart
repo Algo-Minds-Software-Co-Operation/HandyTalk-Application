@@ -1,8 +1,77 @@
 import 'package:flutter/material.dart';
 import 'chat_screen.dart';
 
-class MessagesPage extends StatelessWidget {
+class Chat {
+  final String userName;
+  final String profileImagePath;
+  final String lastMessage;
+  final String time;
+  bool isPinned;
+
+  Chat({
+    required this.userName,
+    required this.profileImagePath,
+    required this.lastMessage,
+    required this.time,
+    this.isPinned = false,
+  });
+}
+
+class MessagesPage extends StatefulWidget {
   const MessagesPage({super.key});
+
+  @override
+  _MessagesPageState createState() => _MessagesPageState();
+}
+
+class _MessagesPageState extends State<MessagesPage> {
+  List<Chat> chats = [
+    Chat(
+      userName: 'User 1',
+      profileImagePath: 'assets/images/profile-picture-icon.png',
+      lastMessage: 'Last message content 1...',
+      time: '12:30 PM',
+      isPinned: false,
+    ),
+    Chat(
+      userName: 'User 2',
+      profileImagePath: 'assets/images/profile-picture-icon.png',
+      lastMessage: 'Last message content 2...',
+      time: '1:00 PM',
+      isPinned: false,
+    ),
+     Chat(
+      userName: 'User 3',
+      profileImagePath: 'assets/images/profile-picture-icon.png',
+      lastMessage: 'Last message content 3...',
+      time: '10:00 AM',
+      isPinned: false,
+    ),
+     Chat(
+      userName: 'User 4',
+      profileImagePath: 'assets/images/profile-picture-icon.png',
+      lastMessage: 'Last message content 4...',
+      time: '6:00 AM',
+      isPinned: false,
+    ),
+    // Add more chats here
+  ];
+
+void togglePin(Chat chat) {
+    setState(() {
+      chat.isPinned = !chat.isPinned;
+      chats.sort((a, b) {
+        if (a.isPinned && !b.isPinned) {
+          return -1;
+        } else if (!a.isPinned && b.isPinned) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +84,11 @@ class MessagesPage extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           '',
-          style: TextStyle(fontSize: 24, color: Colors.black),
+          style: TextStyle(
+            fontSize: 24,
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: Stack(
@@ -135,53 +208,63 @@ class MessagesPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16.0),
-                        // Example chat
-                        ListTile(
-                          leading: const CircleAvatar(
-                            backgroundImage: AssetImage(
-                                'assets/images/profile-picture-icon.png'), // Replace with profile pic path
-                          ),
-                          title: const Text(
-                            'User Name',
-                            style: TextStyle(
-                              fontFamily: 'Roboto',
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.black,
-                            ),
-                          ),
-                          subtitle: const Text(
-                            'Last message content...',
-                            style: TextStyle(
-                              color: Colors.black,
-                            ),
-                          ),
-                          trailing: const Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '12:30 PM',
-                                style: TextStyle(
+                        // Chat items
+                        ...chats.map((chat) => ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage: AssetImage(chat
+                                    .profileImagePath), // Replace with profile pic path
+                              ),
+                              title: Text(
+                                chat.userName,
+                                style: const TextStyle(
+                                  fontFamily: 'Roboto',
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
                                   color: Colors.black,
                                 ),
                               ),
-                              Icon(Icons.check,
-                                  color: Colors.black, size: 16.0),
-                            ],
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ChatScreen(
-                                      userName: 'User Name',
-                                      profileImagePath:
-                                          'assets/images/profile-picture-icon.png')),
-                            );
-                          },
-                        ),
-                        // Add more chats here
+                              subtitle: Text(
+                                chat.lastMessage,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
+                              
+                              trailing: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    chat.time,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                  Icon(
+                                    chat.isPinned
+                                        ? Icons.push_pin
+                                        : Icons.push_pin_outlined,
+                                    color: chat.isPinned
+                                        ? Colors.blue
+                                        : Colors.black,
+                                    size: 16.0,
+                                  ),
+                                ],
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChatScreen(
+                                      userName: chat.userName,
+                                      profileImagePath: chat.profileImagePath,
+                                    ),
+                                  ),
+                                );
+                              },
+                              onLongPress: () => togglePin(chat),
+                            )),
+                            
                       ],
                     ),
                   ),
