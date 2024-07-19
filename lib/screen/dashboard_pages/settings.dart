@@ -1,3 +1,5 @@
+import 'package:HandyTalk/main.dart';
+import 'package:HandyTalk/screen/signin_userpassword_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -9,11 +11,11 @@ class Settings extends StatefulWidget {
   _SettingsState createState() => _SettingsState();
 }
 
-class _SettingsState extends State<Settings>
-    with SingleTickerProviderStateMixin {
+class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin {
   File? _image;
   bool _isAnimating = false;
   late AnimationController _animationController;
+  String _selectedLanguage = 'English - US';
 
   @override
   void initState() {
@@ -42,6 +44,37 @@ class _SettingsState extends State<Settings>
     }
   }
 
+  Future<void> _showLanguageDialog() async {
+    final String? selectedLanguage = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: const Text('Select Language'),
+          children: <Widget>[
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, 'English - US');
+              },
+              child: const Text('English - US'),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, 'Sinhala');
+              },
+              child: const Text('Sinhala'),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (selectedLanguage != null && selectedLanguage != _selectedLanguage) {
+      setState(() {
+        _selectedLanguage = selectedLanguage;
+      });
+    }
+  }
+
   @override
   void dispose() {
     _animationController.dispose();
@@ -50,182 +83,229 @@ class _SettingsState extends State<Settings>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Positioned(
-          top: 100, // Positioned 100 pixels from the top
-          left: MediaQuery.of(context).size.width / 2 - 160,
-          child: Container(
-            width: 320,
-            height: 250,
-            decoration: BoxDecoration(
-              color: const Color(0xFFCAF0F8).withOpacity(0.25),
-              borderRadius: BorderRadius.circular(25),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF000000).withOpacity(0.35),
-                  offset: const Offset(0, 0),
-                  blurRadius: 150,
-                  spreadRadius: 5,
-                ),
-              ],
+    return Scaffold(
+      
+      body: Stack(
+        children: <Widget>[
+          // Background image
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/background.png',
+              fit: BoxFit.cover,
             ),
-            child: Center(
-              child: GestureDetector(
-                onLongPress: () {
-                  setState(() {
-                    _isAnimating = true;
-                  });
-                  _animationController.forward(from: 0.0);
-                  Future.delayed(const Duration(seconds: 3), _pickImage);
-                },
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Positioned(
-                      top: 30,
-                      child: AnimatedContainer(
-                        duration: const Duration(seconds: 3),
-                        curve: Curves.easeInOut,
-                        width: _isAnimating ? 80 : 60,
-                        height: _isAnimating ? 80 : 60,
-                        child: ClipOval(
-                          child: _image == null
-                              ? Image.asset(
-                                  'assets/images/tempory_img.png',
-                                  fit: BoxFit.cover,
-                                )
-                              : Image.file(
-                                  _image!,
-                                  fit: BoxFit.cover,
-                                ),
-                        ),
-                      ),
-                    ),
-                    const Positioned(
-                      top: 110,
-                      child: Text(
-                        'Kavindu Malshan',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontFamily: 'Roboto-Bold',
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 130,
-                      child: Text(
-                        '@kavindu1125',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.5),
-                          fontSize: 12,
-                          fontFamily: 'Roboto-Bold',
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      top: 200,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.email,
-                              color: Colors.black.withOpacity(0.75), size: 16),
-                          const SizedBox(width: 8), // Adjust spacing as needed
-                          Text(
-                            'kavindu11250403@gmail.com',
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.75),
-                              fontSize: 12,
-                              fontFamily: 'Roboto-Bold',
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                          const SizedBox(width: 8), // Adjust spacing as needed
-                          SizedBox(
-                            width: 75.0, // Set width of the button
-                            height: 20.0, // Set height of the button
-                            child: ElevatedButton(
-                              onPressed: () {
-                                // Add functionality for the button
-                              },
-                              style: ButtonStyle(
-                                backgroundColor:
-                                    WidgetStateProperty.all<Color>(const Color(
-                                        0xFF4BFF2E)), // Set background color to #4BFF2E
-                                shape: WidgetStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        10.0), // Set border radius
+          ),
+          // Main content
+          Positioned(
+            top: 60,
+            left: MediaQuery.of(context).size.width / 2 - 160,
+            child: Container(
+              width: 320,
+              height: 250,
+              decoration: BoxDecoration(
+                color: const Color(0xFFCAF0F8).withOpacity(0.25),
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF000000).withOpacity(0.35),
+                    offset: const Offset(0, 0),
+                    blurRadius: 150,
+                    spreadRadius: 5,
+                  ),
+                ],
+              ),
+              child: Center(
+                child: GestureDetector(
+                  onLongPress: () {
+                    setState(() {
+                      _isAnimating = true;
+                    });
+                    _animationController.forward(from: 0.0);
+                    Future.delayed(const Duration(seconds: 3), _pickImage);
+                  },
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Positioned(
+                        top: 30,
+                        child: AnimatedContainer(
+                          duration: const Duration(seconds: 3),
+                          curve: Curves.easeInOut,
+                          width: _isAnimating ? 80 : 60,
+                          height: _isAnimating ? 80 : 60,
+                          child: ClipOval(
+                            child: _image == null
+                                ? Image.asset(
+                                    'assets/images/tempory_img.png',
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.file(
+                                    _image!,
+                                    fit: BoxFit.cover,
                                   ),
-                                ),
-                                foregroundColor:
-                                    WidgetStateProperty.all<Color>(Colors
-                                        .white), // Set font color to white
-                              ),
-                              child: const Text(
-                                'verified',
-                                style: TextStyle(
-                                    fontSize: 8,
-                                    fontFamily: 'Roboto-Bold',
-                                    color: Colors
-                                        .white), // Set text color to white
+                          ),
+                        ),
+                      ),
+                      const Positioned(
+                        top: 110,
+                        child: Text(
+                          'Kavindu Malshan',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Roboto-Bold',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 130,
+                        child: Text(
+                          '@kavindu1125',
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.5),
+                            fontSize: 12,
+                            fontFamily: 'Roboto-Bold',
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 200,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.email,
+                                color: Colors.black.withOpacity(0.75), size: 16),
+                            const SizedBox(width: 8),
+                            Text(
+                              'kavindu11250403@gmail.com',
+                              style: TextStyle(
+                                color: Colors.black.withOpacity(0.75),
+                                fontSize: 12,
+                                fontFamily: 'Roboto-Bold',
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
-                          ),
-                        ],
+                            const SizedBox(width: 8),
+                            SizedBox(
+                              width: 80.0,
+                              height: 20.0,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          const Color(0xFF4BFF2E)),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ),
+                                  ),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.white),
+                                ),
+                                child: const Text(
+                                  'Verified',
+                                  style: TextStyle(
+                                      fontSize: 9,
+                                      fontFamily: 'Roboto-Bold',
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        Positioned(
-          top: 370,
-          left: MediaQuery.of(context).size.width / 2 - 160,
-          child: Container(
-            width: 320,
-            height: 125,
-            decoration: BoxDecoration(
-              color: const Color(0xFFCAF0F8).withOpacity(0.25),
-              borderRadius: BorderRadius.circular(25),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF000000).withOpacity(0.35),
-                  offset: const Offset(0, 0),
-                  blurRadius: 150,
-                  spreadRadius: 5,
-                ),
-              ],
+          Positioned(
+            top: 340,
+            left: MediaQuery.of(context).size.width / 2 - 160,
+            child: Container(
+              width: 320,
+              height: 120,
+              decoration: BoxDecoration(
+                color: const Color(0xFFCAF0F8).withOpacity(0.25),
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF000000).withOpacity(0.35),
+                    offset: const Offset(0, 0),
+                    blurRadius: 150,
+                    spreadRadius: 5,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.language),
+                    title: const Text('Language'),
+                    subtitle: Text(_selectedLanguage),
+                    onTap: _showLanguageDialog,
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.notifications),
+                    title: const Text('Communication Preferences'),
+                    onTap: () {},
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        Positioned(
-          top: 515,
-          left: MediaQuery.of(context).size.width / 2 - 160,
-          child: Container(
-            width: 320,
-            height: 125,
-            decoration: BoxDecoration(
-              color: const Color(0xFFCAF0F8).withOpacity(0.25),
-              borderRadius: BorderRadius.circular(25),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFF000000).withOpacity(0.35),
-                  offset: const Offset(0, 0),
-                  blurRadius: 150,
-                  spreadRadius: 5,
-                ),
-              ],
+          Positioned(
+            top: 490,
+            left: MediaQuery.of(context).size.width / 2 - 160,
+            child: Container(
+              width: 320,
+              height: 100,
+              decoration: BoxDecoration(
+                color: const Color(0xFFCAF0F8).withOpacity(0.25),
+                borderRadius: BorderRadius.circular(25),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xFF000000).withOpacity(0.35),
+                    offset: const Offset(0, 0),
+                    blurRadius: 150,
+                    spreadRadius: 5,
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.logout),
+                    title: const Text('Log out'),
+                    onTap: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SplashScreen()),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.delete),
+                    title: const Text('Delete Account'),
+                    onTap: () {},
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: Settings(),
+  ));
 }
