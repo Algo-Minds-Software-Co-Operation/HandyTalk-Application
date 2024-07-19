@@ -40,13 +40,12 @@ class NumbersScreen extends StatelessWidget {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  childAspectRatio:
-                      0.7, // Adjusted aspect ratio for smaller rectangles
+                  childAspectRatio: 0.8, // Adjusted aspect ratio for better proportions
                   mainAxisSpacing: 20.0, // Increased spacing between rows
                   crossAxisSpacing: 20.0, // Increased spacing between columns
                 ),
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0), // Horizontal padding around the grid
+                    horizontal: 20.0, vertical: 20.0), // Adjusted padding around the grid
                 itemCount: 100,
                 itemBuilder: (context, index) {
                   int number = index + 1;
@@ -57,22 +56,29 @@ class NumbersScreen extends StatelessWidget {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFFCAF0F8).withOpacity(0.25),
-                        borderRadius: BorderRadius.circular(10.0),
+                        color: const Color(0xFFCAF0F8).withOpacity(0.35),
+                        borderRadius: BorderRadius.circular(15.0),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
+                            color: Colors.black.withOpacity(0.1),
                             spreadRadius: 2,
-                            blurRadius: 7,
+                            blurRadius: 5,
                             offset: const Offset(0, 3),
                           ),
                         ],
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.75),
+                          width: 2,
+                        ),
                       ),
                       child: Center(
                         child: Text(
                           number.toString(),
-                          style:
-                              const TextStyle(fontSize: 18.0, color: Colors.black87),
+                          style: const TextStyle(
+                            fontSize: 22.0,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -86,3 +92,4 @@ class NumbersScreen extends StatelessWidget {
     );
   }
 }
+

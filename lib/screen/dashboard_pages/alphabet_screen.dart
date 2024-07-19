@@ -40,17 +40,14 @@ class AlphabetScreen extends StatelessWidget {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  childAspectRatio:
-                      0.7, // Adjusted aspect ratio for smaller rectangles
-                  mainAxisSpacing: 20.0, // Increased spacing between rows
-                  crossAxisSpacing: 20.0, // Increased spacing between columns
+                  childAspectRatio: 0.8,
+                  mainAxisSpacing: 20.0,
+                  crossAxisSpacing: 20.0,
                 ),
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0), // Horizontal padding around the grid
+                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                 itemCount: 26,
                 itemBuilder: (context, index) {
-                  String letter =
-                      String.fromCharCode('A'.codeUnitAt(0) + index);
+                  String letter = String.fromCharCode('A'.codeUnitAt(0) + index);
                   return GestureDetector(
                     onTap: () {
                       // Navigate to specific letter's details if needed
@@ -58,22 +55,29 @@ class AlphabetScreen extends StatelessWidget {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFFCAF0F8).withOpacity(0.25),
-                        borderRadius: BorderRadius.circular(10.0),
+                        color: const Color(0xFFCAF0F8).withOpacity(0.35),
+                        borderRadius: BorderRadius.circular(15.0),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
+                            color: Colors.black.withOpacity(0.15),
                             spreadRadius: 2,
-                            blurRadius: 7,
+                            blurRadius: 5,
                             offset: const Offset(0, 3),
                           ),
                         ],
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.75),
+                          width: 2,
+                        ),
                       ),
                       child: Center(
                         child: Text(
                           letter,
-                          style:
-                              const TextStyle(fontSize: 18.0, color: Colors.black87),
+                          style: const TextStyle(
+                            fontSize: 22.0,
+                            color: Colors.black87,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -87,3 +91,4 @@ class AlphabetScreen extends StatelessWidget {
     );
   }
 }
+
