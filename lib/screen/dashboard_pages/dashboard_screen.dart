@@ -132,47 +132,52 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GestureDetector(
-              onTap: () {
-                navigateToProfileSettings(
-                    context); // Navigate to EditModel when tapping profile picture on Home page
-              },
-              child: Image.asset(
-                profileImagePath,
-                width: 40,
-                height: 40,
-              ),
-            ),
-            const SizedBox(width: 10),
-            Text(
-              appBarTitle,
-              style: TextStyle(
-                fontFamily: 'Roboto',
-                color: Colors.black.withOpacity(0.75),
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            if (_selectedIndex == 0) _buildCoinsIcon(),
-            GestureDetector(
-              onTap: () {
-                navigateToNotification(context); // Pass context here
-              },
-              child: Image.asset(
-                notificationImagePath,
-                width: 30,
-                height: 30,
-              ),
-            ),
-          ],
+  backgroundColor: Colors.transparent,
+  elevation: 0,
+  automaticallyImplyLeading: false,
+  title: Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      if (_selectedIndex == 0)
+        GestureDetector(
+          onTap: () {
+            navigateToProfileSettings(context); // Navigate to EditModel when tapping profile picture on Home page
+          },
+          child: Image.asset(
+            profileImagePath,
+            width: 40,
+            height: 40,
+          ),
+        ),
+      if (_selectedIndex == 0) const SizedBox(width: 10),
+      Text(
+        appBarTitle,
+        style: TextStyle(
+          fontFamily: 'Roboto',
+          color: Colors.black.withOpacity(0.75),
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
         ),
       ),
+      if (_selectedIndex == 0) const SizedBox(width: 10),
+      if (_selectedIndex == 0) _buildCoinsIcon(),
+    ],
+  ),
+  centerTitle: true,
+  actions: [
+    GestureDetector(
+      onTap: () {
+        navigateToNotification(context); // Pass context here
+      },
+      child: Image.asset(
+        notificationImagePath,
+        width: 30,
+        height: 30,
+      ),
+    ),
+  ],
+),
+
       extendBodyBehindAppBar: true,
       body: Stack(
         fit: StackFit.expand,
