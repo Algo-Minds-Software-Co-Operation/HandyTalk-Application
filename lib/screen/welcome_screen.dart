@@ -4,7 +4,7 @@ import 'signup_name_page.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
+  
   void getStartedBtnOnClicked(BuildContext context) {
     Navigator.push(
       context,
