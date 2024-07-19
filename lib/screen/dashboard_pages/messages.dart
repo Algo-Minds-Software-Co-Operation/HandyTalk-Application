@@ -156,42 +156,12 @@ void togglePin(Chat chat) {
                 ),
                 const SizedBox(height: 16.0),
                 // Groups joined section
-                Expanded(
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: const [
-                      // Example group
-                      Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Column(
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage: AssetImage(
-                                  'assets/images/profile-picture-icon.png'), // Replace with group dp path
-                            ),
-                            SizedBox(height: 8.0),
-                            Text(
-                              'WDM',
-                              style: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      // Add more groups here
-                    ],
-                  ),
-                ),
+                
                 const SizedBox(height: 0.0),
                 // Recent chats section
                 Transform.translate(
                   offset: const Offset(
-                      0, -285), // Adjust the offset to move the section up
+                      0, 25), // Adjust the offset to move the section up
                   child: Padding(
                     padding:
                         const EdgeInsets.only(top: 0, left: 16.0, right: 16.0),

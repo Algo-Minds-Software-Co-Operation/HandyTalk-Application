@@ -1,5 +1,4 @@
-import 'package:HandyTalk/screen/dashboard_pages/chat_screen.dart';
-import 'package:HandyTalk/screen/dashboard_pages/messages.dart';
+import 'package:HandyTalk/screen/dashboard_pages/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'screen/welcome_screen.dart';
@@ -8,19 +7,19 @@ import 'firebase/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 
-  FirebaseAuth.instance.authStateChanges().listen((User? user) {
-    if (user == null) {
-      print('User is currently signed out!');
-    } else {
-      print('User is signed in!');
-    }
-  });
+  // FirebaseAuth.instance.authStateChanges().listen((User? user) {
+  //   if (user == null) {
+  //     print('User is currently signed out!');
+  //   } else {
+  //     print('User is signed in!');
+  //   }
+  // });
   runApp(const MyApp());
 }
 
