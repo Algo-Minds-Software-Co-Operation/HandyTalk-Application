@@ -161,7 +161,7 @@ class _SearchBarState extends State<SearchBar> {
           const Expanded(
             child: TextField(
               decoration: InputDecoration(
-                hintText: 'Search',
+                hintText: 'Type text here',
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
               ),

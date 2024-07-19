@@ -116,6 +116,10 @@ class ClassroomCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: const Color(0xFFCAF0F8).withOpacity(0.35),
           borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(
+            color: color, // Set the border color
+            width: 2.0, // Set the border width
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),

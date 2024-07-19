@@ -101,9 +101,12 @@ class ClassroomCard extends StatelessWidget {
       width: MediaQuery.of(context).size.width - 40, // Decrease width by 40
       height: 130.0, // Adjusted height
       decoration: BoxDecoration(
-        color: const Color(0xFFCAF0F8)
-            .withOpacity(0.35), // Set background color with opacity
+        color: const Color(0xFFCAF0F8).withOpacity(0.35), // Set background color with opacity
         borderRadius: BorderRadius.circular(10.0),
+        border: Border.all(
+          color: color, // Set the border color
+          width: 2.0, // Set the border width
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -118,7 +121,7 @@ class ClassroomCard extends StatelessWidget {
           if (image != null)
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: image,
+              child: image!,
             )
           else
             Padding(
@@ -134,8 +137,7 @@ class ClassroomCard extends StatelessWidget {
                   title,
                   style: TextStyle(
                     fontSize: 16.0,
-                    fontWeight:
-                        isBoldTitle ? FontWeight.bold : FontWeight.normal,
+                    fontWeight: isBoldTitle ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
                 const SizedBox(height: 5.0),
