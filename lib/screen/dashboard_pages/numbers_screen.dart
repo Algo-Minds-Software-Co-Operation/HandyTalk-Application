@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:HandyTalk/screen/dashboard_pages/number_list.dart';
 
 class NumbersScreen extends StatelessWidget {
   const NumbersScreen({super.key});
@@ -40,19 +41,28 @@ class NumbersScreen extends StatelessWidget {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  childAspectRatio: 0.8, // Adjusted aspect ratio for better proportions
+                  childAspectRatio:
+                      0.8, // Adjusted aspect ratio for better proportions
                   mainAxisSpacing: 20.0, // Increased spacing between rows
                   crossAxisSpacing: 20.0, // Increased spacing between columns
                 ),
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 20.0), // Adjusted padding around the grid
+                    horizontal: 20.0,
+                    vertical: 20.0), // Adjusted padding around the grid
                 itemCount: 100,
                 itemBuilder: (context, index) {
                   int number = index + 1;
                   return GestureDetector(
                     onTap: () {
-                      // Navigate to specific number's details if needed
-                      // Example: Navigator.push(...);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NumberText(
+                            letter: number
+                                .toString(), // Pass the selected number as a string
+                          ),
+                        ),
+                      );
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -92,4 +102,3 @@ class NumbersScreen extends StatelessWidget {
     );
   }
 }
-
