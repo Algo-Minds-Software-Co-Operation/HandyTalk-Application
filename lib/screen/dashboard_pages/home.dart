@@ -1,6 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'edit_model.dart';
+import 'package:HandyTalk/screen/dashboard_pages/edit_model.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -106,9 +107,60 @@ class SearchBar extends StatefulWidget {
   _SearchBarState createState() => _SearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMixin {
   final ImagePicker _picker = ImagePicker();
   bool _animate = false;
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  Timer? _timer;
+  int _seconds = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+    _animation = Tween(begin: 1.0, end: 1.2).animate(CurvedAnimation(
+      parent: _controller,
+      curve: Curves.easeInOut,
+    ));
+  }
+
+  void _startRecording() {
+    setState(() {
+      _animate = true;
+      _seconds = 0;
+    });
+    _controller.repeat(reverse: true);
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _seconds++;
+      });
+    });
+  }
+
+  void _stopRecording() {
+    setState(() {
+      _animate = false;
+    });
+    _controller.stop();
+    _timer?.cancel();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  String _formatDuration(int seconds) {
+    final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
+    final remainingSeconds = (seconds % 60).toString().padLeft(2, '0');
+    return '$minutes:$remainingSeconds';
+  }
 
   void _openCamera() async {
     setState(() {
@@ -175,17 +227,32 @@ class _SearchBarState extends State<SearchBar> {
             ),
           ),
           const SizedBox(width: 10.0), // Space between camera and mic icon
-          Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFF0077B6), // Circle color #0077B6
-              shape: BoxShape.circle,
-            ),
-            padding: const EdgeInsets.all(
-                8.0), // Adjust padding to control the size of the circle
-            child: const Icon(
-              Icons.mic,
-              color: Colors.white, // Mic icon color
-              size: 16.0, // Mic icon size
+          GestureDetector(
+            onTapDown: (_) => _startRecording(),
+            onTapUp: (_) => _stopRecording(),
+            child: ScaleTransition(
+              scale: _animation,
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Color(0xFF0077B6), // Circle color #0077B6
+                  shape: BoxShape.circle,
+                ),
+                padding: const EdgeInsets.all(
+                    8.0), // Adjust padding to control the size of the circle
+                child: _animate
+                    ? Text(
+                        _formatDuration(_seconds),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    : const Icon(
+                        Icons.mic,
+                        color: Colors.white, // Mic icon color
+                        size: 16.0, // Mic icon size
+                      ),
+              ),
             ),
           ),
         ],

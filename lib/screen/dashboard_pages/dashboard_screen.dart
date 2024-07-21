@@ -19,6 +19,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int _selectedIndex = 0;
+  bool _isShining = false;
 
   static final List<Widget> _widgetOptions = <Widget>[
     const Home(),
@@ -37,6 +38,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
         context,
         MaterialPageRoute(builder: (context) => const PremiumScreen()),
       );
+    });
+
+    // Start the shining animation timer
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (_selectedIndex == 0) {
+        setState(() {
+          _isShining = !_isShining;
+        });
+      }
     });
   }
 
@@ -75,11 +85,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
       onTap: () {
         navigateToCoinsScreen(context);
       },
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 500),
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
         decoration: BoxDecoration(
-          color: Colors.amber,
+          color: _isShining ? Colors.amber[600] : Colors.amber,
           borderRadius: BorderRadius.circular(12),
+          boxShadow: _isShining
+              ? [
+                  BoxShadow(
+                    color: Colors.amber[600]!,
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                  )
+                ]
+              : [],
         ),
         child: const Row(
           mainAxisSize: MainAxisSize.min,
@@ -132,52 +152,51 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return Scaffold(
       appBar: AppBar(
-  backgroundColor: Colors.transparent,
-  elevation: 0,
-  automaticallyImplyLeading: false,
-  title: Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      if (_selectedIndex == 0)
-        GestureDetector(
-          onTap: () {
-            navigateToProfileSettings(context); // Navigate to EditModel when tapping profile picture on Home page
-          },
-          child: Image.asset(
-            profileImagePath,
-            width: 40,
-            height: 40,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (_selectedIndex == 0)
+              GestureDetector(
+                onTap: () {
+                  navigateToProfileSettings(context); // Navigate to EditModel when tapping profile picture on Home page
+                },
+                child: Image.asset(
+                  profileImagePath,
+                  width: 40,
+                  height: 40,
+                ),
+              ),
+            if (_selectedIndex == 0) const SizedBox(width: 10),
+            Text(
+              appBarTitle,
+              style: TextStyle(
+                fontFamily: 'Roboto',
+                color: Colors.black.withOpacity(0.75),
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            if (_selectedIndex == 0) const SizedBox(width: 10),
+            if (_selectedIndex == 0) _buildCoinsIcon(),
+          ],
+        ),
+        centerTitle: true,
+        actions: [
+          GestureDetector(
+            onTap: () {
+              navigateToNotification(context); // Pass context here
+            },
+            child: Image.asset(
+              notificationImagePath,
+              width: 30,
+              height: 30,
+            ),
           ),
-        ),
-      if (_selectedIndex == 0) const SizedBox(width: 10),
-      Text(
-        appBarTitle,
-        style: TextStyle(
-          fontFamily: 'Roboto',
-          color: Colors.black.withOpacity(0.75),
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
+        ],
       ),
-      if (_selectedIndex == 0) const SizedBox(width: 10),
-      if (_selectedIndex == 0) _buildCoinsIcon(),
-    ],
-  ),
-  centerTitle: true,
-  actions: [
-    GestureDetector(
-      onTap: () {
-        navigateToNotification(context); // Pass context here
-      },
-      child: Image.asset(
-        notificationImagePath,
-        width: 30,
-        height: 30,
-      ),
-    ),
-  ],
-),
-
       extendBodyBehindAppBar: true,
       body: Stack(
         fit: StackFit.expand,
