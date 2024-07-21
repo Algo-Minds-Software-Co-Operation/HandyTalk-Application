@@ -216,51 +216,59 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        title: Row(
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage(widget.profileImagePath),
-            ),
-            const SizedBox(width: 8.0),
-            Text(
-              widget.userName,
-              style: const TextStyle(color: Colors.black),
-            ),
-          ],
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.videocam, color: Colors.black),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.call, color: Colors.black),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CallScreen(
-                    userName: widget.userName,
-                    profileImagePath: widget.profileImagePath,
-                  ),
-                ),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.more_vert, color: Colors.black),
-            onPressed: _showMoreOptions,
-          ),
-        ],
+  backgroundColor: Colors.transparent,
+  elevation: 0,
+  leading: IconButton(
+    icon: const Icon(Icons.arrow_back, color: Colors.black),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  ),
+  title: Row(
+    children: [
+      CircleAvatar(
+        backgroundImage: AssetImage(widget.profileImagePath),
       ),
+      const SizedBox(width: 8.0),
+      Text(
+        widget.userName,
+        style: const TextStyle(color: Colors.black),
+      ),
+    ],
+  ),
+  actions: [
+    IconButton(
+      icon: const Icon(Icons.videocam, color: Colors.black),
+      onPressed: () {},
+    ),
+    IconButton(
+      icon: const Icon(Icons.call, color: Colors.black),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CallScreen(
+              userName: widget.userName,
+              profileImagePath: widget.profileImagePath,
+            ),
+          ),
+        );
+      },
+    ),
+    IconButton(
+      icon: const Icon(Icons.more_vert, color: Colors.black),
+      onPressed: _showMoreOptions,
+    ),
+  ],
+  bottom: PreferredSize(
+    preferredSize: Size.fromHeight(4.0),
+    child: Container(
+      color: Colors.grey,
+      height: 1.0,
+    ),
+  ),
+),
+
       body: Stack(
         children: [
           Positioned.fill(
