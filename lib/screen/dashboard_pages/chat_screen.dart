@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'call_screen.dart'; // Import the CallScreen
 
 class ChatScreen extends StatefulWidget {
   final String userName;
@@ -18,12 +19,14 @@ class _ChatScreenState extends State<ChatScreen> {
   bool _show3DModel = false;
   List<String> _messages = [];
   bool _showEmojiPicker = false;
+  bool _showSignLanguageToText = false;
 
   void _sendMessage() {
     if (_messageController.text.isNotEmpty) {
       setState(() {
         _messages.insert(0, _messageController.text);
         _messageController.clear();
+        _showSignLanguageToText = true;
       });
     }
   }
@@ -35,6 +38,7 @@ class _ChatScreenState extends State<ChatScreen> {
       PlatformFile file = result.files.first;
       setState(() {
         _messages.insert(0, 'File: ${file.name}');
+        _showSignLanguageToText = true;
       });
     }
   }
@@ -47,6 +51,164 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() {
       _showEmojiPicker = !_showEmojiPicker;
     });
+  }
+
+  void _showAttachmentOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          color: Colors.white,
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.blue,
+                  child: Icon(Icons.insert_drive_file, color: Colors.white),
+                ),
+                title: Text('Document'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _sendFile();
+                },
+              ),
+              ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.pink,
+                  child: Icon(Icons.photo, color: Colors.white),
+                ),
+                title: Text('Gallery'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for Gallery
+                },
+              ),
+              ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.orange,
+                  child: Icon(Icons.audiotrack, color: Colors.white),
+                ),
+                title: Text('Audio'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for Audio
+                },
+              ),
+              ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.green,
+                  child: Icon(Icons.location_on, color: Colors.white),
+                ),
+                title: Text('Location'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for Location
+                },
+              ),
+              ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.purple,
+                  child: Icon(Icons.contact_phone, color: Colors.white),
+                ),
+                title: Text('Contact'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for Contact
+                },
+              ),
+              ListTile(
+                leading: CircleAvatar(
+                  backgroundColor: Colors.red,
+                  child: Icon(Icons.poll, color: Colors.white),
+                ),
+                title: Text('Poll'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for Poll
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void _showMoreOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          color: Colors.white,
+          child: Wrap(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.person, color: Colors.black),
+                title: const Text('View Contact'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for View Contact
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.link, color: Colors.black),
+                title: const Text('Media, links, and docs'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for Media, links, and docs
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.search, color: Colors.black),
+                title: const Text('Search'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for Search
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.notifications_off, color: Colors.black),
+                title: const Text('Mute notifications'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for Mute notifications
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.timer, color: Colors.black),
+                title: const Text('Disappearing messages'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for Disappearing messages
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.wallpaper, color: Colors.black),
+                title: const Text('Wallpaper'),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for Wallpaper
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.more_horiz, color: Colors.black),
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text('More'),
+                    Icon(Icons.arrow_forward, color: Colors.black),
+                  ],
+                ),
+                onTap: () {
+                  Navigator.pop(context);
+                  // Add functionality for More
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -81,11 +243,21 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           IconButton(
             icon: const Icon(Icons.call, color: Colors.black),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CallScreen(
+                    userName: widget.userName,
+                    profileImagePath: widget.profileImagePath,
+                  ),
+                ),
+              );
+            },
           ),
           IconButton(
             icon: const Icon(Icons.more_vert, color: Colors.black),
-            onPressed: () {},
+            onPressed: _showMoreOptions,
           ),
         ],
       ),
@@ -106,120 +278,131 @@ class _ChatScreenState extends State<ChatScreen> {
                   itemBuilder: (context, index) {
                     bool isSentMessage = true;
 
-                    return Align(
-                      alignment: isSentMessage
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _show3DModel = !_show3DModel;
-                          });
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(8.0),
-                          padding: const EdgeInsets.all(12.0),
-                          decoration: BoxDecoration(
-                            color: isSentMessage
-                                ? Colors.blue.withOpacity(0.2)
-                                : Colors.white.withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'User Name',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Text(
-                                _messages[index],
-                                style: const TextStyle(color: Colors.black),
-                              ),
-                              if (_show3DModel)
-                                Container(
-                                  margin: const EdgeInsets.only(top: 8.0),
-                                  decoration: BoxDecoration(
-                                    color: Colors.white.withOpacity(0.9),
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.8,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.5,
-                                  child: Center(
-                                    child: Image.asset(
-                                      'assets/images/3d-model.png',
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                ),
-                              Text(
-                                'Translate to sign language',
-                                style: TextStyle(
-                                  fontSize: 8,
-                                  color: Colors.black.withOpacity(0.35),
-                                ),
-                              ),
-                            ],
+                    return Column(
+                      crossAxisAlignment: isSentMessage
+                          ? CrossAxisAlignment.end
+                          : CrossAxisAlignment.start,
+                      children: [
+                        Align(
+                          alignment: isSentMessage
+                              ? Alignment.centerRight
+                              : Alignment.centerLeft,
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 10.0,
+                              vertical: 5.0,
+                            ),
+                            padding: const EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              color: isSentMessage ? Colors.blue : Colors.grey,
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Text(
+                              _messages[index],
+                              style: const TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
-                      ),
+                        if (_showSignLanguageToText)
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _show3DModel = !_show3DModel;
+                              });
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 10.0, bottom: 5.0),
+                              child: Text(
+                                'Sign language to text',
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  color: Colors.black.withOpacity(0.5),
+                                ),
+                              ),
+                            ),
+                          ),
+                      ],
                     );
                   },
                 ),
               ),
               if (_showEmojiPicker)
                 SizedBox(
-                  height: 250,
-                  child: EmojiPicker(
-                    onEmojiSelected: (category, emoji) {
-                      _sendEmoji(emoji.emoji);
-                    },
+                  height: 250.0,
+                  child: GridView.count(
+                    crossAxisCount: 8,
+                    children: List.generate(40, (index) {
+                      String emoji = String.fromCharCodes([
+                        0x1F600 + index
+                      ]);
+                      return GestureDetector(
+                        onTap: () => _sendEmoji(emoji),
+                        child: Center(
+                          child: Text(
+                            emoji,
+                            style: const TextStyle(fontSize: 24.0),
+                          ),
+                        ),
+                      );
+                    }),
                   ),
                 ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon:
-                          const Icon(Icons.emoji_emotions, color: Colors.black),
-                      onPressed: _toggleEmojiPicker,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.attach_file, color: Colors.black),
-                      onPressed: _sendFile,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.camera_alt, color: Colors.black),
-                      onPressed: () {},
-                    ),
-                    Expanded(
-                      child: TextField(
-                        controller: _messageController,
-                        decoration: const InputDecoration(
-                          hintText: 'Type a message',
-                          hintStyle: TextStyle(color: Colors.black),
-                          border: InputBorder.none,
-                        ),
-                        style: const TextStyle(color: Colors.black),
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.send, color: Colors.black),
-                      onPressed: _sendMessage,
-                    ),
-                  ],
-                ),
-              ),
+              _buildBottomSection(),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildBottomSection() {
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Row(
+            children: [
+              IconButton(
+                icon: const Icon(Icons.emoji_emotions),
+                onPressed: _toggleEmojiPicker,
+              ),
+              Expanded(
+                child: TextField(
+                  controller: _messageController,
+                  decoration: const InputDecoration(
+                    hintText: 'Type a message',
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.attach_file),
+                onPressed: _showAttachmentOptions,
+              ),
+              IconButton(
+                icon: const Icon(Icons.camera_alt),
+                onPressed: () {
+                  setState(() {
+                    _show3DModel = !_show3DModel;
+                  });
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.send),
+                onPressed: _sendMessage,
+              ),
+            ],
+          ),
+        ),
+        if (_show3DModel) _build3DModelSection(),
+      ],
+    );
+  }
+
+  Widget _build3DModelSection() {
+    return SizedBox(
+      height: 300.0,
+      child: Image.asset('assets/images/3d-model.png'),
     );
   }
 }
