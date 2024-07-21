@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:HandyTalk/screen/dashboard_pages/AlperbetText.dart';
 
 class AlphabetScreen extends StatelessWidget {
   const AlphabetScreen({super.key});
@@ -44,14 +45,20 @@ class AlphabetScreen extends StatelessWidget {
                   mainAxisSpacing: 20.0,
                   crossAxisSpacing: 20.0,
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 20.0),
                 itemCount: 26,
                 itemBuilder: (context, index) {
-                  String letter = String.fromCharCode('A'.codeUnitAt(0) + index);
+                  String letter =
+                      String.fromCharCode('A'.codeUnitAt(0) + index);
                   return GestureDetector(
                     onTap: () {
-                      // Navigate to specific letter's details if needed
-                      // Example: Navigator.push(...);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AlphabetText(letter: letter),
+                        ),
+                      );
                     },
                     child: Container(
                       decoration: BoxDecoration(
@@ -91,4 +98,3 @@ class AlphabetScreen extends StatelessWidget {
     );
   }
 }
-
