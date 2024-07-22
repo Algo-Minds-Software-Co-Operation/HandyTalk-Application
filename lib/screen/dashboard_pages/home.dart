@@ -58,20 +58,22 @@ class _HomeState extends State<Home> {
             width: double.infinity,
             height: double.infinity,
           ),
-          const Positioned(
+          Positioned(
             top: 120,
             left: 16,
             right: 16,
-            child: SearchBar(),
+            child: SearchBar(
+              onSearch: (searchTerm) => _searchGif(searchTerm),
+            ),
           ),
           const Positioned(
-            top: 200, // Adjust the position as needed
+            top: 200,
             left: 16,
             right: 16,
             child: ProgressRectangle(),
           ),
           Positioned(
-            bottom: 16, // Adjust the bottom margin as needed
+            bottom: 16,
             right: 16,
             child: Container(
               margin: const EdgeInsets.only(bottom: 8.0),
@@ -93,7 +95,7 @@ class _HomeState extends State<Home> {
             ),
           ),
           Positioned(
-            bottom: 84, // Adjust the bottom margin as needed
+            bottom: 84,
             right: 16,
             child: Material(
               color: Colors.transparent,
@@ -123,12 +125,12 @@ class _HomeState extends State<Home> {
             ),
           ),
           Positioned(
-            bottom: 0, // Adjust the bottom margin as needed
+            bottom: 0,
             right: 16,
             child: Image.asset(
               _gifPath,
-              width: 350.0, // Adjust width as needed
-              height: 350.0, // Adjust height as needed
+              width: 350.0,
+              height: 350.0,
               fit: BoxFit.contain,
             ),
           ),
@@ -141,8 +143,9 @@ class _HomeState extends State<Home> {
 class SearchBar extends StatefulWidget {
   final double width;
   final double height;
+  final ValueChanged<String> onSearch;
 
-  const SearchBar({super.key, this.width = 300.0, this.height = 50.0});
+  const SearchBar({super.key, this.width = 300.0, this.height = 50.0, required this.onSearch});
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -151,6 +154,7 @@ class SearchBar extends StatefulWidget {
 class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMixin {
   final ImagePicker _picker = ImagePicker();
   final TextEditingController _controller = TextEditingController();
+  bool _isTyping = false;
   bool _animate = false;
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -168,6 +172,12 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
       parent: _animationController,
       curve: Curves.easeInOut,
     ));
+
+    _controller.addListener(() {
+      setState(() {
+        _isTyping = _controller.text.isNotEmpty;
+      });
+    });
   }
 
   void _startRecording() {
@@ -218,7 +228,6 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
       _animate = false;
     });
 
-    // Handle the photo if needed
     if (photo != null) {
       print('Photo captured: ${photo.path}');
     }
@@ -227,7 +236,7 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
   void _searchGif() {
     final searchTerm = _controller.text.trim();
     if (searchTerm.isNotEmpty) {
-      (context as Element).findAncestorStateOfType<_HomeState>()?._searchGif(searchTerm);
+      widget.onSearch(searchTerm);
     }
   }
 
@@ -239,27 +248,28 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
       height: widget.height,
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
       decoration: BoxDecoration(
-        color: const Color(0x1ACAF0F8), // #CAF0F8 with 10% opacity
+        color: const Color(0x1ACAF0F8),
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2), // #000000 with 20% opacity
+            color: Colors.black.withOpacity(0.2),
             offset: const Offset(1, 1),
             blurRadius: 50,
             spreadRadius: 2,
           ),
         ],
         border: Border.all(
-          color: Colors.black.withOpacity(0.025), // Black color with 5% opacity
-          width: 1.0, // Width of the border
+          color: Colors.black.withOpacity(0.025),
+          width: 1.0,
         ),
       ),
       child: Row(
         children: <Widget>[
-          Icon(
-            Icons.search_rounded,
-            color: Colors.black.withOpacity(0.5), // 50% opacity
-          ),
+          if (!_isTyping)
+            Icon(
+              Icons.search_rounded,
+              color: Colors.black.withOpacity(0.5),
+            ),
           Expanded(
             child: TextField(
               controller: _controller,
@@ -271,42 +281,61 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
               onSubmitted: (_) => _searchGif(),
             ),
           ),
-          GestureDetector(
-            onTap: _searchGif,
-            child: Icon(
-              Icons.search,
-              color: Colors.black.withOpacity(0.7), // 70% opacity
-            ),
-          ),
-          const SizedBox(width: 10.0), // Space between camera and mic icon
-          GestureDetector(
-            onTapDown: (_) => _startRecording(),
-            onTapUp: (_) => _stopRecording(),
-            child: ScaleTransition(
-              scale: _animation,
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Color(0xFF0077B6), // Circle color #0077B6
-                  shape: BoxShape.circle,
+          if (!_isTyping) ...[
+            GestureDetector(
+              onTap: _openCamera,
+              child: ScaleTransition(
+                scale: _animation,
+                child: Icon(
+                  Icons.camera_alt,
+                  color: Colors.black.withOpacity(0.5),
                 ),
-                padding: const EdgeInsets.all(
-                    8.0), // Adjust padding to control the size of the circle
-                child: _animate
-                    ? Text(
-                        _formatDuration(_seconds),
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      )
-                    : const Icon(
-                        Icons.mic,
-                        color: Colors.white, // Mic icon color
-                        size: 16.0, // Mic icon size
-                      ),
               ),
             ),
-          ),
+            const SizedBox(width: 10.0),
+            GestureDetector(
+              onTapDown: (_) => _startRecording(),
+              onTapUp: (_) => _stopRecording(),
+              child: ScaleTransition(
+                scale: _animation,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF0077B6),
+                    shape: BoxShape.circle,
+                  ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: _animate
+                      ? Text(
+                          _formatDuration(_seconds),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      : const Icon(
+                          Icons.mic,
+                          color: Colors.white,
+                          size: 16.0,
+                        ),
+                ),
+              ),
+            ),
+          ] else
+            GestureDetector(
+              onTap: _searchGif,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF0077B6),
+                  shape: BoxShape.circle,
+                ),
+                padding: const EdgeInsets.all(8.0),
+                child: const Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: 16.0,
+                ),
+              ),
+            ),
         ],
       ),
     );
@@ -319,11 +348,10 @@ class ProgressRectangle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12.0), // Adjust padding as needed
+      padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: const Color(0xFFCAF0F8).withOpacity(0.50), // Set the opacity here
-        borderRadius:
-            BorderRadius.circular(8.0), // Adjust border radius as needed
+        color: const Color(0xFFCAF0F8).withOpacity(0.50),
+        borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -342,7 +370,7 @@ class ProgressRectangle extends StatelessWidget {
                 Text(
                   'Your progress',
                   style: TextStyle(
-                    fontSize: 14.0, // Adjust font size as needed
+                    fontSize: 14.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -353,7 +381,7 @@ class ProgressRectangle extends StatelessWidget {
                     Text(
                       '5',
                       style: TextStyle(
-                        fontSize: 24.0, // Adjust font size as needed
+                        fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -361,7 +389,7 @@ class ProgressRectangle extends StatelessWidget {
                     Text(
                       'Days',
                       style: TextStyle(
-                        fontSize: 14.0, // Adjust font size as needed
+                        fontSize: 14.0,
                       ),
                     ),
                   ],
@@ -370,17 +398,16 @@ class ProgressRectangle extends StatelessWidget {
                 ProgressCategory(
                   color: Colors.orange,
                   text: 'Games',
-                  width: 20.0, // Adjust width as needed
-                  height: 10.0, // Adjust height as needed
-                  textSize: 8.0, // Adjust font size as needed
+                  width: 20.0,
+                  height: 10.0,
+                  textSize: 8.0,
                 ),
               ],
             ),
           ),
-          // Placeholder for the chart on the right side
           Container(
-            width: 60, // Adjust the width as needed
-            height: 60, // Adjust the height as needed
+            width: 60,
+            height: 60,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: Colors.blue.withOpacity(0.2),
@@ -408,7 +435,8 @@ class ProgressCategory extends StatelessWidget {
   final double height;
   final double textSize;
 
-  const ProgressCategory({super.key, 
+  const ProgressCategory({
+    super.key,
     required this.color,
     required this.text,
     this.width = 50.0,
@@ -425,8 +453,7 @@ class ProgressCategory extends StatelessWidget {
           height: height,
           decoration: BoxDecoration(
             color: color,
-            borderRadius:
-                BorderRadius.circular(6.0), // Adjust border radius as needed
+            borderRadius: BorderRadius.circular(6.0),
           ),
         ),
         const SizedBox(width: 8.0),
