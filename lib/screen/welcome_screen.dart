@@ -134,12 +134,13 @@ class HomeScreen extends StatelessWidget {
           ),
           Center(
             child: Padding(
-                padding: const EdgeInsets.only(bottom: 355.0),
-                child: Image.asset(
-                  'assets/images/page-circle-one.png',
-                  width: 50,
-                  height: 50,
-                )),
+              padding: const EdgeInsets.only(top: 450.0),
+              child: Image.asset(
+                'assets/gif/password.gif',
+                width: 550,
+                height: 500,
+              ),
+            ),
           ),
           Center(
             child: Padding(
@@ -194,15 +195,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          Center(
-            child: Padding(
-                padding: const EdgeInsets.only(top: 450.0),
-                child: Image.asset(
-                  'assets/images/3d-model.png',
-                  width: 400,
-                  height: 400,
-                )),
           ),
         ],
       ),

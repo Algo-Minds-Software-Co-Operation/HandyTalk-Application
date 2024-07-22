@@ -67,6 +67,7 @@ flutter:
     - assets/images/shirt_04.png
     - assets/images/shirt_05.png
     - assets/images/shirt_06.png
+    - assets/gif/password.gif
 
   fonts:
     - family: Roboto
