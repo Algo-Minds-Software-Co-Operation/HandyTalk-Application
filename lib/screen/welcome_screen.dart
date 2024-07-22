@@ -85,7 +85,7 @@ class HomeScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Positioned(
-            bottom: 720.0,
+            bottom: 740.0,
             left: 270,
             right: 0,
             child: Center(

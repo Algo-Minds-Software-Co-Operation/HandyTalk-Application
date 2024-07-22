@@ -1,10 +1,51 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:HandyTalk/screen/dashboard_pages/edit_model.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String _gifPath = 'assets/gif/password.gif';
+
+  void _searchGif(String searchTerm) async {
+    String gifPath = 'assets/gif/$searchTerm.gif';
+
+    // Check if the file exists
+    bool fileExists = await _fileExists(gifPath);
+
+    if (fileExists) {
+      setState(() {
+        _gifPath = gifPath;
+      });
+    } else {
+      _showErrorMessage();
+    }
+  }
+
+  Future<bool> _fileExists(String path) async {
+    try {
+      return await File(path).exists();
+    } catch (e) {
+      return false;
+    }
+  }
+
+  void _showErrorMessage() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Gif not found!'),
+        backgroundColor: Colors.red,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +126,7 @@ class Home extends StatelessWidget {
             bottom: 0, // Adjust the bottom margin as needed
             right: 16,
             child: Image.asset(
-              'assets/images/3d-model.png', // Make sure the image is in the assets folder
+              _gifPath,
               width: 350.0, // Adjust width as needed
               height: 350.0, // Adjust height as needed
               fit: BoxFit.contain,
@@ -109,8 +150,9 @@ class SearchBar extends StatefulWidget {
 
 class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMixin {
   final ImagePicker _picker = ImagePicker();
+  final TextEditingController _controller = TextEditingController();
   bool _animate = false;
-  late AnimationController _controller;
+  late AnimationController _animationController;
   late Animation<double> _animation;
   Timer? _timer;
   int _seconds = 0;
@@ -118,12 +160,12 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
+    _animationController = AnimationController(
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     _animation = Tween(begin: 1.0, end: 1.2).animate(CurvedAnimation(
-      parent: _controller,
+      parent: _animationController,
       curve: Curves.easeInOut,
     ));
   }
@@ -133,7 +175,7 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
       _animate = true;
       _seconds = 0;
     });
-    _controller.repeat(reverse: true);
+    _animationController.repeat(reverse: true);
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         _seconds++;
@@ -145,14 +187,15 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
     setState(() {
       _animate = false;
     });
-    _controller.stop();
+    _animationController.stop();
     _timer?.cancel();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _animationController.dispose();
     _timer?.cancel();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -178,6 +221,13 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
     // Handle the photo if needed
     if (photo != null) {
       print('Photo captured: ${photo.path}');
+    }
+  }
+
+  void _searchGif() {
+    final searchTerm = _controller.text.trim();
+    if (searchTerm.isNotEmpty) {
+      (context as Element).findAncestorStateOfType<_HomeState>()?._searchGif(searchTerm);
     }
   }
 
@@ -210,19 +260,21 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
             Icons.search_rounded,
             color: Colors.black.withOpacity(0.5), // 50% opacity
           ),
-          const Expanded(
+          Expanded(
             child: TextField(
-              decoration: InputDecoration(
+              controller: _controller,
+              decoration: const InputDecoration(
                 hintText: 'Type text here',
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
               ),
+              onSubmitted: (_) => _searchGif(),
             ),
           ),
           GestureDetector(
-            onTap: _openCamera,
+            onTap: _searchGif,
             child: Icon(
-              Icons.camera_alt_rounded,
+              Icons.search,
               color: Colors.black.withOpacity(0.7), // 70% opacity
             ),
           ),
