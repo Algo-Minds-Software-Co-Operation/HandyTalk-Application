@@ -1,6 +1,3 @@
-import 'package:HandyTalk/screen/dashboard_pages/AlperbetText.dart';
-import 'package:HandyTalk/screen/dashboard_pages/dashboard_screen.dart';
-import 'package:HandyTalk/screen/signin_username_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'screen/welcome_screen.dart';
@@ -31,7 +28,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HomeScreen()
+      home: SplashScreen()
     );
   }
 }

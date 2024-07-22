@@ -96,7 +96,7 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
           ),
           // Main content
           Positioned(
-            top: 60,
+            top: 115,
             left: MediaQuery.of(context).size.width / 2 - 160,
             child: Container(
               width: 320,

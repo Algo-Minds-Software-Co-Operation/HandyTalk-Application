@@ -12,16 +12,19 @@ class HomeScreen extends StatelessWidget {
         pageBuilder: (context, animation, secondaryAnimation) =>
             SignupNamePage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = 0.0;
-          var end = 1.0;
-          var curve = Curves.ease;
+          var begin = Offset(0.0, 1.0);
+          var end = Offset.zero;
+          var curve = Curves.easeInOut;
 
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
 
-          return FadeTransition(
-            opacity: animation.drive(tween),
-            child: child,
+          return SlideTransition(
+            position: offsetAnimation,
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
           );
         },
       ),
@@ -35,16 +38,19 @@ class HomeScreen extends StatelessWidget {
         pageBuilder: (context, animation, secondaryAnimation) =>
             SignUsernameEnglish(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = 0.0;
-          var end = 1.0;
-          var curve = Curves.ease;
+          var begin = Offset(0.0, 1.0);
+          var end = Offset.zero;
+          var curve = Curves.easeInOut;
 
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
 
-          return FadeTransition(
-            opacity: animation.drive(tween),
-            child: child,
+          return SlideTransition(
+            position: offsetAnimation,
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
           );
         },
       ),
@@ -58,16 +64,19 @@ class HomeScreen extends StatelessWidget {
         pageBuilder: (context, animation, secondaryAnimation) =>
             const HomeSinhalaScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = 0.0;
-          var end = 1.0;
-          var curve = Curves.ease;
+          var begin = Offset(0.0, 1.0);
+          var end = Offset.zero;
+          var curve = Curves.easeInOut;
 
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
 
-          return FadeTransition(
-            opacity: animation.drive(tween),
-            child: child,
+          return SlideTransition(
+            position: offsetAnimation,
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
           );
         },
       ),
@@ -86,20 +95,17 @@ class HomeScreen extends StatelessWidget {
           ),
           Positioned(
             bottom: 740.0,
-            left: 270,
-            right: 0,
-            child: Center(
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () {
-                    navigateToSinhalaPage(context);
-                  },
-                  child: Image.asset(
-                    'assets/images/language-chang-to-sinhala.png',
-                    width: 40,
-                    height: 40,
-                  ),
+            left: 20.0, // Adjusted for better placement
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () {
+                  navigateToSinhalaPage(context);
+                },
+                child: Image.asset(
+                  'assets/images/language-chang-to-sinhala.png',
+                  width: 40,
+                  height: 40,
                 ),
               ),
             ),
@@ -144,55 +150,50 @@ class HomeScreen extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 200.0),
-              child: ElevatedButton(
-                onPressed: () => getStartedBtnOnClicked(context),
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all<Color>(
-                      const Color(0xFF0077B6).withOpacity(0.75)),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+              padding: const EdgeInsets.only(bottom: 150.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => getStartedBtnOnClicked(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF0077B6).withOpacity(0.75),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      minimumSize: const Size(200, 50),
+                    ),
+                    child: const Text(
+                      'Get Started',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        color: Colors.white,
+                        fontSize: 14.0,
+                        fontStyle: FontStyle.normal,
+                      ),
                     ),
                   ),
-                  minimumSize: WidgetStateProperty.all<Size>(const Size(180, 40)),
-                ),
-                child: const Text(
-                  'Get Started',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 10.0,
-                    fontStyle: FontStyle.normal,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 110.0),
-              child: ElevatedButton(
-                onPressed: () => loginBtnOnClicked(context),
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all<Color>(
-                      Colors.white.withOpacity(0.75)),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () => loginBtnOnClicked(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white.withOpacity(0.75),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      minimumSize: const Size(200, 50),
+                    ),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        fontFamily: 'Roboto-Bold',
+                        color: Color(0xFF0077B6),
+                        fontSize: 14.0,
+                        fontStyle: FontStyle.normal,
+                      ),
                     ),
                   ),
-                  minimumSize: WidgetStateProperty.all<Size>(const Size(180, 40)),
-                ),
-                child: const Text(
-                  'Login',
-                  style: TextStyle(
-                    fontFamily: 'Roboto-Bold',
-                    color: Color(0xFF0077B6),
-                    fontSize: 10.0,
-                    fontStyle: FontStyle.normal,
-                  ),
-                ),
+                ],
               ),
             ),
           ),
@@ -201,6 +202,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
 
 class HomeSinhalaScreen extends StatelessWidget {
   const HomeSinhalaScreen({super.key});
