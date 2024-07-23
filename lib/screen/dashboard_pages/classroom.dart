@@ -16,7 +16,7 @@ class ClassroomPage extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        padding: const EdgeInsets.only(top: 75.0), // Adjust top padding here
+        padding: const EdgeInsets.only(top: 115.0), // Adjust top padding here
         child: ListView(
           padding: EdgeInsets.zero, // Remove default ListView padding
           children: [

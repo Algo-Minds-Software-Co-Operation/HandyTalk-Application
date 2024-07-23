@@ -1,9 +1,51 @@
+import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'edit_model.dart';
+import 'package:HandyTalk/screen/dashboard_pages/edit_model.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  String _gifPath = 'assets/gif/password.gif';
+
+  void _searchGif(String searchTerm) async {
+    String gifPath = 'assets/gif/$searchTerm.gif';
+
+    // Check if the file exists
+    bool fileExists = await _fileExists(gifPath);
+
+    if (fileExists) {
+      setState(() {
+        _gifPath = gifPath;
+      });
+    } else {
+      _showErrorMessage();
+    }
+  }
+
+  Future<bool> _fileExists(String path) async {
+    try {
+      return await File(path).exists();
+    } catch (e) {
+      return false;
+    }
+  }
+
+  void _showErrorMessage() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Gif not found!'),
+        backgroundColor: Colors.red,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +58,22 @@ class Home extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
           ),
-          const Positioned(
+          Positioned(
             top: 120,
             left: 16,
             right: 16,
-            child: SearchBar(),
+            child: SearchBar(
+              onSearch: (searchTerm) => _searchGif(searchTerm),
+            ),
           ),
           const Positioned(
-            top: 200, // Adjust the position as needed
+            top: 200,
             left: 16,
             right: 16,
             child: ProgressRectangle(),
           ),
           Positioned(
-            bottom: 16, // Adjust the bottom margin as needed
+            bottom: 16,
             right: 16,
             child: Container(
               margin: const EdgeInsets.only(bottom: 8.0),
@@ -51,7 +95,7 @@ class Home extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 84, // Adjust the bottom margin as needed
+            bottom: 84,
             right: 16,
             child: Material(
               color: Colors.transparent,
@@ -81,12 +125,12 @@ class Home extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 0, // Adjust the bottom margin as needed
+            bottom: 0,
             right: 16,
             child: Image.asset(
-              'assets/images/3d-model.png', // Make sure the image is in the assets folder
-              width: 350.0, // Adjust width as needed
-              height: 350.0, // Adjust height as needed
+              _gifPath,
+              width: 350.0,
+              height: 350.0,
               fit: BoxFit.contain,
             ),
           ),
@@ -99,16 +143,77 @@ class Home extends StatelessWidget {
 class SearchBar extends StatefulWidget {
   final double width;
   final double height;
+  final ValueChanged<String> onSearch;
 
-  const SearchBar({super.key, this.width = 300.0, this.height = 50.0});
+  const SearchBar({super.key, this.width = 300.0, this.height = 50.0, required this.onSearch});
 
   @override
   _SearchBarState createState() => _SearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMixin {
   final ImagePicker _picker = ImagePicker();
+  final TextEditingController _controller = TextEditingController();
+  bool _isTyping = false;
   bool _animate = false;
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+  Timer? _timer;
+  int _seconds = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+    _animation = Tween(begin: 1.0, end: 1.2).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    ));
+
+    _controller.addListener(() {
+      setState(() {
+        _isTyping = _controller.text.isNotEmpty;
+      });
+    });
+  }
+
+  void _startRecording() {
+    setState(() {
+      _animate = true;
+      _seconds = 0;
+    });
+    _animationController.repeat(reverse: true);
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        _seconds++;
+      });
+    });
+  }
+
+  void _stopRecording() {
+    setState(() {
+      _animate = false;
+    });
+    _animationController.stop();
+    _timer?.cancel();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    _timer?.cancel();
+    _controller.dispose();
+    super.dispose();
+  }
+
+  String _formatDuration(int seconds) {
+    final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
+    final remainingSeconds = (seconds % 60).toString().padLeft(2, '0');
+    return '$minutes:$remainingSeconds';
+  }
 
   void _openCamera() async {
     setState(() {
@@ -123,9 +228,15 @@ class _SearchBarState extends State<SearchBar> {
       _animate = false;
     });
 
-    // Handle the photo if needed
     if (photo != null) {
       print('Photo captured: ${photo.path}');
+    }
+  }
+
+  void _searchGif() {
+    final searchTerm = _controller.text.trim();
+    if (searchTerm.isNotEmpty) {
+      widget.onSearch(searchTerm);
     }
   }
 
@@ -137,57 +248,94 @@ class _SearchBarState extends State<SearchBar> {
       height: widget.height,
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
       decoration: BoxDecoration(
-        color: const Color(0x1ACAF0F8), // #CAF0F8 with 10% opacity
+        color: const Color(0x1ACAF0F8),
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2), // #000000 with 20% opacity
+            color: Colors.black.withOpacity(0.2),
             offset: const Offset(1, 1),
             blurRadius: 50,
             spreadRadius: 2,
           ),
         ],
         border: Border.all(
-          color: Colors.black.withOpacity(0.025), // Black color with 5% opacity
-          width: 1.0, // Width of the border
+          color: Colors.black.withOpacity(0.025),
+          width: 1.0,
         ),
       ),
       child: Row(
         children: <Widget>[
-          Icon(
-            Icons.search_rounded,
-            color: Colors.black.withOpacity(0.5), // 50% opacity
-          ),
-          const Expanded(
+          if (!_isTyping)
+            Icon(
+              Icons.search_rounded,
+              color: Colors.black.withOpacity(0.5),
+            ),
+          Expanded(
             child: TextField(
-              decoration: InputDecoration(
+              controller: _controller,
+              decoration: const InputDecoration(
                 hintText: 'Type text here',
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
               ),
+              onSubmitted: (_) => _searchGif(),
             ),
           ),
-          GestureDetector(
-            onTap: _openCamera,
-            child: Icon(
-              Icons.camera_alt_rounded,
-              color: Colors.black.withOpacity(0.7), // 70% opacity
+          if (!_isTyping) ...[
+            GestureDetector(
+              onTap: _openCamera,
+              child: ScaleTransition(
+                scale: _animation,
+                child: Icon(
+                  Icons.camera_alt,
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              ),
             ),
-          ),
-          const SizedBox(width: 10.0), // Space between camera and mic icon
-          Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFF0077B6), // Circle color #0077B6
-              shape: BoxShape.circle,
+            const SizedBox(width: 10.0),
+            GestureDetector(
+              onTapDown: (_) => _startRecording(),
+              onTapUp: (_) => _stopRecording(),
+              child: ScaleTransition(
+                scale: _animation,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF0077B6),
+                    shape: BoxShape.circle,
+                  ),
+                  padding: const EdgeInsets.all(8.0),
+                  child: _animate
+                      ? Text(
+                          _formatDuration(_seconds),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      : const Icon(
+                          Icons.mic,
+                          color: Colors.white,
+                          size: 16.0,
+                        ),
+                ),
+              ),
             ),
-            padding: const EdgeInsets.all(
-                8.0), // Adjust padding to control the size of the circle
-            child: const Icon(
-              Icons.mic,
-              color: Colors.white, // Mic icon color
-              size: 16.0, // Mic icon size
+          ] else
+            GestureDetector(
+              onTap: _searchGif,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF0077B6),
+                  shape: BoxShape.circle,
+                ),
+                padding: const EdgeInsets.all(8.0),
+                child: const Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: 16.0,
+                ),
+              ),
             ),
-          ),
         ],
       ),
     );
@@ -200,11 +348,10 @@ class ProgressRectangle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12.0), // Adjust padding as needed
+      padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: const Color(0xFFCAF0F8).withOpacity(0.50), // Set the opacity here
-        borderRadius:
-            BorderRadius.circular(8.0), // Adjust border radius as needed
+        color: const Color(0xFFCAF0F8).withOpacity(0.50),
+        borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -223,7 +370,7 @@ class ProgressRectangle extends StatelessWidget {
                 Text(
                   'Your progress',
                   style: TextStyle(
-                    fontSize: 14.0, // Adjust font size as needed
+                    fontSize: 14.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -234,7 +381,7 @@ class ProgressRectangle extends StatelessWidget {
                     Text(
                       '5',
                       style: TextStyle(
-                        fontSize: 24.0, // Adjust font size as needed
+                        fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -242,7 +389,7 @@ class ProgressRectangle extends StatelessWidget {
                     Text(
                       'Days',
                       style: TextStyle(
-                        fontSize: 14.0, // Adjust font size as needed
+                        fontSize: 14.0,
                       ),
                     ),
                   ],
@@ -251,17 +398,16 @@ class ProgressRectangle extends StatelessWidget {
                 ProgressCategory(
                   color: Colors.orange,
                   text: 'Games',
-                  width: 20.0, // Adjust width as needed
-                  height: 10.0, // Adjust height as needed
-                  textSize: 8.0, // Adjust font size as needed
+                  width: 20.0,
+                  height: 10.0,
+                  textSize: 8.0,
                 ),
               ],
             ),
           ),
-          // Placeholder for the chart on the right side
           Container(
-            width: 60, // Adjust the width as needed
-            height: 60, // Adjust the height as needed
+            width: 60,
+            height: 60,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
               color: Colors.blue.withOpacity(0.2),
@@ -289,7 +435,8 @@ class ProgressCategory extends StatelessWidget {
   final double height;
   final double textSize;
 
-  const ProgressCategory({super.key, 
+  const ProgressCategory({
+    super.key,
     required this.color,
     required this.text,
     this.width = 50.0,
@@ -306,8 +453,7 @@ class ProgressCategory extends StatelessWidget {
           height: height,
           decoration: BoxDecoration(
             color: color,
-            borderRadius:
-                BorderRadius.circular(6.0), // Adjust border radius as needed
+            borderRadius: BorderRadius.circular(6.0),
           ),
         ),
         const SizedBox(width: 8.0),

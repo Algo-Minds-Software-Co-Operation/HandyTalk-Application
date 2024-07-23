@@ -19,7 +19,7 @@ class GamesPage extends StatelessWidget {
           //   colors: [Color(0xFF9FE7FB), Color(0xFF85C7F2)],
           // ),
         ),
-        padding: const EdgeInsets.only(top: 75.0), // Adjust top padding here
+        padding: const EdgeInsets.only(top: 115.0), // Adjust top padding here
         child: ListView(
           padding: EdgeInsets.zero, // Remove default ListView padding
           children: [
