@@ -40,14 +40,14 @@ class _MessagesPageState extends State<MessagesPage> {
       time: '1:00 PM',
       isPinned: false,
     ),
-     Chat(
+    Chat(
       userName: 'User 3',
       profileImagePath: 'assets/images/profile-picture-icon.png',
       lastMessage: 'Last message content 3...',
       time: '10:00 AM',
       isPinned: false,
     ),
-     Chat(
+    Chat(
       userName: 'User 4',
       profileImagePath: 'assets/images/profile-picture-icon.png',
       lastMessage: 'Last message content 4...',
@@ -57,7 +57,7 @@ class _MessagesPageState extends State<MessagesPage> {
     // Add more chats here
   ];
 
-void togglePin(Chat chat) {
+  void togglePin(Chat chat) {
     setState(() {
       chat.isPinned = !chat.isPinned;
       chats.sort((a, b) {
@@ -71,7 +71,6 @@ void togglePin(Chat chat) {
       });
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -155,8 +154,31 @@ void togglePin(Chat chat) {
                   ),
                 ),
                 const SizedBox(height: 16.0),
+                // Image profile and text
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/images/profile-picture-icon.png'),
+                        radius: 20,
+                      ),
+                      const SizedBox(width: 10),
+                      const Text(
+                        'ASL Learn',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 16.0),
                 // Groups joined section
-                
+
                 const SizedBox(height: 0.0),
                 // Recent chats section
                 Transform.translate(
@@ -199,7 +221,6 @@ void togglePin(Chat chat) {
                                   color: Colors.black,
                                 ),
                               ),
-                              
                               trailing: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -234,7 +255,6 @@ void togglePin(Chat chat) {
                               },
                               onLongPress: () => togglePin(chat),
                             )),
-                            
                       ],
                     ),
                   ),
