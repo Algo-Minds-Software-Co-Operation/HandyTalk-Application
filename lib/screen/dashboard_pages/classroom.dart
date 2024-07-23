@@ -1,4 +1,5 @@
 import 'package:HandyTalk/screen/dashboard_pages/common_screen.dart';
+import 'package:HandyTalk/screen/dashboard_pages/sign_language.dart';
 import 'package:flutter/material.dart';
 import 'alphabet_screen.dart';
 import 'numbers_screen.dart'; // Import the NumbersScreen
@@ -29,6 +30,12 @@ class ClassroomPage extends StatelessWidget {
               title: 'Sign Language',
               subtitle: 'Learn Sign Language',
               color: Colors.blue,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignLanguage()),
+                );
+              },
             ),
             const SizedBox(height: 20),
             ClassroomCard(

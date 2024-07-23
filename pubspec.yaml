@@ -67,7 +67,15 @@ flutter:
     - assets/images/shirt_04.png
     - assets/images/shirt_05.png
     - assets/images/shirt_06.png
+    - assets/images/NeuroTracker.png
+    - assets/images/Cartoon_Vector.png
+    - assets/images/Successful_Characters.png
+    - assets/images/Select-all.png
+    - assets/images/Fire.png
+    - assets/images/Assignment-Return.png
+    - assets/images/Check-All.png
     - assets/gif/password.gif
+
 
   fonts:
     - family: Roboto
