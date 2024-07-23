@@ -1,8 +1,8 @@
 plugins {
     id "com.android.application"
-    id 'com.google.gms.google-services' // FlutterFire Configuration
+    id 'com.google.gms.google-services' 
     id "kotlin-android"
-    id "dev.flutter.flutter-gradle-plugin" // Must be applied after the Android and Kotlin Gradle plugins
+    id "dev.flutter.flutter-gradle-plugin" 
 }
 
 def localProperties = new Properties()
@@ -32,6 +32,9 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
     }
 
     buildTypes {

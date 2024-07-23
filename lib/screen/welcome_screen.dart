@@ -203,11 +203,34 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-
 class HomeSinhalaScreen extends StatelessWidget {
   const HomeSinhalaScreen({super.key});
+  
+  void getStartedBtnOnClicked(BuildContext context) {
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            SignupNamePage(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          var begin = Offset(0.0, 1.0);
+          var end = Offset.zero;
+          var curve = Curves.easeInOut;
 
-  void getStartedBtnOnClicked() {}
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(
+            position: offsetAnimation,
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+          );
+        },
+      ),
+    );
+  }
 
   void loginBtnOnClicked(BuildContext context) {
     Navigator.push(
@@ -216,16 +239,19 @@ class HomeSinhalaScreen extends StatelessWidget {
         pageBuilder: (context, animation, secondaryAnimation) =>
             SignUsernameEnglish(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = 0.0;
-          var end = 1.0;
-          var curve = Curves.ease;
+          var begin = Offset(0.0, 1.0);
+          var end = Offset.zero;
+          var curve = Curves.easeInOut;
 
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
 
-          return FadeTransition(
-            opacity: animation.drive(tween),
-            child: child,
+          return SlideTransition(
+            position: offsetAnimation,
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
           );
         },
       ),
@@ -233,25 +259,7 @@ class HomeSinhalaScreen extends StatelessWidget {
   }
 
   void navigateToEnglishPage(BuildContext context) {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => const HomeScreen(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          var begin = 0.0;
-          var end = 1.0;
-          var curve = Curves.ease;
-
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-          return FadeTransition(
-            opacity: animation.drive(tween),
-            child: child,
-          );
-        },
-      ),
-    );
+    Navigator.pop(context);
   }
 
   @override
@@ -265,21 +273,18 @@ class HomeSinhalaScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Positioned(
-            bottom: 720.0,
-            left: 270,
-            right: 0,
-            child: Center(
-              child: MouseRegion(
-                cursor: SystemMouseCursors.click,
-                child: GestureDetector(
-                  onTap: () {
-                    navigateToEnglishPage(context);
-                  },
-                  child: Image.asset(
-                    'assets/images/language-chang-to-english.png',
-                    width: 40,
-                    height: 40,
-                  ),
+            bottom: 740.0,
+            left: 20.0,
+            child: MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () {
+                  navigateToEnglishPage(context);
+                },
+                child: Image.asset(
+                  'assets/images/language-chang-to-english.png',
+                  width: 40,
+                  height: 40,
                 ),
               ),
             ),
@@ -288,9 +293,9 @@ class HomeSinhalaScreen extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(bottom: 470.0),
               child: Text(
-                'අදම අප හා එක්වන්න',
+                'අප සමඟ එක්වන්න අදම',
                 style: TextStyle(
-                  fontFamily: 'AbhayaLibre-ExtraBold',
+                  fontFamily: 'Roboto',
                   color: Colors.black,
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -302,9 +307,9 @@ class HomeSinhalaScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 415.0),
               child: Text(
-                'ඉදිරියට යාමට ඔබේ විස්තර ඇතුළත් කරන්න',
+                'තව දුරටත් ඉදිරියට යාම සඳහා ඔබේ විස්තර ඇතුළත් කරන්න',
                 style: TextStyle(
-                  fontFamily: 'AbhayaLibre-Regular',
+                  fontFamily: 'Roboto',
                   color: Colors.black.withOpacity(0.5),
                   fontSize: 12,
                   fontWeight: FontWeight.normal,
@@ -314,75 +319,62 @@ class HomeSinhalaScreen extends StatelessWidget {
           ),
           Center(
             child: Padding(
-                padding: const EdgeInsets.only(bottom: 355.0),
-                child: Image.asset(
-                  'assets/images/page-circle-one.png',
-                  width: 50,
-                  height: 50,
-                )),
-          ),
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 200.0),
-              child: ElevatedButton(
-                onPressed: getStartedBtnOnClicked,
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all<Color>(
-                      const Color(0xFF0077B6).withOpacity(0.75)),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                  ),
-                  minimumSize: WidgetStateProperty.all<Size>(const Size(180, 40)),
-                ),
-                child: const Text(
-                  'දැන්ම එකතු වන්න',
-                  style: TextStyle(
-                    fontFamily: 'Roboto',
-                    color: Colors.white,
-                    fontSize: 10.0,
-                    fontStyle: FontStyle.normal,
-                  ),
-                ),
+              padding: const EdgeInsets.only(top: 450.0),
+              child: Image.asset(
+                'assets/gif/password.gif',
+                width: 550,
+                height: 500,
               ),
             ),
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(bottom: 110.0),
-              child: ElevatedButton(
-                onPressed: () => loginBtnOnClicked(context),
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all<Color>(
-                      Colors.white.withOpacity(0.75)),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+              padding: const EdgeInsets.only(bottom: 150.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ElevatedButton(
+                    onPressed: () => getStartedBtnOnClicked(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF0077B6).withOpacity(0.75),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      minimumSize: const Size(200, 50),
+                    ),
+                    child: const Text(
+                      'ආරම්භ කරන්න',
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        color: Colors.white,
+                        fontSize: 14.0,
+                        fontStyle: FontStyle.normal,
+                      ),
                     ),
                   ),
-                  minimumSize: WidgetStateProperty.all<Size>(const Size(180, 40)),
-                ),
-                child: const Text(
-                  'ඇතුල් වන්න',
-                  style: TextStyle(
-                    fontFamily: 'Roboto-Bold',
-                    color: Color(0xFF0077B6),
-                    fontSize: 10.0,
-                    fontStyle: FontStyle.normal,
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () => loginBtnOnClicked(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white.withOpacity(0.75),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      minimumSize: const Size(200, 50),
+                    ),
+                    child: const Text(
+                      'ලොග් වන්න',
+                      style: TextStyle(
+                        fontFamily: 'Roboto-Bold',
+                        color: Color(0xFF0077B6),
+                        fontSize: 14.0,
+                        fontStyle: FontStyle.normal,
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
-          ),
-          Center(
-            child: Padding(
-                padding: const EdgeInsets.only(top: 450.0),
-                child: Image.asset(
-                  'assets/images/3d-model.png',
-                  width: 400,
-                  height: 400,
-                )),
           ),
         ],
       ),
