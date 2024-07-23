@@ -1,5 +1,4 @@
 import 'package:HandyTalk/main.dart';
-import 'package:HandyTalk/screen/signin_userpassword_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -96,7 +95,7 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
           ),
           // Main content
           Positioned(
-            top: 60,
+            top: 115,
             left: MediaQuery.of(context).size.width / 2 - 160,
             child: Container(
               width: 320,

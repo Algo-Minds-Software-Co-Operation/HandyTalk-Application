@@ -58,9 +58,9 @@ class SignUsernameEnglish extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 450.0),
               child: Image.asset(
-                'assets/images/3d-model.png',
-                width: 400,
-                height: 400,
+                'assets/gif/password.gif',
+                width: 550,
+                height: 500,
               ),
             ),
           ),
