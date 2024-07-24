@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'chat_screen.dart';
+import 'all_users.dart'; // Correct import for the new groups screen
+import 'dart:io'; // Import for File
 
 class Chat {
   final String userName;
@@ -18,7 +20,9 @@ class Chat {
 }
 
 class MessagesPage extends StatefulWidget {
-  const MessagesPage({super.key});
+  final Map<String, dynamic>? newGroup; // Add this to handle new groups
+
+  const MessagesPage({super.key, this.newGroup});
 
   @override
   _MessagesPageState createState() => _MessagesPageState();
@@ -31,33 +35,29 @@ class _MessagesPageState extends State<MessagesPage> {
       profileImagePath: 'assets/images/profile-picture-icon.png',
       lastMessage: 'Last message content 1...',
       time: '12:30 PM',
-      isPinned: false,
     ),
     Chat(
       userName: 'User 2',
       profileImagePath: 'assets/images/profile-picture-icon.png',
       lastMessage: 'Last message content 2...',
       time: '1:00 PM',
-      isPinned: false,
     ),
-     Chat(
+    Chat(
       userName: 'User 3',
       profileImagePath: 'assets/images/profile-picture-icon.png',
       lastMessage: 'Last message content 3...',
       time: '10:00 AM',
-      isPinned: false,
     ),
-     Chat(
+    Chat(
       userName: 'User 4',
       profileImagePath: 'assets/images/profile-picture-icon.png',
       lastMessage: 'Last message content 4...',
       time: '6:00 AM',
-      isPinned: false,
     ),
     // Add more chats here
   ];
 
-void togglePin(Chat chat) {
+  void togglePin(Chat chat) {
     setState(() {
       chat.isPinned = !chat.isPinned;
       chats.sort((a, b) {
@@ -71,7 +71,6 @@ void togglePin(Chat chat) {
       });
     });
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -132,13 +131,14 @@ void togglePin(Chat chat) {
                   ),
                 ),
                 const SizedBox(height: 16.0),
+
                 // Groups section
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.0),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Find Groups',
                         style: TextStyle(
                           fontFamily: 'Roboto',
@@ -147,96 +147,115 @@ void togglePin(Chat chat) {
                           color: Colors.black,
                         ),
                       ),
-                      Icon(
-                        Icons.add,
-                        color: Colors.black,
+                      IconButton(
+                        icon: const Icon(Icons.add, color: Colors.black),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AllUsers(),
+                            ),
+                          ).then((result) {
+                            if (result != null &&
+                                result is Map<String, dynamic>) {
+                              setState(() {});
+                            }
+                          });
+                        },
                       ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 16.0),
-                // Groups joined section
-                
-                const SizedBox(height: 0.0),
+
+                // Display new group information
+                widget.newGroup != null
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text('Group Name: ${widget.newGroup!['name']}'),
+                          if (widget.newGroup!['image'] != null)
+                            Image.file(
+                              File(widget.newGroup!['image']),
+                            ),
+                        ],
+                      )
+                    : const Text('No new group created.'),
+                const SizedBox(height: 16.0),
+
                 // Recent chats section
-                Transform.translate(
-                  offset: const Offset(
-                      0, 25), // Adjust the offset to move the section up
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 0, left: 16.0, right: 16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Recent Chats',
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: Colors.black,
-                          ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Recent Chats',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.black,
                         ),
-                        const SizedBox(height: 16.0),
-                        // Chat items
-                        ...chats.map((chat) => ListTile(
-                              leading: CircleAvatar(
-                                backgroundImage: AssetImage(chat
-                                    .profileImagePath), // Replace with profile pic path
+                      ),
+                      const SizedBox(height: 16.0),
+                      // Chat items
+                      ...chats.map((chat) => ListTile(
+                            leading: CircleAvatar(
+                              backgroundImage: AssetImage(chat
+                                  .profileImagePath), // Replace with profile pic path
+                            ),
+                            title: Text(
+                              chat.userName,
+                              style: const TextStyle(
+                                fontFamily: 'Roboto',
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.black,
                               ),
-                              title: Text(
-                                chat.userName,
-                                style: const TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: Colors.black,
+                            ),
+                            subtitle: Text(
+                              chat.lastMessage,
+                              style: const TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                            trailing: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  chat.time,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                              subtitle: Text(
-                                chat.lastMessage,
-                                style: const TextStyle(
-                                  color: Colors.black,
+                                Icon(
+                                  chat.isPinned
+                                      ? Icons.push_pin
+                                      : Icons.push_pin_outlined,
+                                  color: chat.isPinned
+                                      ? Colors.blue
+                                      : Colors.black,
+                                  size: 16.0,
                                 ),
-                              ),
-                              
-                              trailing: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    chat.time,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                    ),
+                              ],
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ChatScreen(
+                                    userName: chat.userName,
+                                    profileImagePath: chat.profileImagePath,
                                   ),
-                                  Icon(
-                                    chat.isPinned
-                                        ? Icons.push_pin
-                                        : Icons.push_pin_outlined,
-                                    color: chat.isPinned
-                                        ? Colors.blue
-                                        : Colors.black,
-                                    size: 16.0,
-                                  ),
-                                ],
-                              ),
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ChatScreen(
-                                      userName: chat.userName,
-                                      profileImagePath: chat.profileImagePath,
-                                    ),
-                                  ),
-                                );
-                              },
-                              onLongPress: () => togglePin(chat),
-                            )),
-                            
-                      ],
-                    ),
+                                ),
+                              );
+                            },
+                            onLongPress: () => togglePin(chat),
+                          )),
+                    ],
                   ),
                 ),
               ],
