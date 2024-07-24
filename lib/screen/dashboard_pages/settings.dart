@@ -1,4 +1,3 @@
-import 'package:HandyTalk/main.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -31,16 +30,59 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
       });
   }
 
-  Future<void> _pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    if (image != null) {
+  Future<void> _showAvatarDialog() async {
+    final String? selectedAvatar = await showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          title: const Text('Select Avatar'),
+          children: <Widget>[
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, 'assets/images/avatar_01.png');
+              },
+              child: Image.asset('assets/images/avatar_01.png', width: 50, height: 50),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, 'assets/images/avatar_02.png');
+              },
+              child: Image.asset('assets/images/avatar_02.png', width: 50, height: 50),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, 'assets/images/avatar_03.png');
+              },
+              child: Image.asset('assets/images/avatar_03.png', width: 50, height: 50),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, 'assets/images/avatar_04.png');
+              },
+              child: Image.asset('assets/images/avatar_04.png', width: 50, height: 50),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context, 'assets/images/avatar_05.png');
+              },
+              child: Image.asset('assets/images/avatar_05.png', width: 50, height: 50),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (selectedAvatar != null) {
       setState(() {
-        _image = File(image.path);
+        _image = File(selectedAvatar);
         _isAnimating = true;
         _animationController.forward(from: 0.0);
       });
     }
+  }
+
+  Future<void> _pickImage() async {
+    _showAvatarDialog();
   }
 
   Future<void> _showLanguageDialog() async {
@@ -83,7 +125,6 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: Stack(
         children: <Widget>[
           // Background image
@@ -121,6 +162,7 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
                     _animationController.forward(from: 0.0);
                     Future.delayed(const Duration(seconds: 3), _pickImage);
                   },
+                  onTap: _showAvatarDialog, // Add this line to handle tap
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
@@ -224,7 +266,7 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
             ),
           ),
           Positioned(
-            top: 340,
+            top: 380,
             left: MediaQuery.of(context).size.width / 2 - 160,
             child: Container(
               width: 320,
@@ -259,7 +301,7 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
             ),
           ),
           Positioned(
-            top: 490,
+            top: 520,
             left: MediaQuery.of(context).size.width / 2 - 160,
             child: Container(
               width: 320,
@@ -282,10 +324,10 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
                     leading: const Icon(Icons.logout),
                     title: const Text('Log out'),
                     onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const SplashScreen()),
-                      );
+                      // Navigator.pushReplacement(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => const SplashScreen()),
+                      // );
                     },
                   ),
                   ListTile(
@@ -301,10 +343,4 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: Settings(),
-  ));
 }

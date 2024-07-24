@@ -2,7 +2,7 @@ name: HandyTalk
 description: "HandyTalk is very helpful for deaf and mute peoples to understand anothers."
 publish_to: "none"
 
-version: 1.0.2
+version: 1.0.3
 
 environment:
   sdk: ">=3.4.3 <4.0.0"
@@ -75,6 +75,11 @@ flutter:
     - assets/images/Assignment-Return.png
     - assets/images/Check-All.png
     - assets/gif/password.gif
+    - assets/images/avatar_01.png
+    - assets/images/avatar_02.png
+    - assets/images/avatar_03.png
+    - assets/images/avatar_04.png
+    - assets/images/avatar_05.png
 
 
   fonts:

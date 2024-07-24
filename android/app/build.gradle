@@ -1,8 +1,8 @@
 plugins {
     id "com.android.application"
-    id 'com.google.gms.google-services' 
+    id 'com.google.gms.google-services' // FlutterFire Configuration
     id "kotlin-android"
-    id "dev.flutter.flutter-gradle-plugin" 
+    id "dev.flutter.flutter-gradle-plugin" // Must be applied after the Android and Kotlin Gradle plugins
 }
 
 def localProperties = new Properties()
@@ -19,8 +19,8 @@ def flutterVersionName = localProperties.getProperty("flutter.versionName", "1.0
 android {
     namespace = "com.example.handy_talk_application"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
-    compileSdkVersion 30
+    // ndkVersion = flutter.ndkVersion
+    ndkVersion "21.4.7075529"
     buildToolsVersion "30.0.3"
 
     compileOptions {
@@ -34,6 +34,7 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
+
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
         }
@@ -49,9 +50,6 @@ android {
     splits {
         abi {
             enable false
-            reset()
-            include 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-            universalApk false
         }
     }
 }
