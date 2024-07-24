@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Positioned(
-            bottom: 740.0,
+            bottom: 720.0,
             left: 20.0, // Adjusted for better placement
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
