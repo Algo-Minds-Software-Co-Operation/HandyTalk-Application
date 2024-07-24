@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'signup_birthgen_screen.dart';
 
-class SignupNamePage extends StatelessWidget {
+class SignupNamePage extends StatefulWidget {
+  SignupNamePage({super.key});
+
+  @override
+  _SignupNamePageState createState() => _SignupNamePageState();
+}
+
+class _SignupNamePageState extends State<SignupNamePage> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
-
-  SignupNamePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,128 +72,155 @@ class SignupNamePage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 270.0,
+            top: 250.0,
             left: 40.0,
             right: 40.0,
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: TextField(
-                    controller: firstNameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 60, // Set a fixed height for the TextFormField
+                    child: TextFormField(
+                      controller: firstNameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.blue.withOpacity(0.5),
+                          ),
+                        ),
+                        labelText: 'First Name',
+                        labelStyle: TextStyle(
+                          fontSize: 12,
                           color: Colors.black.withOpacity(0.5),
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.blue.withOpacity(0.5),
-                        ),
-                      ),
-                      labelText: 'First Name',
-                      labelStyle: TextStyle(
-                        fontSize: 12,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                      prefixIcon: Icon(
-                        Icons.person,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
-                    ),
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                    ),
-                    cursorColor: Colors.blue,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: TextField(
-                    controller: lastNameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        prefixIcon: Icon(
+                          Icons.person,
                           color: Colors.black.withOpacity(0.5),
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.blue.withOpacity(0.5),
+                        errorStyle: TextStyle(
+                          color: Colors.red,
+                          fontSize: 12,
                         ),
+                        contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12), // Adjust padding to keep height consistent
                       ),
-                      labelText: 'Last Name',
-                      labelStyle: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black,
                       ),
-                      prefixIcon: Icon(
-                        Icons.person,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
+                      cursorColor: Colors.blue,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter first name';
+                        }
+                        return null;
+                      },
                     ),
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                    ),
-                    cursorColor: Colors.blue,
                   ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                                  SignupBirthDetailsPage(),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
-                            var begin = 0.0;
-                            var end = 1.0;
-                            var curve = Curves.ease;
-
-                            var tween = Tween(begin: begin, end: end)
-                                .chain(CurveTween(curve: curve));
-
-                            return FadeTransition(
-                              opacity: animation.drive(tween),
-                              child: child,
-                            );
-                          },
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 60, // Set a fixed height for the TextFormField
+                    child: TextFormField(
+                      controller: lastNameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.black.withOpacity(0.5),
+                          ),
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0077B6),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.blue.withOpacity(0.5),
+                          ),
+                        ),
+                        labelText: 'Last Name',
+                        labelStyle: TextStyle(
+                          fontSize: 12,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Colors.black.withOpacity(0.5),
+                        ),
+                        errorStyle: TextStyle(
+                          color: Colors.red,
+                          fontSize: 12,
+                        ),
+                        contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12), // Adjust padding to keep height consistent
                       ),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Colors.black,
+                      ),
+                      cursorColor: Colors.blue,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter last name';
+                        }
+                        return null;
+                      },
                     ),
-                    child: const Text(
-                      'Next',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Roboto-Bold',
-                        fontSize: 13,
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      SignupBirthDetailsPage(),
+                              transitionsBuilder:
+                                  (context, animation, secondaryAnimation, child) {
+                                var begin = 0.0;
+                                var end = 1.0;
+                                var curve = Curves.ease;
+
+                                var tween = Tween(begin: begin, end: end)
+                                    .chain(CurveTween(curve: curve));
+
+                                return FadeTransition(
+                                  opacity: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0077B6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text(
+                        'Next',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Roboto-Bold',
+                          fontSize: 13,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

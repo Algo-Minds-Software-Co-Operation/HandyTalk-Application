@@ -24,7 +24,7 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
     startTimer();
     for (var i = 0; i < 4; i++) {
       _otpControllers[i].addListener(_onOtpChanged);
-      _otpControllers[i].text = '0'; // Initial values for OTP fields
+      _otpControllers[i].text = '0'; // Placeholder for OTP fields
     }
   }
 
@@ -48,7 +48,7 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
 
   void _onOtpChanged() {
     String otp = _otpControllers.map((controller) => controller.text).join();
-    if (otp.length == 4 && otp != "0000") {
+    if (otp.length == 4) {
       setState(() {
         _buttonColor = Colors.blue;
       });
@@ -155,6 +155,11 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
                         ),
                         decoration: InputDecoration(
                           counterText: '',
+                          hintText: '0', // Placeholder text
+                          hintStyle: TextStyle(
+                            color: Colors.black.withOpacity(0.5),
+                            fontSize: 36,
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8.0),
                             borderSide: const BorderSide(color: Colors.transparent),
@@ -193,11 +198,8 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
               padding: const EdgeInsets.only(bottom: 192.0, right: 160.0),
               child: GestureDetector(
                 onTap: () {
-                  if (_timerText == "Resend OTP") {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => AnotherPage()),
-                    // );
+                  if (_timerText == "Resend") {
+                    // Handle resend OTP action here
                   }
                 },
                 child: RichText(
@@ -236,31 +238,33 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
                 width: 300,
                 height: 45,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (context, animation, secondaryAnimation) =>
-                            const LanguageSelect(),
-                        transitionsBuilder:
-                            (context, animation, secondaryAnimation, child) {
-                          var begin = 0.0;
-                          var end = 1.0;
-                          var curve = Curves.ease;
+                  onPressed: _buttonColor == Colors.blue
+                      ? () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation, secondaryAnimation) =>
+                                  const LanguageSelect(),
+                              transitionsBuilder:
+                                  (context, animation, secondaryAnimation, child) {
+                                var begin = 0.0;
+                                var end = 1.0;
+                                var curve = Curves.ease;
 
-                          var tween = Tween(begin: begin, end: end)
-                              .chain(CurveTween(curve: curve));
+                                var tween = Tween(begin: begin, end: end)
+                                    .chain(CurveTween(curve: curve));
 
-                          return FadeTransition(
-                            opacity: animation.drive(tween),
-                            child: child,
+                                return FadeTransition(
+                                  opacity: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
                           );
-                        },
-                      ),
-                    );
-                  },
+                        }
+                      : null,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF0077B6), // Button color
+                    backgroundColor: _buttonColor, // Button color
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10), // Button radius
                     ),

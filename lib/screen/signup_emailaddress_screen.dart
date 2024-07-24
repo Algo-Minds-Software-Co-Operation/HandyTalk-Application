@@ -1,10 +1,25 @@
-import 'package:HandyTalk/screen/otp_verify_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:HandyTalk/screen/otp_verify_screen.dart';
 
-class SignupEmailAddressPage extends StatelessWidget {
-  final TextEditingController emailAddressController = TextEditingController();
+class SignupEmailAddressPage extends StatefulWidget {
+  const SignupEmailAddressPage({super.key});
 
-  SignupEmailAddressPage({super.key});
+  @override
+  _SignupEmailAddressPageState createState() => _SignupEmailAddressPageState();
+}
+
+class _SignupEmailAddressPageState extends State<SignupEmailAddressPage> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailAddressController = TextEditingController();
+
+  String? _emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Email address is required';
+    } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+      return 'Enter a valid email address';
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,96 +83,100 @@ class SignupEmailAddressPage extends StatelessWidget {
             top: 270.0,
             left: 40.0,
             right: 40.0,
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: TextField(
-                    controller: emailAddressController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 60,
+                    child: TextFormField(
+                      controller: _emailAddressController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.blue.withOpacity(0.5),
+                          ),
+                        ),
+                        labelText: 'Email address',
+                        labelStyle: TextStyle(
+                          fontSize: 12,
                           color: Colors.black.withOpacity(0.5),
                         ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.blue.withOpacity(
-                              0.5), // Focused border color with opacity
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: Colors.black.withOpacity(0.5),
                         ),
+                        errorStyle: TextStyle(color: Colors.red),
                       ),
-                      labelText: 'Email address',
-                      labelStyle: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black,
                       ),
-                      prefixIcon: Icon(
-                        Icons.email,
-                        color: Colors.black.withOpacity(0.5),
-                      ),
+                      cursorColor: Colors.blue,
+                      validator: _emailValidator,
+                      onTap: () {
+                        _emailAddressController.selection = TextSelection(
+                          baseOffset: 0,
+                          extentOffset: _emailAddressController.text.length,
+                        );
+                      },
                     ),
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.black,
-                    ),
-                    cursorColor: Colors.blue,
-                    onTap: () {
-                      emailAddressController.selection = TextSelection(
-                        baseOffset: 0,
-                        extentOffset: emailAddressController.text.length,
-                      );
-                    },
                   ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() ?? false) {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (context, animation, secondaryAnimation) =>
                                   const OTPVerifyScreen(),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
-                            var begin = 0.0;
-                            var end = 1.0;
-                            var curve = Curves.ease;
+                              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                var begin = 0.0;
+                                var end = 1.0;
+                                var curve = Curves.ease;
 
-                            var tween = Tween(begin: begin, end: end)
-                                .chain(CurveTween(curve: curve));
+                                var tween = Tween(begin: begin, end: end)
+                                    .chain(CurveTween(curve: curve));
 
-                            return FadeTransition(
-                              opacity: animation.drive(tween),
-                              child: child,
-                            );
-                          },
+                                return FadeTransition(
+                                  opacity: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0077B6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0077B6),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
                       ),
-                    ),
-                    child: const Text(
-                      'Send OTP',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Roboto-Bold',
-                        fontSize: 13,
+                      child: const Text(
+                        'Send OTP',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Roboto-Bold',
+                          fontSize: 13,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
