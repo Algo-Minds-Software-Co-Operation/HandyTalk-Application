@@ -283,9 +283,9 @@ class _OTPVerify01State extends State<OTPVerifyScreen> {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 550.0),
+              padding: const EdgeInsets.only(top: 450.0),
               child: Image.asset(
-                'assets/images/3d-model.png',
+                'assets/gif/address.gif',
                 width: 400,
                 height: 400,
               ),

@@ -33,14 +33,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     super.initState();
     // Navigate to PremiumScreen after 2 seconds if on Home screen
-    Timer(const Duration(seconds: 2), () {
-      if (_selectedIndex == 0) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const PremiumScreen()),
-        );
-      }
-    });
+    // Timer(const Duration(seconds: 2), () {
+    //   if (_selectedIndex == 0) {
+    //     Navigator.push(
+    //       context,
+    //       MaterialPageRoute(builder: (context) => const PremiumScreen()),
+    //     );
+    //   }
+    // });
 
     // Start the shining animation timer
     Timer.periodic(const Duration(seconds: 1), (timer) {

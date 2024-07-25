@@ -1,6 +1,7 @@
+import 'package:HandyTalk/screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'premium_screen.dart'; // Import the PremiumScreen
 
 class Settings extends StatefulWidget {
   const Settings({super.key});
@@ -31,55 +32,97 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
   }
 
   Future<void> _showAvatarDialog() async {
-    final String? selectedAvatar = await showDialog<String>(
-      context: context,
-      builder: (BuildContext context) {
-        return SimpleDialog(
-          title: const Text('Select Avatar'),
-          children: <Widget>[
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context, 'assets/images/avatar_01.png');
-              },
-              child: Image.asset('assets/images/avatar_01.png', width: 50, height: 50),
+  final String? selectedAvatar = await showDialog<String>(
+    context: context,
+    builder: (BuildContext context) {
+      return SimpleDialog(
+        title: const Text('Select Avatar'),
+        backgroundColor: const Color(0xFFCAF0F8).withOpacity(0.9), // Suitable background color
+        children: <Widget>[
+          SizedBox(
+            height: 100,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                _buildAvatarOption(
+                  context,
+                  'assets/images/avatar_01.png',
+                  'Buy',
+                  Colors.green,
+                ),
+                _buildAvatarOption(
+                  context,
+                  'assets/images/avatar_02.png',
+                  'Buy',
+                  Colors.green,
+                ),
+                _buildAvatarOption(
+                  context,
+                  'assets/images/avatar_03.png',
+                  'Premium',
+                  Colors.red,
+                ),
+                _buildAvatarOption(
+                  context,
+                  'assets/images/avatar_04.png',
+                  'Premium',
+                  Colors.red,
+                ),
+                _buildAvatarOption(
+                  context,
+                  'assets/images/avatar_05.png',
+                  'Premium',
+                  Colors.red,
+                ),
+              ],
             ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context, 'assets/images/avatar_02.png');
-              },
-              child: Image.asset('assets/images/avatar_02.png', width: 50, height: 50),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context, 'assets/images/avatar_03.png');
-              },
-              child: Image.asset('assets/images/avatar_03.png', width: 50, height: 50),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context, 'assets/images/avatar_04.png');
-              },
-              child: Image.asset('assets/images/avatar_04.png', width: 50, height: 50),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context, 'assets/images/avatar_05.png');
-              },
-              child: Image.asset('assets/images/avatar_05.png', width: 50, height: 50),
-            ),
-          ],
-        );
-      },
-    );
+          ),
+        ],
+      );
+    },
+  );
 
-    if (selectedAvatar != null) {
-      setState(() {
-        _image = File(selectedAvatar);
-        _isAnimating = true;
-        _animationController.forward(from: 0.0);
-      });
-    }
+  if (selectedAvatar != null) {
+    setState(() {
+      _image = File(selectedAvatar);
+      _isAnimating = true;
+      _animationController.forward(from: 0.0);
+    });
   }
+}
+
+Widget _buildAvatarOption(BuildContext context, String imagePath, String label, Color labelColor) {
+  return SimpleDialogOption(
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const PremiumScreen()),
+      );
+    },
+    child: Stack(
+      alignment: Alignment.center,
+      children: [
+        Image.asset(imagePath, width: 50, height: 50),
+        Positioned(
+          bottom: 5,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            color: labelColor,
+            child: Text(
+              label,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 
   Future<void> _pickImage() async {
     _showAvatarDialog();
@@ -324,10 +367,7 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
                     leading: const Icon(Icons.logout),
                     title: const Text('Log out'),
                     onTap: () {
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => const SplashScreen()),
-                      // );
+                      _showLogoutConfirmation(context);
                     },
                   ),
                   ListTile(
@@ -341,6 +381,39 @@ class _SettingsState extends State<Settings> with SingleTickerProviderStateMixin
           ),
         ],
       ),
+    );
+  }
+
+  void _showLogoutConfirmation(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm Logout'),
+          content: Text('Do you really want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Dismiss the dialog
+              },
+            ),
+            ElevatedButton(
+              child: Text('Log Out'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red, // Change button color
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Dismiss the dialog
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
