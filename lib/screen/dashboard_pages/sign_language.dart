@@ -23,91 +23,95 @@ class SignLanguage extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 60.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    FilterButton(
-                      label: 'All',
-                      iconPath: 'assets/images/Select-all.png',
-                      foregroundColor: Colors.white,
-                      backgroundColor: Color.fromARGB(255, 1, 190, 248), // Change this color
+          Padding(
+            padding: const EdgeInsets.only(top: 60.0),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        FilterButton(
+                          label: 'All',
+                          iconPath: 'assets/images/Select-all.png',
+                        ),
+                        SizedBox(width: 8.0),
+                        FilterButton(
+                          label: 'Ongoing',
+                          iconPath: 'assets/images/Fire.png',
+                        ),
+                        SizedBox(width: 8.0),
+                        FilterButton(
+                          label: 'Incompleted',
+                          iconPath: 'assets/images/Assignment-Return.png',
+                        ),
+                        SizedBox(width: 8.0),
+                        FilterButton(
+                          label: 'Completed',
+                          iconPath: 'assets/images/Check-All.png',
+                        ),
+                      ],
                     ),
-                    FilterButton(
-                      label: 'Ongoing',
-                      iconPath: 'assets/images/Fire.png',
-                      foregroundColor: Colors.white,
-                      backgroundColor: Color.fromARGB(255, 1, 190, 248), // Change this color
-                    ),
-                    FilterButton(
-                      label: 'Incompleted',
-                      iconPath: 'assets/images/Assignment-Return.png',
-                      foregroundColor: Colors.white,
-                      backgroundColor: Color.fromARGB(255, 1, 190, 248), // Change this color
-                    ),
-                    FilterButton(
-                      label: 'Completed',
-                      iconPath: 'assets/images/Check-All.png',
-                      foregroundColor: Colors.white,
-                      backgroundColor: Color.fromARGB(255, 1, 190, 248), // Change this color
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    CourseCard(
-                      title: 'Find a course you want to learn!',
-                      buttonText: 'Check Now',
-                      imageUrl: 'assets/images/NeuroTracker.png',
-                      isImageRightAligned: true,
-                      imageSize: 120.0,
-                      buttonPadding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 30.0),
-                      buttonForegroundColor: Colors.white, // Button text color
-                      buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248), // Button background color
-                      cardWidth: 350.0,
-                      cardHeight: 145.0,
-                      cardShadowColor: Theme.of(context).shadowColor.withOpacity(0.5),
-                      cardColor: Color.fromARGB(255, 193, 239, 250),
-                      titlePadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-                    ),
-                    CourseCard(
-                      title: 'Creative Art Design Learn',
-                      buttonText: 'Get Started',
-                      imageUrl: 'assets/images/Cartoon_Vector.png',
-                      imageSize: 100.0,
-                      buttonPadding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 25.0),
-                      buttonForegroundColor: Colors.white, // Button text color
-                      buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248), // Button background color
-                      cardWidth: 350.0,
-                      cardHeight: 145.0,
-                      cardShadowColor: Theme.of(context).shadowColor.withOpacity(0.5),
-                      cardColor: Color.fromARGB(255, 193, 239, 250),
-                      titlePadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-                    ),
-                    CourseCard(
-                      title: 'Another Languages',
-                      buttonText: 'Get Started',
-                      imageUrl: 'assets/images/Successful_Characters.png',
-                      isImageRightAligned: true,
-                      imageSize: 100.0,
-                      buttonPadding: EdgeInsets.symmetric(vertical: 1.0, horizontal: 25.0),
-                      buttonForegroundColor: const Color.fromARGB(255, 255, 255, 255), // Button text color
-                      buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248), // Button background color
-                      cardWidth: 350.0,
-                      cardHeight: 145.0,
-                      cardShadowColor: Theme.of(context).shadowColor.withOpacity(0.5),
-                      cardColor: Color.fromARGB(255, 193, 239, 250),
-                      titlePadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
-                    ),
-                  ],
+                Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.all(16.0),
+                    children: [
+                      AnimatedCourseCard(
+                        title: 'Find a course you want to learn!',
+                        buttonText: 'Check Now',
+                        imageUrl: 'assets/images/NeuroTracker.png',
+                        isImageRightAligned: true,
+                        imageSize: 150.0,
+                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 30.0),
+                        buttonForegroundColor: Colors.white,
+                        buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248),
+                        cardWidth: MediaQuery.of(context).size.width - 32,
+                        cardHeight: 180.0,
+                        cardShadowColor: Colors.black26,
+                        cardColor: Color.fromARGB(255, 193, 239, 250),
+                        titlePadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+                      ),
+                      SizedBox(height: 16.0),
+                      AnimatedCourseCard(
+                        title: 'Creative Art Design Learn',
+                        buttonText: 'Get Started',
+                        imageUrl: 'assets/images/Cartoon_Vector.png',
+                        imageSize: 120.0,
+                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 25.0),
+                        buttonForegroundColor: Colors.white,
+                        buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248),
+                        cardWidth: MediaQuery.of(context).size.width - 32,
+                        cardHeight: 180.0,
+                        cardShadowColor: Colors.black26,
+                        cardColor: Color.fromARGB(255, 193, 239, 250),
+                        titlePadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+                      ),
+                      SizedBox(height: 16.0),
+                      AnimatedCourseCard(
+                        title: 'Another Languages',
+                        buttonText: 'Get Started',
+                        imageUrl: 'assets/images/Successful_Characters.png',
+                        isImageRightAligned: true,
+                        imageSize: 120.0,
+                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 25.0),
+                        buttonForegroundColor: Colors.white,
+                        buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248),
+                        cardWidth: MediaQuery.of(context).size.width - 32,
+                        cardHeight: 180.0,
+                        cardShadowColor: Colors.black26,
+                        cardColor: Color.fromARGB(255, 193, 239, 250),
+                        titlePadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -118,14 +122,14 @@ class SignLanguage extends StatelessWidget {
 class FilterButton extends StatelessWidget {
   final String label;
   final String iconPath;
-  final Color foregroundColor; // Add this parameter
-  final Color backgroundColor; // Add this parameter
+  final Color foregroundColor;
+  final Color backgroundColor;
 
   const FilterButton({
     required this.label,
     required this.iconPath,
-    this.foregroundColor = Colors.black, // Default color
-    this.backgroundColor = Colors.white, // Default color
+    this.foregroundColor = Colors.white,
+    this.backgroundColor = const Color.fromARGB(255, 1, 190, 248),
   });
 
   @override
@@ -136,20 +140,21 @@ class FilterButton extends StatelessWidget {
         foregroundColor: foregroundColor,
         backgroundColor: backgroundColor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20.0),
+          borderRadius: BorderRadius.circular(30.0),
         ),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
       ),
       icon: Image.asset(
         iconPath,
-        width: 24.0, // Adjust size as needed
-        height: 24.0, // Adjust size as needed
+        width: 24.0,
+        height: 24.0,
       ),
       label: Text(label),
     );
   }
 }
 
-class CourseCard extends StatelessWidget {
+class AnimatedCourseCard extends StatefulWidget {
   final String title;
   final String buttonText;
   final String imageUrl;
@@ -164,7 +169,7 @@ class CourseCard extends StatelessWidget {
   final Color cardColor;
   final EdgeInsets titlePadding;
 
-  const CourseCard({
+  const AnimatedCourseCard({
     required this.title,
     required this.buttonText,
     required this.imageUrl,
@@ -176,43 +181,63 @@ class CourseCard extends StatelessWidget {
     this.cardWidth = double.infinity,
     this.cardHeight = 150.0,
     this.cardShadowColor = Colors.black26,
-    this.cardColor = const Color.fromARGB(255, 255, 255, 255), // Semi-transparent white
+    this.cardColor = const Color.fromARGB(255, 255, 255, 255),
     this.titlePadding = const EdgeInsets.all(0),
   });
+
+  @override
+  _AnimatedCourseCardState createState() => _AnimatedCourseCardState();
+}
+
+class _AnimatedCourseCardState extends State<AnimatedCourseCard> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 1000), // Increased duration for a smoother pulse effect
+    )..repeat(reverse: true);
+    _scaleAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+  }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> cardContent = [
       Image.asset(
-        imageUrl,
-        width: imageSize,
-        height: imageSize,
+        widget.imageUrl,
+        width: widget.imageSize,
+        height: widget.imageSize,
+        fit: BoxFit.cover,
       ),
-      SizedBox(width: 50.0),
+      SizedBox(width: 16.0),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: titlePadding,
+              padding: widget.titlePadding,
               child: Text(
-                title,
+                widget.title,
                 style: TextStyle(
-                  fontSize: 18.0,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(height: 50.0),
+            SizedBox(height: 10.0),
             Padding(
-              padding: buttonPadding,
+              padding: widget.buttonPadding,
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: buttonForegroundColor,
-                  backgroundColor: buttonBackgroundColor,
+                  foregroundColor: widget.buttonForegroundColor,
+                  backgroundColor: widget.buttonBackgroundColor,
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
                 ),
-                child: Text(buttonText),
+                child: Text(widget.buttonText),
               ),
             ),
           ],
@@ -220,31 +245,40 @@ class CourseCard extends StatelessWidget {
       ),
     ];
 
-    if (isImageRightAligned) {
+    if (widget.isImageRightAligned) {
       cardContent = cardContent.reversed.toList();
     }
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Container(
-        width: cardWidth,
-        height: cardHeight,
-        decoration: BoxDecoration(
-          color: cardColor, // Transparent color
-          borderRadius: BorderRadius.circular(20.0),
-          boxShadow: [
-            BoxShadow(
-              color: cardShadowColor,
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-        child: Row(
-          children: cardContent,
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: ScaleTransition(
+        scale: _scaleAnimation,
+        child: Container(
+          width: widget.cardWidth,
+          height: widget.cardHeight,
+          decoration: BoxDecoration(
+            color: widget.cardColor,
+            borderRadius: BorderRadius.circular(15.0),
+            boxShadow: [
+              BoxShadow(
+                color: widget.cardShadowColor,
+                spreadRadius: 1,
+                blurRadius: 5,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: Row(
+            children: cardContent,
+          ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

@@ -85,7 +85,8 @@ class ClassroomCard extends StatelessWidget {
   final Color color;
   final bool isBoldTitle;
 
-  const ClassroomCard({super.key, 
+  const ClassroomCard({
+    super.key, 
     this.icon,
     this.image,
     required this.title,
@@ -96,60 +97,81 @@ class ClassroomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20.0),
-      width: MediaQuery.of(context).size.width - 40, // Decrease width by 40
-      height: 130.0, // Adjusted height
-      decoration: BoxDecoration(
-        color: const Color(0xFFCAF0F8).withOpacity(0.35), // Set background color with opacity
-        borderRadius: BorderRadius.circular(10.0),
-        border: Border.all(
-          color: color, // Set the border color
-          width: 2.0, // Set the border width
+    return GestureDetector(
+      onTap: () => _showFeatureComingSoonDialog(context),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20.0),
+        width: MediaQuery.of(context).size.width - 40, // Decrease width by 40
+        height: 130.0, // Adjusted height
+        decoration: BoxDecoration(
+          color: const Color(0xFFCAF0F8).withOpacity(0.35), // Set background color with opacity
+          borderRadius: BorderRadius.circular(10.0),
+          border: Border.all(
+            color: color, // Set the border color
+            width: 2.0, // Set the border width
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 7,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ],
         ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          if (image != null)
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: image!,
-            )
-          else
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Icon(icon, color: color),
-            ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: isBoldTitle ? FontWeight.bold : FontWeight.normal,
+        child: Row(
+          children: [
+            if (image != null)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: image!,
+              )
+            else
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Icon(icon, color: color),
+              ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: isBoldTitle ? FontWeight.bold : FontWeight.normal,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 5.0),
-                Text(
-                  subtitle,
-                  style: const TextStyle(fontSize: 12.0),
-                ),
-              ],
+                  const SizedBox(height: 5.0),
+                  Text(
+                    subtitle,
+                    style: const TextStyle(fontSize: 12.0),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
+    );
+  }
+
+  void _showFeatureComingSoonDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Feature Coming Soon'),
+          content: const Text('This feature will be available soon. Stay tuned!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
     );
   }
 }
