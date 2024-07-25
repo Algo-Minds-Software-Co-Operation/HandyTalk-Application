@@ -81,12 +81,11 @@ class _HomeState extends State<Home> {
             bottom: 16,
             right: 16,
             child: Container(
-              margin: const EdgeInsets.only(bottom: 8.0),
               width: 60,
               height: 60,
               decoration: BoxDecoration(
                 color: Colors.blue.withOpacity(0.6),
-                borderRadius: BorderRadius.circular(10.0),
+                shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.2),
@@ -120,13 +119,13 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(builder: (context) => const EditModel()),
                   );
                 },
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(30.0),
                 child: Container(
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 125, 236, 255).withOpacity(0.6),
-                    borderRadius: BorderRadius.circular(10.0),
+                    shape: BoxShape.circle,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.2),
@@ -156,7 +155,6 @@ class _HomeState extends State<Home> {
               height: 350.0,
               fit: BoxFit.contain,
               errorBuilder: (context, error, stackTrace) {
-                // Handle errors if the image is not found
                 return Container(
                   width: 350.0,
                   height: 350.0,
