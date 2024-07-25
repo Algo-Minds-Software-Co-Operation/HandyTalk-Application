@@ -67,7 +67,7 @@ class SignLanguage extends StatelessWidget {
                         imageUrl: 'assets/images/NeuroTracker.png',
                         isImageRightAligned: true,
                         imageSize: 150.0,
-                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 30.0),
+                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 32.0), // Increased button width
                         buttonForegroundColor: Colors.white,
                         buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248),
                         cardWidth: MediaQuery.of(context).size.width - 32,
@@ -82,7 +82,7 @@ class SignLanguage extends StatelessWidget {
                         buttonText: 'Get Started',
                         imageUrl: 'assets/images/Cartoon_Vector.png',
                         imageSize: 120.0,
-                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 25.0),
+                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 32.0), // Increased button width
                         buttonForegroundColor: Colors.white,
                         buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248),
                         cardWidth: MediaQuery.of(context).size.width - 32,
@@ -98,7 +98,7 @@ class SignLanguage extends StatelessWidget {
                         imageUrl: 'assets/images/Successful_Characters.png',
                         isImageRightAligned: true,
                         imageSize: 120.0,
-                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 25.0),
+                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 32.0), // Increased button width
                         buttonForegroundColor: Colors.white,
                         buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248),
                         cardWidth: MediaQuery.of(context).size.width - 32,
@@ -154,7 +154,7 @@ class FilterButton extends StatelessWidget {
   }
 }
 
-class AnimatedCourseCard extends StatefulWidget {
+class AnimatedCourseCard extends StatelessWidget {
   final String title;
   final String buttonText;
   final String imageUrl;
@@ -186,30 +186,12 @@ class AnimatedCourseCard extends StatefulWidget {
   });
 
   @override
-  _AnimatedCourseCardState createState() => _AnimatedCourseCardState();
-}
-
-class _AnimatedCourseCardState extends State<AnimatedCourseCard> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000), // Increased duration for a smoother pulse effect
-    )..repeat(reverse: true);
-    _scaleAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
-  }
-
-  @override
   Widget build(BuildContext context) {
     List<Widget> cardContent = [
       Image.asset(
-        widget.imageUrl,
-        width: widget.imageSize,
-        height: widget.imageSize,
+        imageUrl,
+        width: imageSize,
+        height: imageSize,
         fit: BoxFit.cover,
       ),
       SizedBox(width: 16.0),
@@ -218,9 +200,9 @@ class _AnimatedCourseCardState extends State<AnimatedCourseCard> with SingleTick
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: widget.titlePadding,
+              padding: titlePadding,
               child: Text(
-                widget.title,
+                title,
                 style: TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
@@ -229,15 +211,15 @@ class _AnimatedCourseCardState extends State<AnimatedCourseCard> with SingleTick
             ),
             SizedBox(height: 10.0),
             Padding(
-              padding: widget.buttonPadding,
+              padding: buttonPadding,
               child: ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: widget.buttonForegroundColor,
-                  backgroundColor: widget.buttonBackgroundColor,
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  foregroundColor: buttonForegroundColor,
+                  backgroundColor: buttonBackgroundColor,
+                  padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 30.0), // Adjusted button width
                 ),
-                child: Text(widget.buttonText),
+                child: Text(buttonText),
               ),
             ),
           ],
@@ -245,40 +227,31 @@ class _AnimatedCourseCardState extends State<AnimatedCourseCard> with SingleTick
       ),
     ];
 
-    if (widget.isImageRightAligned) {
+    if (isImageRightAligned) {
       cardContent = cardContent.reversed.toList();
     }
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ScaleTransition(
-        scale: _scaleAnimation,
-        child: Container(
-          width: widget.cardWidth,
-          height: widget.cardHeight,
-          decoration: BoxDecoration(
-            color: widget.cardColor,
-            borderRadius: BorderRadius.circular(15.0),
-            boxShadow: [
-              BoxShadow(
-                color: widget.cardShadowColor,
-                spreadRadius: 1,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
-          ),
-          child: Row(
-            children: cardContent,
-          ),
+      child: Container(
+        width: cardWidth,
+        height: cardHeight,
+        decoration: BoxDecoration(
+          color: cardColor,
+          borderRadius: BorderRadius.circular(15.0),
+          boxShadow: [
+            BoxShadow(
+              color: cardShadowColor,
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Row(
+          children: cardContent,
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
   }
 }

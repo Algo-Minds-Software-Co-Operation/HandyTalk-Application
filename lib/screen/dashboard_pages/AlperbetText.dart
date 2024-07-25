@@ -82,7 +82,7 @@ class AlphabetText extends StatelessWidget {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.only(bottom: 10.0), // Adjusted padding
+                    const EdgeInsets.only(bottom: 0.0), // Adjusted padding
                 child: Image.asset(
                   'assets/images/3d-model.png',
                   width: 400,
