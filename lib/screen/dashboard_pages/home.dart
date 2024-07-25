@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:HandyTalk/screen/dashboard_pages/edit_model.dart';
 
 class Home extends StatefulWidget {
@@ -13,11 +14,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String _gifPath = 'assets/gif/password.gif';
+  String _gifNotFoundText = 'Gif not found in our database!';
+  String _defaultGifPath = 'assets/gif/3d-model.png'; // Default image path
 
   void _searchGif(String searchTerm) async {
     String gifPath = 'assets/gif/$searchTerm.gif';
 
-    // Check if the file exists
     bool fileExists = await _fileExists(gifPath);
 
     if (fileExists) {
@@ -25,6 +27,9 @@ class _HomeState extends State<Home> {
         _gifPath = gifPath;
       });
     } else {
+      setState(() {
+        _gifPath = _defaultGifPath; // Set default image if GIF is not found
+      });
       _showErrorMessage();
     }
   }
@@ -40,7 +45,7 @@ class _HomeState extends State<Home> {
   void _showErrorMessage() {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: const Text('Gif not found!'),
+        content: Text(_gifNotFoundText),
         backgroundColor: Colors.red,
         duration: const Duration(seconds: 2),
       ),
@@ -66,7 +71,7 @@ class _HomeState extends State<Home> {
               onSearch: (searchTerm) => _searchGif(searchTerm),
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 200,
             left: 16,
             right: 16,
@@ -80,8 +85,16 @@ class _HomeState extends State<Home> {
               width: 60,
               height: 60,
               decoration: BoxDecoration(
-                color: Colors.blue.withOpacity(0.5),
+                color: Colors.blue.withOpacity(0.6),
                 borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    offset: const Offset(1, 1),
+                    blurRadius: 10,
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
               child: const Center(
                 child: Text(
@@ -89,6 +102,7 @@ class _HomeState extends State<Home> {
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
+                    fontSize: 16,
                   ),
                 ),
               ),
@@ -111,13 +125,22 @@ class _HomeState extends State<Home> {
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 125, 236, 255).withOpacity(0.5),
+                    color: const Color.fromARGB(255, 125, 236, 255).withOpacity(0.6),
                     borderRadius: BorderRadius.circular(10.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        offset: const Offset(1, 1),
+                        blurRadius: 10,
+                        spreadRadius: 2,
+                      ),
+                    ],
                   ),
                   child: const Center(
                     child: Icon(
                       Icons.edit,
                       color: Color(0xFFFFFFFF),
+                      size: 24,
                     ),
                   ),
                 ),
@@ -132,6 +155,24 @@ class _HomeState extends State<Home> {
               width: 350.0,
               height: 350.0,
               fit: BoxFit.contain,
+              errorBuilder: (context, error, stackTrace) {
+                // Handle errors if the image is not found
+                return Container(
+                  width: 350.0,
+                  height: 350.0,
+                  color: Colors.grey.withOpacity(0.3),
+                  child: Center(
+                    child: Text(
+                      _gifNotFoundText,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: Colors.red,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
@@ -154,12 +195,14 @@ class SearchBar extends StatefulWidget {
 class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMixin {
   final ImagePicker _picker = ImagePicker();
   final TextEditingController _controller = TextEditingController();
+  final stt.SpeechToText _speech = stt.SpeechToText();
   bool _isTyping = false;
   bool _animate = false;
   late AnimationController _animationController;
   late Animation<double> _animation;
   Timer? _timer;
   int _seconds = 0;
+  bool _isListening = false;
 
   @override
   void initState() {
@@ -180,10 +223,11 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
     });
   }
 
-  void _startRecording() {
+  void _startRecording() async {
     setState(() {
       _animate = true;
       _seconds = 0;
+      _isListening = true;
     });
     _animationController.repeat(reverse: true);
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
@@ -191,14 +235,28 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
         _seconds++;
       });
     });
+
+    bool available = await _speech.initialize();
+    if (available) {
+      _speech.listen(onResult: (result) {
+        setState(() {
+          _controller.text = result.recognizedWords;
+        });
+      });
+    }
   }
 
   void _stopRecording() {
     setState(() {
       _animate = false;
+      _isListening = false;
     });
     _animationController.stop();
     _timer?.cancel();
+    _speech.stop();
+    if (_controller.text.isNotEmpty) {
+      _searchGif();
+    }
   }
 
   @override
@@ -206,6 +264,7 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
     _animationController.dispose();
     _timer?.cancel();
     _controller.dispose();
+    _speech.stop();
     super.dispose();
   }
 
@@ -248,18 +307,18 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
       height: widget.height,
       padding: const EdgeInsets.symmetric(horizontal: 15.0),
       decoration: BoxDecoration(
-        color: const Color(0x1ACAF0F8),
+        color: const Color(0xFFE0F7FA),
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
             offset: const Offset(1, 1),
-            blurRadius: 50,
+            blurRadius: 15,
             spreadRadius: 2,
           ),
         ],
         border: Border.all(
-          color: Colors.black.withOpacity(0.025),
+          color: Colors.black.withOpacity(0.1),
           width: 1.0,
         ),
       ),
@@ -315,7 +374,7 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
                       : const Icon(
                           Icons.mic,
                           color: Colors.white,
-                          size: 16.0,
+                          size: 20.0,
                         ),
                 ),
               ),
@@ -332,7 +391,7 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
                 child: const Icon(
                   Icons.search,
                   color: Colors.white,
-                  size: 16.0,
+                  size: 20.0,
                 ),
               ),
             ),
@@ -348,13 +407,13 @@ class ProgressRectangle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: const Color(0xFFCAF0F8).withOpacity(0.50),
-        borderRadius: BorderRadius.circular(8.0),
+        color: const Color(0xFFB3E5FC),
+        borderRadius: BorderRadius.circular(12.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.2),
             blurRadius: 10,
             spreadRadius: 2,
           ),
@@ -370,8 +429,9 @@ class ProgressRectangle extends StatelessWidget {
                 Text(
                   'Your progress',
                   style: TextStyle(
-                    fontSize: 14.0,
+                    fontSize: 16.0,
                     fontWeight: FontWeight.bold,
+                    color: Colors.blueGrey,
                   ),
                 ),
                 SizedBox(height: 8.0),
@@ -381,15 +441,17 @@ class ProgressRectangle extends StatelessWidget {
                     Text(
                       '5',
                       style: TextStyle(
-                        fontSize: 24.0,
+                        fontSize: 30.0,
                         fontWeight: FontWeight.bold,
+                        color: Colors.orange,
                       ),
                     ),
                     SizedBox(width: 4.0),
                     Text(
                       'Days',
                       style: TextStyle(
-                        fontSize: 14.0,
+                        fontSize: 16.0,
+                        color: Colors.blueGrey,
                       ),
                     ),
                   ],
@@ -400,23 +462,23 @@ class ProgressRectangle extends StatelessWidget {
                   text: 'Games',
                   width: 20.0,
                   height: 10.0,
-                  textSize: 8.0,
+                  textSize: 12.0,
                 ),
               ],
             ),
           ),
           Container(
-            width: 60,
-            height: 60,
+            width: 80,
+            height: 80,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(12.0),
               color: Colors.blue.withOpacity(0.2),
             ),
             child: Center(
               child: Text(
                 'Chart',
                 style: TextStyle(
-                  color: Colors.black.withOpacity(0.5),
+                  color: Colors.blueGrey,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -462,6 +524,7 @@ class ProgressCategory extends StatelessWidget {
           style: TextStyle(
             fontSize: textSize,
             fontWeight: FontWeight.bold,
+            color: Colors.blueGrey,
           ),
         ),
       ],
