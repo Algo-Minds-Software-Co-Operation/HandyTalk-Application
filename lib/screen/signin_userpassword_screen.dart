@@ -3,7 +3,9 @@ import 'dashboard_pages/dashboard_screen.dart';
 import 'reset_password_screen.dart';
 
 class SignUserpasswordEnglish extends StatefulWidget {
-  const SignUserpasswordEnglish({super.key});
+  final String username;
+
+  const SignUserpasswordEnglish({super.key, required this.username});
 
   @override
   _SignUserpasswordEnglishState createState() =>
@@ -14,6 +16,22 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
   final TextEditingController _passwordController = TextEditingController();
   bool _isChecked = false;
   bool _isPasswordVisible = false;
+
+  void _showError(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Error'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +85,7 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
             child: Padding(
               padding: const EdgeInsets.only(top: 450.0),
               child: Image.asset(
-                'assets/images/3d-model.png',
+                'assets/gif/password.gif',
                 width: 400,
                 height: 400,
               ),
@@ -195,28 +213,32 @@ class _SignUserpasswordEnglishState extends State<SignUserpasswordEnglish> {
                   height: 45,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                                  const DashboardScreen(),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
-                            var begin = 0.0;
-                            var end = 1.0;
-                            var curve = Curves.ease;
+                      if (_passwordController.text == "Malith@2003") {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    const DashboardScreen(),
+                            transitionsBuilder: (context, animation,
+                                secondaryAnimation, child) {
+                              var begin = 0.0;
+                              var end = 1.0;
+                              var curve = Curves.ease;
 
-                            var tween = Tween(begin: begin, end: end)
-                                .chain(CurveTween(curve: curve));
+                              var tween = Tween(begin: begin, end: end)
+                                  .chain(CurveTween(curve: curve));
 
-                            return FadeTransition(
-                              opacity: animation.drive(tween),
-                              child: child,
-                            );
-                          },
-                        ),
-                      );
+                              return FadeTransition(
+                                opacity: animation.drive(tween),
+                                child: child,
+                              );
+                            },
+                          ),
+                        );
+                      } else {
+                        _showError(context, 'Incorrect password. Please try again.');
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0077B6),

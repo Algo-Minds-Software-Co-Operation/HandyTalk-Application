@@ -77,20 +77,21 @@ flutter:
     - assets/images/Fire.png
     - assets/images/Assignment-Return.png
     - assets/images/Check-All.png
+    - assets/gif/
     - assets/gif/password.gif
     - assets/gif/address.gif
-    - assets/gif/be careful.gif
-    - assets/gif/call me.gif
-    - assets/gif/can you help me.gif
-    - assets/gif/dont like.gif
-    - assets/gif/excuse me.gif
-    - assets/gif/good bye.gif
-    - assets/gif/good job.gif
+    - assets/gif/be_careful.gif
+    - assets/gif/call_me.gif
+    - assets/gif/can_you_help_me.gif
+    - assets/gif/dont_like.gif
+    - assets/gif/excuse_me.gif
+    - assets/gif/good_bye.gif
+    - assets/gif/good_job.gif
     - assets/gif/hello.gif
-    - assets/gif/how much.gif
-    - assets/gif/i am hungry.gif
-    - assets/gif/i am thirsty.gif
-    - assets/gif/i dont understand.gif
+    - assets/gif/how_much.gif
+    - assets/gif/i_am_hungry.gif
+    - assets/gif/i_am_thirsty.gif
+    - assets/gif/i_dont_understand.gif
     - assets/gif/like.gif
     - assets/gif/new.gif
     - assets/gif/next.gif
@@ -98,13 +99,13 @@ flutter:
     - assets/gif/please.gif
     - assets/gif/repeat.gif
     - assets/gif/reset.gif
-    - assets/gif/see you late.gif
+    - assets/gif/see_you_late.gif
     - assets/gif/select.gif
-    - assets/gif/take care.gif
-    - assets/gif/thank you.gif
+    - assets/gif/take_care.gif
+    - assets/gif/thank_you.gif
     - assets/gif/today.gif
     - assets/gif/wait.gif
-    - assets/gif/what time is it.gif
+    - assets/gif/what_time_is_it.gif
     - assets/gif/wrong.gif
     - assets/gif/yes.gif
     - assets/images/avatar_01.png

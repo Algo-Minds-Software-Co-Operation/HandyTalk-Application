@@ -3,8 +3,29 @@ import 'signin_userpassword_screen.dart';
 
 class SignUsernameEnglish extends StatelessWidget {
   final TextEditingController _usernameController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   SignUsernameEnglish({super.key});
+
+  void _showErrorMessage(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Incorrect username or password.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +79,7 @@ class SignUsernameEnglish extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 450.0),
               child: Image.asset(
-                'assets/gif/password.gif',
+                'assets/gif/i_dont_understand.gif',
                 width: 550,
                 height: 500,
               ),
@@ -68,94 +89,92 @@ class SignUsernameEnglish extends StatelessWidget {
             top: 270.0,
             left: 40.0,
             right: 40.0,
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: TextField(
-                    controller: _usernameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 45,
+                    child: TextFormField(
+                      controller: _usernameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.blue.withOpacity(0.5),
+                          ),
+                        ),
+                        labelText: 'Username',
+                        labelStyle: TextStyle(
+                          fontSize: 12,
                           color: Colors.black.withOpacity(0.5),
                         ),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.blue.withOpacity(
-                              0.5), // Focused border color with opacity
-                        ),
-                      ),
-                      labelText: 'Username',
-                      labelStyle: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black,
                       ),
+                      cursorColor: Colors.blue,
                     ),
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: Colors.black, // Unfocused text color
-                    ),
-                    cursorColor: Colors.blue, // Cursor color
-                    onTap: () {
-                      // Change text color when focused
-                      _usernameController.selection = TextSelection(
-                        baseOffset: 0,
-                        extentOffset: _usernameController.text.length,
-                      );
-                    },
                   ),
-                ),
-                const SizedBox(height: 20),
-                SizedBox(
-                  width: double.infinity,
-                  height: 45,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                                  const SignUserpasswordEnglish(),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
-                            var begin = 0.0;
-                            var end = 1.0;
-                            var curve = Curves.ease;
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 45,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_usernameController.text == 'Malith') {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      const SignUserpasswordEnglish(username: 'Malith',),
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                var begin = 0.0;
+                                var end = 1.0;
+                                var curve = Curves.ease;
 
-                            var tween = Tween(begin: begin, end: end)
-                                .chain(CurveTween(curve: curve));
+                                var tween = Tween(begin: begin, end: end)
+                                    .chain(CurveTween(curve: curve));
 
-                            return FadeTransition(
-                              opacity: animation.drive(tween),
-                              child: child,
-                            );
-                          },
+                                return FadeTransition(
+                                  opacity: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
+                          );
+                        } else {
+                          _showErrorMessage(context);
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0077B6),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0077B6), // Button color
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(10), // Button radius
                       ),
-                    ),
-                    child: const Text(
-                      'Next',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Roboto-Bold',
-                        fontSize: 13,
+                      child: const Text(
+                        'Next',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Roboto-Bold',
+                          fontSize: 13,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

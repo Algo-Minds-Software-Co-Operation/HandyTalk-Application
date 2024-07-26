@@ -142,7 +142,7 @@ class HomeScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 450.0),
               child: Image.asset(
-                'assets/gif/password.gif',
+                'assets/gif/hello.gif',
                 width: 550,
                 height: 500,
               ),
@@ -321,7 +321,7 @@ class HomeSinhalaScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(top: 450.0),
               child: Image.asset(
-                'assets/gif/password.gif',
+                'assets/gif/hello.gif',
                 width: 550,
                 height: 500,
               ),

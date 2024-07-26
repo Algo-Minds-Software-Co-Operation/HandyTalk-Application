@@ -73,7 +73,7 @@ class _SignupUsernameScreenState extends State<SignupUsernameScreen> {
             child: Padding(
               padding: const EdgeInsets.only(top: 450.0),
               child: Image.asset(
-                'assets/images/3d-model.png',
+                'assets/gif/excuse_me.gif',
                 width: 400,
                 height: 400,
               ),

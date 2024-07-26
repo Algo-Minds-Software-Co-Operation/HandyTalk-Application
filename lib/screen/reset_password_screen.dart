@@ -134,7 +134,7 @@ class ResetPasswordScreen extends StatelessWidget {
                         PageRouteBuilder(
                           pageBuilder:
                               (context, animation, secondaryAnimation) =>
-                                  const SignUserpasswordEnglish(),
+                                  const SignUserpasswordEnglish(username: 'Malith',),
                           transitionsBuilder:
                               (context, animation, secondaryAnimation, child) {
                             var begin = 0.0;

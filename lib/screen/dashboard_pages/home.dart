@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:HandyTalk/screen/dashboard_pages/edit_model.dart';
@@ -14,30 +14,33 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String _gifPath = 'assets/gif/password.gif';
-  String _gifNotFoundText = 'Gif not found in our database!';
-  String _defaultGifPath = 'assets/gif/3d-model.png'; // Default image path
+  String _gifNotFoundText = 'Text not found in our database!';
+  String _defaultGifPath = 'assets/images/3d-model.png'; // Default image path
 
   void _searchGif(String searchTerm) async {
-    String normalizedSearchTerm = searchTerm.toLowerCase();
-    String gifPath = 'assets/gif/$normalizedSearchTerm.gif';
+  // Replace spaces with underscores
+  String normalizedSearchTerm = searchTerm.toLowerCase().replaceAll(' ', '_');
+  String gifPath = 'assets/gif/$normalizedSearchTerm.gif';
 
-    bool fileExists = await _fileExists(gifPath);
+  bool fileExists = await _fileExists(gifPath);
 
-    if (fileExists) {
-      setState(() {
-        _gifPath = gifPath;
-      });
-    } else {
-      setState(() {
-        _gifPath = _defaultGifPath; // Set default image if GIF is not found
-      });
-      _showErrorMessage();
-    }
+  if (fileExists) {
+    setState(() {
+      _gifPath = gifPath;
+    });
+  } else {
+    setState(() {
+      _gifPath = _defaultGifPath; // Set default image if GIF is not found
+    });
+    _showErrorMessage();
   }
+}
+
 
   Future<bool> _fileExists(String path) async {
     try {
-      return await File(path).exists();
+      await rootBundle.load(path);
+      return true;
     } catch (e) {
       return false;
     }
@@ -316,18 +319,9 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
             spreadRadius: 2,
           ),
         ],
-        border: Border.all(
-          color: Colors.black.withOpacity(0.1),
-          width: 1.0,
-        ),
       ),
       child: Row(
         children: <Widget>[
-          if (!_isTyping)
-            Icon(
-              Icons.search_rounded,
-              color: Colors.black.withOpacity(0.5),
-            ),
           Expanded(
             child: TextField(
               controller: _controller,
