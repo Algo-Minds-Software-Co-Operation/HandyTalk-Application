@@ -182,13 +182,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 onTap: () {
                   navigateToProfileSettings(context); // Navigate to EditModel when tapping profile picture on Home page
                 },
-                child: Image.asset(
-                  profileImagePath,
-                  width: 40,
-                  height: 40,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0), // Adjust the left padding
+                  child: Image.asset(
+                    'assets/images/profile-icon.png',
+                    width: 30, // Make the icon smaller
+                    height: 30, // Make the icon smaller
+                  ),
                 ),
               ),
-            if (_selectedIndex == 0) const SizedBox(width: 10),
+            if (_selectedIndex == 0) const SizedBox(width: 30),
             Text(
               appBarTitle,
               style: TextStyle(
@@ -206,12 +209,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
         leading: _selectedIndex == 1
             ? GestureDetector(
                 onTap: () {
-                  navigateToSettings(context); // Navigate to Settings page when tapping profile icon in MessagesPage
+                  _onItemTapped(4); // Auto navigate to Settings page
                 },
-                child: Image.asset(
-                  'assets/images/profile-icon.png',
-                  width: 30,
-                  height: 30,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0), // Adjust the left padding
+                  child: Image.asset(
+                    'assets/images/profile-icon.png',
+                    width: 30, // Make the icon smaller
+                    height: 30, // Make the icon smaller
+                  ),
                 ),
               )
             : null,
@@ -272,7 +278,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings_rounded),
-              label: 'Settings',
+              label: 'Profile',
             ),
           ],
         ),
