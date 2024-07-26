@@ -18,7 +18,8 @@ class _HomeState extends State<Home> {
   String _defaultGifPath = 'assets/gif/3d-model.png'; // Default image path
 
   void _searchGif(String searchTerm) async {
-    String gifPath = 'assets/gif/$searchTerm.gif';
+    String normalizedSearchTerm = searchTerm.toLowerCase();
+    String gifPath = 'assets/gif/$normalizedSearchTerm.gif';
 
     bool fileExists = await _fileExists(gifPath);
 

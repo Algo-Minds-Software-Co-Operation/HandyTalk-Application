@@ -18,6 +18,8 @@ dependencies:
   emoji_picker_flutter: ^1.0.0
   fl_chart: ^0.68.0
   speech_to_text: ^6.6.2
+  permission_handler: ^11.3.1
+  flutter_sound: ^9.8.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
@@ -77,6 +79,34 @@ flutter:
     - assets/images/Check-All.png
     - assets/gif/password.gif
     - assets/gif/address.gif
+    - assets/gif/be careful.gif
+    - assets/gif/call me.gif
+    - assets/gif/can you help me.gif
+    - assets/gif/dont like.gif
+    - assets/gif/excuse me.gif
+    - assets/gif/good bye.gif
+    - assets/gif/good job.gif
+    - assets/gif/hello.gif
+    - assets/gif/how much.gif
+    - assets/gif/i am hungry.gif
+    - assets/gif/i am thirsty.gif
+    - assets/gif/i dont understand.gif
+    - assets/gif/like.gif
+    - assets/gif/new.gif
+    - assets/gif/next.gif
+    - assets/gif/no.gif
+    - assets/gif/please.gif
+    - assets/gif/repeat.gif
+    - assets/gif/reset.gif
+    - assets/gif/see you late.gif
+    - assets/gif/select.gif
+    - assets/gif/take care.gif
+    - assets/gif/thank you.gif
+    - assets/gif/today.gif
+    - assets/gif/wait.gif
+    - assets/gif/what time is it.gif
+    - assets/gif/wrong.gif
+    - assets/gif/yes.gif
     - assets/images/avatar_01.png
     - assets/images/avatar_02.png
     - assets/images/avatar_03.png
