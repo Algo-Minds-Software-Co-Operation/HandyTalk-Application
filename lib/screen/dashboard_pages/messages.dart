@@ -1,3 +1,4 @@
+import 'package:HandyTalk/screen/dashboard_pages/group_chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'chat_screen.dart';
 
@@ -154,24 +155,39 @@ class _MessagesPageState extends State<MessagesPage> {
                   ),
                 ),
                 const SizedBox(height: 16.0),
-                // Image profile and text
+                // Image profile and text in the right corner
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/profile-picture-icon.png'),
-                        radius: 20,
-                      ),
-                      const SizedBox(width: 10),
-                      const Text(
-                        'ASL Learn',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.black,
-                        ),
+                      Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const GroupChat(),
+                                ),
+                              );
+                            },
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage('assets/images/who.png'),
+                              radius: 20,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Text(
+                            'ASL Learn',
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

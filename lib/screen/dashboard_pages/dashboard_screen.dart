@@ -92,6 +92,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
+  void navigateToSettings(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const Settings()),
+    );
+  }
+
   Widget _buildCoinsIcon() {
     return GestureDetector(
       onTap: () {
@@ -141,7 +148,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     if (_selectedIndex == 1) {
       appBarTitle = 'Messages';
-      profileImagePath = 'assets/images/default-notification.png';
+      profileImagePath = 'assets/images/profile-icon.png'; // New profile icon for MessagesPage
       notificationImagePath = 'assets/images/add-new-message.png';
     } else if (_selectedIndex == 2) {
       appBarTitle = 'Classroom';
@@ -196,6 +203,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ],
         ),
         centerTitle: true,
+        leading: _selectedIndex == 1
+            ? GestureDetector(
+                onTap: () {
+                  navigateToSettings(context); // Navigate to Settings page when tapping profile icon in MessagesPage
+                },
+                child: Image.asset(
+                  'assets/images/profile-icon.png',
+                  width: 30,
+                  height: 30,
+                ),
+              )
+            : null,
         actions: [
           GestureDetector(
             onTap: () {

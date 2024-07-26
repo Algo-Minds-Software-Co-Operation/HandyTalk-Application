@@ -21,6 +21,9 @@ dependencies:
   permission_handler: ^11.3.1
   flutter_sound: ^9.8.1
 
+  camera: ^0.11.0+1
+  google_ml_kit: ^0.18.0
+
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_test:
@@ -74,6 +77,8 @@ flutter:
     - assets/images/Cartoon_Vector.png
     - assets/images/Successful_Characters.png
     - assets/images/Select-all.png
+    - assets/images/who.png
+    - assets/images/profile-icon.png
     - assets/images/Fire.png
     - assets/images/Assignment-Return.png
     - assets/images/Check-All.png
@@ -99,7 +104,7 @@ flutter:
     - assets/gif/please.gif
     - assets/gif/repeat.gif
     - assets/gif/reset.gif
-    - assets/gif/see_you_late.gif
+    - assets/gif/see_you_later.gif
     - assets/gif/select.gif
     - assets/gif/take_care.gif
     - assets/gif/thank_you.gif
@@ -113,7 +118,6 @@ flutter:
     - assets/images/avatar_03.png
     - assets/images/avatar_04.png
     - assets/images/avatar_05.png
-
 
   fonts:
     - family: Roboto
