@@ -219,7 +219,7 @@ Widget _buildAvatarOption(BuildContext context, String imagePath, String label, 
                           child: ClipOval(
                             child: _image == null
                                 ? Image.asset(
-                                    'assets/images/tempory_img.png',
+                                    'assets/images/profile-icon.png',
                                     fit: BoxFit.cover,
                                   )
                                 : Image.file(

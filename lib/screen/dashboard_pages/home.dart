@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:camera/camera.dart';
 import 'package:HandyTalk/screen/dashboard_pages/edit_model.dart';
 
 class Home extends StatefulWidget {
@@ -16,26 +17,26 @@ class _HomeState extends State<Home> {
   String _gifPath = 'assets/gif/password.gif';
   String _gifNotFoundText = 'Text not found in our database!';
   String _defaultGifPath = 'assets/images/3d-model.png'; // Default image path
+  String _goodByeMessage = "";
 
   void _searchGif(String searchTerm) async {
-  // Replace spaces with underscores
-  String normalizedSearchTerm = searchTerm.toLowerCase().replaceAll(' ', '_');
-  String gifPath = 'assets/gif/$normalizedSearchTerm.gif';
+    // Replace spaces with underscores
+    String normalizedSearchTerm = searchTerm.toLowerCase().replaceAll(' ', '_');
+    String gifPath = 'assets/gif/$normalizedSearchTerm.gif';
 
-  bool fileExists = await _fileExists(gifPath);
+    bool fileExists = await _fileExists(gifPath);
 
-  if (fileExists) {
-    setState(() {
-      _gifPath = gifPath;
-    });
-  } else {
-    setState(() {
-      _gifPath = _defaultGifPath; // Set default image if GIF is not found
-    });
-    _showErrorMessage();
+    if (fileExists) {
+      setState(() {
+        _gifPath = gifPath;
+      });
+    } else {
+      setState(() {
+        _gifPath = _defaultGifPath; // Set default image if GIF is not found
+      });
+      _showErrorMessage();
+    }
   }
-}
-
 
   Future<bool> _fileExists(String path) async {
     try {
@@ -56,6 +57,12 @@ class _HomeState extends State<Home> {
     );
   }
 
+  void _showGoodByeMessage() {
+    setState(() {
+      _goodByeMessage = "hello Me";
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,6 +80,7 @@ class _HomeState extends State<Home> {
             right: 16,
             child: SearchBar(
               onSearch: (searchTerm) => _searchGif(searchTerm),
+              onRecordComplete: _showGoodByeMessage,
             ),
           ),
           Positioned(
@@ -153,28 +161,39 @@ class _HomeState extends State<Home> {
           Positioned(
             bottom: 0,
             right: 16,
-            child: Image.asset(
-              _gifPath,
-              width: 350.0,
-              height: 350.0,
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
+            child: Column(
+              children: [
+                Text(
+                  _goodByeMessage,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.red,
+                  ),
+                ),
+                Image.asset(
+                  _gifPath,
                   width: 350.0,
                   height: 350.0,
-                  color: Colors.grey.withOpacity(0.3),
-                  child: Center(
-                    child: Text(
-                      _gifNotFoundText,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.red,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      width: 350.0,
+                      height: 350.0,
+                      color: Colors.grey.withOpacity(0.3),
+                      child: Center(
+                        child: Text(
+                          _gifNotFoundText,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.red,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                );
-              },
+                    );
+                  },
+                ),
+              ],
             ),
           ),
         ],
@@ -187,8 +206,9 @@ class SearchBar extends StatefulWidget {
   final double width;
   final double height;
   final ValueChanged<String> onSearch;
+  final VoidCallback onRecordComplete;
 
-  const SearchBar({super.key, this.width = 300.0, this.height = 50.0, required this.onSearch});
+  const SearchBar({super.key, this.width = 300.0, this.height = 50.0, required this.onSearch, required this.onRecordComplete});
 
   @override
   _SearchBarState createState() => _SearchBarState();
@@ -205,6 +225,9 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
   Timer? _timer;
   int _seconds = 0;
   bool _isListening = false;
+  CameraController? _cameraController;
+  late List<CameraDescription> _cameras;
+  bool _isRecording = false;
 
   @override
   void initState() {
@@ -223,6 +246,14 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
         _isTyping = _controller.text.isNotEmpty;
       });
     });
+
+    _initializeCamera();
+  }
+
+  Future<void> _initializeCamera() async {
+    _cameras = await availableCameras();
+    _cameraController = CameraController(_cameras[0], ResolutionPreset.high);
+    await _cameraController?.initialize();
   }
 
   void _startRecording() async {
@@ -261,12 +292,27 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
     }
   }
 
+  void _openCamera() async {
+    if (_cameraController != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CameraPage(
+            cameraController: _cameraController!,
+            onRecordComplete: widget.onRecordComplete,
+          ),
+        ),
+      );
+    }
+  }
+
   @override
   void dispose() {
     _animationController.dispose();
     _timer?.cancel();
     _controller.dispose();
     _speech.stop();
+    _cameraController?.dispose();
     super.dispose();
   }
 
@@ -274,24 +320,6 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
     final minutes = (seconds ~/ 60).toString().padLeft(2, '0');
     final remainingSeconds = (seconds % 60).toString().padLeft(2, '0');
     return '$minutes:$remainingSeconds';
-  }
-
-  void _openCamera() async {
-    setState(() {
-      _animate = true;
-    });
-
-    await Future.delayed(const Duration(seconds: 2));
-
-    final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
-
-    setState(() {
-      _animate = false;
-    });
-
-    if (photo != null) {
-      print('Photo captured: ${photo.path}');
-    }
   }
 
   void _searchGif() {
@@ -388,6 +416,86 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
                 ),
               ),
             ),
+        ],
+      ),
+    );
+  }
+}
+
+class CameraPage extends StatefulWidget {
+  final CameraController cameraController;
+  final VoidCallback onRecordComplete;
+
+  const CameraPage({
+    super.key,
+    required this.cameraController,
+    required this.onRecordComplete,
+  });
+
+  @override
+  _CameraPageState createState() => _CameraPageState();
+}
+
+class _CameraPageState extends State<CameraPage> {
+  bool _isRecording = false;
+
+  void _startRecording() async {
+    if (!_isRecording) {
+      await widget.cameraController.startVideoRecording();
+      setState(() {
+        _isRecording = true;
+      });
+    }
+  }
+
+  void _stopRecording() async {
+    if (_isRecording) {
+      XFile video = await widget.cameraController.stopVideoRecording();
+      setState(() {
+        _isRecording = false;
+      });
+      Navigator.pop(context);
+      widget.onRecordComplete();
+      print('Video recorded: ${video.path}');
+    }
+  }
+
+  @override
+  void dispose() {
+    widget.cameraController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          CameraPreview(widget.cameraController),
+          Positioned(
+            bottom: 16,
+            left: 16,
+            right: 16,
+            child: Center(
+              child: GestureDetector(
+                onTap: _isRecording ? _stopRecording : _startRecording,
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: _isRecording ? Colors.red : Colors.blue,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Center(
+                    child: Icon(
+                      _isRecording ? Icons.stop : Icons.videocam,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

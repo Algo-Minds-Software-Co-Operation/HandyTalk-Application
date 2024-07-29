@@ -20,9 +20,9 @@ dependencies:
   speech_to_text: ^6.6.2
   permission_handler: ^11.3.1
   flutter_sound: ^9.8.1
-
   camera: ^0.11.0+1
-  google_ml_kit: ^0.18.0
+  flutter_local_notifications: ^17.2.1+2
+
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
@@ -118,6 +118,17 @@ flutter:
     - assets/images/avatar_03.png
     - assets/images/avatar_04.png
     - assets/images/avatar_05.png
+    - assets/stickers/sticker_0.png
+    - assets/stickers/sticker_1.png
+    - assets/stickers/sticker_2.png
+    - assets/stickers/sticker_3.png
+    - assets/stickers/sticker_4.png
+    - assets/stickers/sticker_5.png
+    - assets/stickers/sticker_6.png
+    - assets/stickers/sticker_7.png
+    - assets/stickers/sticker_8.png
+    - assets/stickers/sticker_9.png
+    - assets/stickers/sticker_10.png
 
   fonts:
     - family: Roboto

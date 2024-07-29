@@ -14,12 +14,25 @@ class ChatScreen extends StatefulWidget {
   _ChatScreenState createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateMixin {
   final TextEditingController _messageController = TextEditingController();
   bool _show3DModel = false;
   List<String> _messages = [];
   bool _showEmojiPicker = false;
   bool _showSignLanguageToText = false;
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
 
   void _sendMessage() {
     if (_messageController.text.isNotEmpty) {
@@ -216,59 +229,58 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-  backgroundColor: Colors.transparent,
-  elevation: 0,
-  leading: IconButton(
-    icon: const Icon(Icons.arrow_back, color: Colors.black),
-    onPressed: () {
-      Navigator.pop(context);
-    },
-  ),
-  title: Row(
-    children: [
-      CircleAvatar(
-        backgroundImage: AssetImage(widget.profileImagePath),
-      ),
-      const SizedBox(width: 8.0),
-      Text(
-        widget.userName,
-        style: const TextStyle(color: Colors.black),
-      ),
-    ],
-  ),
-  actions: [
-    IconButton(
-      icon: const Icon(Icons.videocam, color: Colors.black),
-      onPressed: () {},
-    ),
-    IconButton(
-      icon: const Icon(Icons.call, color: Colors.black),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CallScreen(
-              userName: widget.userName,
-              profileImagePath: widget.profileImagePath,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: Row(
+          children: [
+            CircleAvatar(
+              backgroundImage: AssetImage(widget.profileImagePath),
             ),
+            const SizedBox(width: 8.0),
+            Text(
+              widget.userName,
+              style: const TextStyle(color: Colors.black),
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.videocam, color: Colors.black),
+            onPressed: () {},
           ),
-        );
-      },
-    ),
-    IconButton(
-      icon: const Icon(Icons.more_vert, color: Colors.black),
-      onPressed: _showMoreOptions,
-    ),
-  ],
-  bottom: PreferredSize(
-    preferredSize: Size.fromHeight(4.0),
-    child: Container(
-      color: Colors.grey,
-      height: 1.0,
-    ),
-  ),
-),
-
+          IconButton(
+            icon: const Icon(Icons.call, color: Colors.black),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CallScreen(
+                    userName: widget.userName,
+                    profileImagePath: widget.profileImagePath,
+                  ),
+                ),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.more_vert, color: Colors.black),
+            onPressed: _showMoreOptions,
+          ),
+        ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(4.0),
+          child: Container(
+            color: Colors.grey,
+            height: 1.0,
+          ),
+        ),
+      ),
       body: Stack(
         children: [
           Positioned.fill(
@@ -334,27 +346,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   },
                 ),
               ),
-              if (_showEmojiPicker)
-                SizedBox(
-                  height: 250.0,
-                  child: GridView.count(
-                    crossAxisCount: 8,
-                    children: List.generate(40, (index) {
-                      String emoji = String.fromCharCodes([
-                        0x1F600 + index
-                      ]);
-                      return GestureDetector(
-                        onTap: () => _sendEmoji(emoji),
-                        child: Center(
-                          child: Text(
-                            emoji,
-                            style: const TextStyle(fontSize: 24.0),
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                ),
+              if (_showEmojiPicker) _buildEmojiStickerPicker(),
               _buildBottomSection(),
             ],
           ),
@@ -404,6 +396,62 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         if (_show3DModel) _build3DModelSection(),
       ],
+    );
+  }
+
+  Widget _buildEmojiStickerPicker() {
+    return SizedBox(
+      height: 300.0,
+      child: Column(
+        children: [
+          TabBar(
+            controller: _tabController,
+            tabs: [
+              Tab(text: 'Emoji'),
+              Tab(text: 'Stickers'),
+            ],
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: _tabController,
+              children: [
+                GridView.count(
+                  crossAxisCount: 8,
+                  children: List.generate(40, (index) {
+                    String emoji = String.fromCharCodes([0x1F600 + index]);
+                    return GestureDetector(
+                      onTap: () => _sendEmoji(emoji),
+                      child: Center(
+                        child: Text(
+                          emoji,
+                          style: const TextStyle(fontSize: 24.0),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+                GridView.count(
+                  crossAxisCount: 4,
+                  children: List.generate(16, (index) {
+                    return GestureDetector(
+                      onTap: () {
+                        // Handle sticker selection
+                      },
+                      child: Center(
+                        child: Image.asset(
+                          'assets/stickers/sticker_$index.png',
+                          width: 50.0,
+                          height: 50.0,
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
