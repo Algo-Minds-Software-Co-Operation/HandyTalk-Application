@@ -68,7 +68,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any questions or feedback, please reach out to us at [support@algomind.com](mailto:support@algomind.com).
+For any questions or feedback, please reach out to us at kavindu11250403@gmail.com.
 
 ---
 
