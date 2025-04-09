@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'signup_birthgen_screen.dart';
 
 class SignupNamePage extends StatefulWidget {
-  SignupNamePage({super.key});
+  const SignupNamePage({super.key});
 
   @override
   _SignupNamePageState createState() => _SignupNamePageState();
@@ -106,11 +106,11 @@ class _SignupNamePageState extends State<SignupNamePage> {
                           Icons.person,
                           color: Colors.black.withOpacity(0.5),
                         ),
-                        errorStyle: TextStyle(
+                        errorStyle: const TextStyle(
                           color: Colors.red,
                           fontSize: 12,
                         ),
-                        contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12), // Adjust padding to keep height consistent
+                        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12), // Adjust padding to keep height consistent
                       ),
                       style: const TextStyle(
                         fontSize: 12,
@@ -153,11 +153,11 @@ class _SignupNamePageState extends State<SignupNamePage> {
                           Icons.person,
                           color: Colors.black.withOpacity(0.5),
                         ),
-                        errorStyle: TextStyle(
+                        errorStyle: const TextStyle(
                           color: Colors.red,
                           fontSize: 12,
                         ),
-                        contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 12), // Adjust padding to keep height consistent
+                        contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12), // Adjust padding to keep height consistent
                       ),
                       style: const TextStyle(
                         fontSize: 12,
@@ -184,7 +184,7 @@ class _SignupNamePageState extends State<SignupNamePage> {
                             PageRouteBuilder(
                               pageBuilder:
                                   (context, animation, secondaryAnimation) =>
-                                      SignupBirthDetailsPage(),
+                                      const SignupBirthDetailsPage(),
                               transitionsBuilder:
                                   (context, animation, secondaryAnimation, child) {
                                 var begin = 0.0;

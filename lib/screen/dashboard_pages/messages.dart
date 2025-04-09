@@ -172,7 +172,7 @@ class _MessagesPageState extends State<MessagesPage> {
                                 ),
                               );
                             },
-                            child: CircleAvatar(
+                            child: const CircleAvatar(
                               backgroundImage: AssetImage('assets/images/who.png'),
                               radius: 20,
                             ),

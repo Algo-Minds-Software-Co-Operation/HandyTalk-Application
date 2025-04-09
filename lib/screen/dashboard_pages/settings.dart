@@ -278,16 +278,16 @@ Widget _buildAvatarOption(BuildContext context, String imagePath, String label, 
                                 onPressed: () {},
                                 style: ButtonStyle(
                                   backgroundColor:
-                                      MaterialStateProperty.all<Color>(
+                                      WidgetStateProperty.all<Color>(
                                           const Color(0xFF4BFF2E)),
-                                  shape: MaterialStateProperty.all<
+                                  shape: WidgetStateProperty.all<
                                       RoundedRectangleBorder>(
                                     RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                   ),
                                   foregroundColor:
-                                      MaterialStateProperty.all<Color>(
+                                      WidgetStateProperty.all<Color>(
                                           Colors.white),
                                 ),
                                 child: const Text(
@@ -389,17 +389,16 @@ Widget _buildAvatarOption(BuildContext context, String imagePath, String label, 
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Confirm Logout'),
-          content: Text('Do you really want to log out?'),
+          title: const Text('Confirm Logout'),
+          content: const Text('Do you really want to log out?'),
           actions: <Widget>[
             TextButton(
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop(); // Dismiss the dialog
               },
             ),
             ElevatedButton(
-              child: Text('Log Out'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red, // Change button color
               ),
@@ -407,9 +406,10 @@ Widget _buildAvatarOption(BuildContext context, String imagePath, String label, 
                 Navigator.of(context).pop(); // Dismiss the dialog
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
                 );
               },
+              child: Text('Log Out'),
             ),
           ],
         );

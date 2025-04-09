@@ -15,8 +15,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   String _gifPath = 'assets/gif/password.gif';
-  String _gifNotFoundText = 'Text not found in our database!';
-  String _defaultGifPath = 'assets/images/3d-model.png'; // Default image path
+  final String _gifNotFoundText = 'Text not found in our database!';
+  final String _defaultGifPath = 'assets/images/3d-model.png'; // Default image path
   String _goodByeMessage = "";
 
   void _searchGif(String searchTerm) async {
@@ -83,7 +83,7 @@ class _HomeState extends State<Home> {
               onRecordComplete: _showGoodByeMessage,
             ),
           ),
-          Positioned(
+          const Positioned(
             top: 200,
             left: 16,
             right: 16,
@@ -227,7 +227,7 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
   bool _isListening = false;
   CameraController? _cameraController;
   late List<CameraDescription> _cameras;
-  bool _isRecording = false;
+  final bool _isRecording = false;
 
   @override
   void initState() {
@@ -404,8 +404,8 @@ class _SearchBarState extends State<SearchBar> with SingleTickerProviderStateMix
             GestureDetector(
               onTap: _searchGif,
               child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xFF0077B6),
+                decoration: const BoxDecoration(
+                  color: Color(0xFF0077B6),
                   shape: BoxShape.circle,
                 ),
                 padding: const EdgeInsets.all(8.0),
@@ -575,7 +575,7 @@ class ProgressRectangle extends StatelessWidget {
               borderRadius: BorderRadius.circular(12.0),
               color: Colors.blue.withOpacity(0.2),
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'Chart',
                 style: TextStyle(

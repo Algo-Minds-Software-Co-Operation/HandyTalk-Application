@@ -121,7 +121,7 @@ class _SignupBirthDetailsPageState extends State<SignupBirthDetailsPage> {
                           Icons.calendar_today,
                           color: Colors.black.withOpacity(0.5),
                         ),
-                        errorStyle: TextStyle(color: Colors.red),
+                        errorStyle: const TextStyle(color: Colors.red),
                       ),
                       style: const TextStyle(
                         fontSize: 12,
@@ -171,7 +171,7 @@ class _SignupBirthDetailsPageState extends State<SignupBirthDetailsPage> {
                           Icons.person,
                           color: Colors.black.withOpacity(0.5),
                         ),
-                        errorStyle: TextStyle(color: Colors.red),
+                        errorStyle: const TextStyle(color: Colors.red),
                       ),
                       value: _selectedGender,
                       items: ['Male', 'Female', 'Other']
@@ -199,7 +199,7 @@ class _SignupBirthDetailsPageState extends State<SignupBirthDetailsPage> {
                             context,
                             PageRouteBuilder(
                               pageBuilder: (context, animation, secondaryAnimation) =>
-                                  SignupEmailAddressPage(),
+                                  const SignupEmailAddressPage(),
                               transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                 var begin = 0.0;
                                 var end = 1.0;

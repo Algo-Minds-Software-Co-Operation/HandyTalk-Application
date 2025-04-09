@@ -9,7 +9,7 @@ class SignLanguage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Sign Language'),
+        title: const Text('Sign Language'),
         centerTitle: true,
       ),
       extendBodyBehindAppBar: true,
@@ -29,7 +29,7 @@ class SignLanguage extends StatelessWidget {
               children: [
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: SingleChildScrollView(
+                  child: const SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -67,45 +67,45 @@ class SignLanguage extends StatelessWidget {
                         imageUrl: 'assets/images/NeuroTracker.png',
                         isImageRightAligned: true,
                         imageSize: 150.0,
-                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 32.0), // Increased button width
+                        buttonPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 32.0), // Increased button width
                         buttonForegroundColor: Colors.white,
-                        buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248),
+                        buttonBackgroundColor: const Color.fromARGB(255, 1, 190, 248),
                         cardWidth: MediaQuery.of(context).size.width - 32,
                         cardHeight: 180.0,
                         cardShadowColor: Colors.black26,
-                        cardColor: Color.fromARGB(255, 193, 239, 250),
-                        titlePadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+                        cardColor: const Color.fromARGB(255, 193, 239, 250),
+                        titlePadding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
                       ),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 16.0),
                       AnimatedCourseCard(
                         title: 'Creative Art Design Learn',
                         buttonText: 'Get Started',
                         imageUrl: 'assets/images/Cartoon_Vector.png',
                         imageSize: 120.0,
-                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 32.0), // Increased button width
+                        buttonPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 32.0), // Increased button width
                         buttonForegroundColor: Colors.white,
-                        buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248),
+                        buttonBackgroundColor: const Color.fromARGB(255, 1, 190, 248),
                         cardWidth: MediaQuery.of(context).size.width - 32,
                         cardHeight: 180.0,
                         cardShadowColor: Colors.black26,
-                        cardColor: Color.fromARGB(255, 193, 239, 250),
-                        titlePadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+                        cardColor: const Color.fromARGB(255, 193, 239, 250),
+                        titlePadding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
                       ),
-                      SizedBox(height: 16.0),
+                      const SizedBox(height: 16.0),
                       AnimatedCourseCard(
                         title: 'Another Languages',
                         buttonText: 'Get Started',
                         imageUrl: 'assets/images/Successful_Characters.png',
                         isImageRightAligned: true,
                         imageSize: 120.0,
-                        buttonPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 32.0), // Increased button width
+                        buttonPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 32.0), // Increased button width
                         buttonForegroundColor: Colors.white,
-                        buttonBackgroundColor: Color.fromARGB(255, 1, 190, 248),
+                        buttonBackgroundColor: const Color.fromARGB(255, 1, 190, 248),
                         cardWidth: MediaQuery.of(context).size.width - 32,
                         cardHeight: 180.0,
                         cardShadowColor: Colors.black26,
-                        cardColor: Color.fromARGB(255, 193, 239, 250),
-                        titlePadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
+                        cardColor: const Color.fromARGB(255, 193, 239, 250),
+                        titlePadding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 8.0),
                       ),
                     ],
                   ),
@@ -125,7 +125,7 @@ class FilterButton extends StatelessWidget {
   final Color foregroundColor;
   final Color backgroundColor;
 
-  const FilterButton({
+  const FilterButton({super.key, 
     required this.label,
     required this.iconPath,
     this.foregroundColor = Colors.white,
@@ -169,7 +169,7 @@ class AnimatedCourseCard extends StatelessWidget {
   final Color cardColor;
   final EdgeInsets titlePadding;
 
-  const AnimatedCourseCard({
+  const AnimatedCourseCard({super.key, 
     required this.title,
     required this.buttonText,
     required this.imageUrl,
@@ -194,7 +194,7 @@ class AnimatedCourseCard extends StatelessWidget {
         height: imageSize,
         fit: BoxFit.cover,
       ),
-      SizedBox(width: 16.0),
+      const SizedBox(width: 16.0),
       Expanded(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,13 +203,13 @@ class AnimatedCourseCard extends StatelessWidget {
               padding: titlePadding,
               child: Text(
                 title,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Padding(
               padding: buttonPadding,
               child: ElevatedButton(
@@ -217,7 +217,7 @@ class AnimatedCourseCard extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   foregroundColor: buttonForegroundColor,
                   backgroundColor: buttonBackgroundColor,
-                  padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 30.0), // Adjusted button width
+                  padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 30.0), // Adjusted button width
                 ),
                 child: Text(buttonText),
               ),
@@ -244,7 +244,7 @@ class AnimatedCourseCard extends StatelessWidget {
               color: cardShadowColor,
               spreadRadius: 1,
               blurRadius: 5,
-              offset: Offset(0, 3),
+              offset: const Offset(0, 3),
             ),
           ],
         ),

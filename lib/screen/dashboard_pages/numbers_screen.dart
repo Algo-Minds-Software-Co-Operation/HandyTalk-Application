@@ -57,7 +57,7 @@ class NumbersScreen extends StatelessWidget {
                       vertical: 20.0), // Adjusted padding around the grid
                   itemCount: 100,
                   shrinkWrap: true, // Important to avoid overflow
-                  physics: NeverScrollableScrollPhysics(), // Disable scrolling for the GridView
+                  physics: const NeverScrollableScrollPhysics(), // Disable scrolling for the GridView
                   itemBuilder: (context, index) {
                     int number = index + 1;
                     return GestureDetector(

@@ -114,7 +114,7 @@ class _SignupEmailAddressPageState extends State<SignupEmailAddressPage> {
                           Icons.email,
                           color: Colors.black.withOpacity(0.5),
                         ),
-                        errorStyle: TextStyle(color: Colors.red),
+                        errorStyle: const TextStyle(color: Colors.red),
                       ),
                       style: const TextStyle(
                         fontSize: 12,

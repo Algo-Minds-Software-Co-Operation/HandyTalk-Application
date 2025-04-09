@@ -17,7 +17,7 @@ class ChatScreen extends StatefulWidget {
 class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateMixin {
   final TextEditingController _messageController = TextEditingController();
   bool _show3DModel = false;
-  List<String> _messages = [];
+  final List<String> _messages = [];
   bool _showEmojiPicker = false;
   bool _showSignLanguageToText = false;
   late TabController _tabController;
@@ -75,66 +75,66 @@ class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateM
           child: Wrap(
             children: [
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.blue,
                   child: Icon(Icons.insert_drive_file, color: Colors.white),
                 ),
-                title: Text('Document'),
+                title: const Text('Document'),
                 onTap: () {
                   Navigator.pop(context);
                   _sendFile();
                 },
               ),
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.pink,
                   child: Icon(Icons.photo, color: Colors.white),
                 ),
-                title: Text('Gallery'),
+                title: const Text('Gallery'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Gallery
                 },
               ),
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.orange,
                   child: Icon(Icons.audiotrack, color: Colors.white),
                 ),
-                title: Text('Audio'),
+                title: const Text('Audio'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Audio
                 },
               ),
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.green,
                   child: Icon(Icons.location_on, color: Colors.white),
                 ),
-                title: Text('Location'),
+                title: const Text('Location'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Location
                 },
               ),
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.purple,
                   child: Icon(Icons.contact_phone, color: Colors.white),
                 ),
-                title: Text('Contact'),
+                title: const Text('Contact'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Contact
                 },
               ),
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.red,
                   child: Icon(Icons.poll, color: Colors.white),
                 ),
-                title: Text('Poll'),
+                title: const Text('Poll'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Poll
@@ -205,9 +205,9 @@ class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateM
               ),
               ListTile(
                 leading: const Icon(Icons.more_horiz, color: Colors.black),
-                title: Row(
+                title: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text('More'),
                     Icon(Icons.arrow_forward, color: Colors.black),
                   ],
@@ -274,7 +274,7 @@ class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateM
           ),
         ],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(4.0),
+          preferredSize: const Size.fromHeight(4.0),
           child: Container(
             color: Colors.grey,
             height: 1.0,
@@ -406,7 +406,7 @@ class _ChatScreenState extends State<ChatScreen> with SingleTickerProviderStateM
         children: [
           TabBar(
             controller: _tabController,
-            tabs: [
+            tabs: const [
               Tab(text: 'Emoji'),
               Tab(text: 'Stickers'),
             ],

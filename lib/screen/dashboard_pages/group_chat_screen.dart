@@ -9,7 +9,7 @@ class GroupChat extends StatefulWidget {
 
 class _GroupChatState extends State<GroupChat> {
   final TextEditingController _messageController = TextEditingController();
-  List<Map<String, String>> _messages = [
+  final List<Map<String, String>> _messages = [
     {
       'sender': 'User 1',
       'message': 'Hello everyone!',
@@ -49,66 +49,66 @@ class _GroupChatState extends State<GroupChat> {
           child: Wrap(
             children: [
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.blue,
                   child: Icon(Icons.insert_drive_file, color: Colors.white),
                 ),
-                title: Text('Document'),
+                title: const Text('Document'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Document
                 },
               ),
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.pink,
                   child: Icon(Icons.photo, color: Colors.white),
                 ),
-                title: Text('Gallery'),
+                title: const Text('Gallery'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Gallery
                 },
               ),
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.orange,
                   child: Icon(Icons.audiotrack, color: Colors.white),
                 ),
-                title: Text('Audio'),
+                title: const Text('Audio'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Audio
                 },
               ),
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.green,
                   child: Icon(Icons.location_on, color: Colors.white),
                 ),
-                title: Text('Location'),
+                title: const Text('Location'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Location
                 },
               ),
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.purple,
                   child: Icon(Icons.contact_phone, color: Colors.white),
                 ),
-                title: Text('Contact'),
+                title: const Text('Contact'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Contact
                 },
               ),
               ListTile(
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   backgroundColor: Colors.red,
                   child: Icon(Icons.poll, color: Colors.white),
                 ),
-                title: Text('Poll'),
+                title: const Text('Poll'),
                 onTap: () {
                   Navigator.pop(context);
                   // Add functionality for Poll
@@ -127,35 +127,35 @@ class _GroupChatState extends State<GroupChat> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Group Info'),
-          content: Column(
+          content: const Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text('Group Description: This is a group to learn ASL.'),
-              const SizedBox(height: 20),
-              const Text('Group Members:'),
+              Text('Group Description: This is a group to learn ASL.'),
+              SizedBox(height: 20),
+              Text('Group Members:'),
               ListTile(
                 leading: CircleAvatar(
                   backgroundImage: AssetImage('assets/images/who.png'),
                 ),
-                title: const Text('User 1'),
+                title: Text('User 1'),
               ),
               ListTile(
                 leading: CircleAvatar(
                   backgroundImage: AssetImage('assets/images/who.png'),
                 ),
-                title: const Text('User 2'),
+                title: Text('User 2'),
               ),
               ListTile(
                 leading: CircleAvatar(
                   backgroundImage: AssetImage('assets/images/who.png'),
                 ),
-                title: const Text('User 3'),
+                title: Text('User 3'),
               ),
               ListTile(
                 leading: CircleAvatar(
                   backgroundImage: AssetImage('assets/images/who.png'),
                 ),
-                title: const Text('Me'),
+                title: Text('Me'),
               ),
             ],
           ),
@@ -187,13 +187,13 @@ class _GroupChatState extends State<GroupChat> {
         ),
         title: GestureDetector(
           onTap: _showGroupInfo,
-          child: Row(
+          child: const Row(
             children: [
               CircleAvatar(
                 backgroundImage: AssetImage('assets/images/who.png'),
               ),
-              const SizedBox(width: 8.0),
-              const Text(
+              SizedBox(width: 8.0),
+              Text(
                 'ASL Learn',
                 style: TextStyle(color: Colors.black),
               ),
@@ -221,7 +221,7 @@ class _GroupChatState extends State<GroupChat> {
           ),
         ],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(4.0),
+          preferredSize: const Size.fromHeight(4.0),
           child: Container(
             color: Colors.grey,
             height: 1.0,

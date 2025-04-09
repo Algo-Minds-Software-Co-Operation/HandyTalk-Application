@@ -172,7 +172,7 @@ class _LanguageSelectState extends State<LanguageSelect> {
       context,
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            SignupUsernameScreen(),
+            const SignupUsernameScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           var begin = 0.0;
           var end = 1.0;

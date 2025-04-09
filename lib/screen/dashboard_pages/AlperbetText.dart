@@ -4,7 +4,7 @@ class AlphabetText extends StatelessWidget {
   final String letter; // Add a field to store the letter
 
   // Update the constructor to accept the letter
-  AlphabetText({super.key, required this.letter});
+  const AlphabetText({super.key, required this.letter});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class AlphabetText extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text('Alphabet'),
+        title: const Text('Alphabet'),
         centerTitle: true,
       ),
        extendBodyBehindAppBar: true,
@@ -38,22 +38,22 @@ class AlphabetText extends StatelessWidget {
                             BorderRadius.circular(20), // Border radius
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromARGB(255, 175, 243, 255)
+                            color: const Color.fromARGB(255, 175, 243, 255)
                                 .withOpacity(0.5),
                             spreadRadius: 5,
                             blurRadius: 7,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 191, 220, 248)
+                          color: const Color.fromARGB(255, 191, 220, 248)
                               .withOpacity(0.35),
                           borderRadius: BorderRadius.circular(15.0),
                           boxShadow: [
                             BoxShadow(
-                              color: Color.fromARGB(255, 180, 179, 179)
+                              color: const Color.fromARGB(255, 180, 179, 179)
                                   .withOpacity(0.15),
                               spreadRadius: 2,
                               blurRadius: 5,

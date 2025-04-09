@@ -4,7 +4,7 @@ class CallScreen extends StatelessWidget {
   final String userName;
   final String profileImagePath;
 
-  const CallScreen({Key? key, required this.userName, required this.profileImagePath}) : super(key: key);
+  const CallScreen({super.key, required this.userName, required this.profileImagePath});
 
   @override
   Widget build(BuildContext context) {

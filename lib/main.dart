@@ -1,4 +1,3 @@
-import 'package:HandyTalk/screen/dashboard_pages/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'screen/welcome_screen.dart';
